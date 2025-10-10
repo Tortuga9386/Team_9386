@@ -37,7 +37,7 @@ public class RobotBase extends OpMode
 
     //Make subsystems available to all class extensions
     public Drive drive;
-    public Lift lift;
+    //public Lift lift;
     public SensorHuskyLens sensorHuskyLens;
 
     /* Constructor */
@@ -48,7 +48,7 @@ public class RobotBase extends OpMode
     public void init() {
 
         //Initialize subsystems
-        lift = new Lift(hardwareMap, this);
+       // lift = new Lift(hardwareMap, this);
         sensorHuskyLens = new SensorHuskyLens(hardwareMap, this);
         //Initialize system
         drive = new Drive(hardwareMap, this);
