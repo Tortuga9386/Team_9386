@@ -54,13 +54,13 @@ public class MainTeleOptest extends RobotBase
 
 
     protected void lift_loop() {
-        lift.liftSlide.doSlideStuff(gamepad2);
-        lift.intakeSlide.doIntakeSlideStuff(gamepad2);
-        lift.intakeClaw.doIntakeClawStuff(gamepad2);
-        lift.intakelinkage.doIntakeLinkageStuff(gamepad2);
-        lift.climber.doClimberStuff(gamepad1);
-        lift.roller.doIntakeRollerStuff(gamepad2);
-        lift.tilter.doIntakeTilterStuff(gamepad2);
+//        lift.liftSlide.doSlideStuff(gamepad2);
+//        lift.intakeSlide.doIntakeSlideStuff(gamepad2);
+//        lift.intakeClaw.doIntakeClawStuff(gamepad2);
+//        lift.intakelinkage.doIntakeLinkageStuff(gamepad2);
+//        lift.climber.doClimberStuff(gamepad1);
+//        lift.roller.doIntakeRollerStuff(gamepad2);
+//        lift.tilter.doIntakeTilterStuff(gamepad2);
 //        telemetry.addData("encoder", lift.liftSlide.liftMotor.getCurrentPosition());
 //        telemetry.addData("encoderslide", lift.intakeSlide.intakeliftMotor.getCurrentPosition());
 //        telemetry.addData("linkage pos",lift.intakelinkage.intakeLinkage.getPosition());
@@ -72,7 +72,7 @@ public class MainTeleOptest extends RobotBase
 
 
         //slidePosition
-        drive.turtleFactor = ((1 - 0.5 * lift.liftSlide.liftMotor.getCurrentPosition() / 5000) * 0.75);
+        //drive.turtleFactor = ((1 - 0.5 * lift.liftSlide.liftMotor.getCurrentPosition() / 5000) * 0.75);
         drive.driveFromGamepad(gamepad1);
     }
 
