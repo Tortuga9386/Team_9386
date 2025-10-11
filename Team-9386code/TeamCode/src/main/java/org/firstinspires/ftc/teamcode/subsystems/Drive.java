@@ -96,7 +96,7 @@ public class Drive {
         }
         double twist = 0;
         if (Math.abs(gamepad.right_stick_x) > deadZone) {
-            twist = -((gamepad.right_stick_x * 0.75) * turtleFactor);
+            twist = -(gamepad.right_stick_x * 1);
         }
 //        Log.v("Drive", "left_stick_x:"+gamepad.left_stick_x);
 //        Log.v("Drive", "strafe:"+strafe);
