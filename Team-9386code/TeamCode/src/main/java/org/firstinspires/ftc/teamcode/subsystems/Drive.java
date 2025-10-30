@@ -1,22 +1,20 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import android.util.Log;
-
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.opmodes.RobotBase;
 
-public class Drive {
-
-    //Inherited data objects
+public class Drive{
     protected HardwareMap hardwareMap;
     public Telemetry telemetry;
-    protected RobotBase robotBase;
 
     //Motor object definitions
     public DcMotor leftFrontMotor;
@@ -39,13 +37,20 @@ public class Drive {
     //mods
     private final ElapsedTime time = new ElapsedTime();
 
-    public Drive(HardwareMap hardwareMap, RobotBase opMode) {
+    public Drive(HardwareMap hardwareMap, OpMode opMode) {
         this.hardwareMap = hardwareMap;
-        this.robotBase = opMode;
-        this.telemetry = robotBase.telemetry;
+        this.telemetry = opMode.telemetry;
 
         initHardware();
     }
+
+    //Inherited data objects
+
+//    protected HardwareMap hardwareMap;
+//    public Telemetry telemetry;
+//    protected RobotBase robotBase;
+
+
 
     protected void initHardware() {
         try {
@@ -56,13 +61,13 @@ public class Drive {
 
         try {
             leftRearMotor = hardwareMap.get(DcMotorEx.class, "BL");
+            leftRearMotor.setDirection(DcMotor.Direction.REVERSE);
         } catch (Exception e){
 //            Log.v("Drive", ":leftRearMotor init failed");
         }
 
         try {
             rightFrontMotor = hardwareMap.get(DcMotorEx.class, "FR");
-            rightFrontMotor.setDirection(DcMotor.Direction.REVERSE);
         } catch (Exception e){
 //            Log.v("Drive", ":rightFrontMotor init failed");
         }
