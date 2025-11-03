@@ -10,7 +10,6 @@ import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
@@ -30,7 +29,7 @@ import java.util.Locale;
  *
  */
 @Disabled
-public class RobotBase
+public class RobotBase extends OpMode
 {
     //Define constants that should NOT be adjusted by manual calibration
     protected boolean           INITIALIZE_IMU      = true;
@@ -40,14 +39,45 @@ public class RobotBase
     public Drive drive;
     //public Lift lift;
     //public SensorHuskyLens sensorHuskyLens;
-    private final HardwareMap hMap;
-    private final OpMode contextOpMode;
 
     /* Constructor */
-    public RobotBase(HardwareMap hardwareMap, OpMode opMode) {
-        this.hMap = hardwareMap;
-        this.contextOpMode = opMode;
+    public RobotBase(){ }
 
-        drive = new Drive(hMap, contextOpMode);
-        }
+    /* Initialize standard Hardware interfaces */
+    @Override
+    public void init() {
+
+        //Initialize subsystems
+       // lift = new Lift(hardwareMap, this);
+        //sensorHuskyLens = new SensorHuskyLens(hardwareMap, this);
+        //Initialize system
+        drive = new Drive(hardwareMap, this);
+
     }
+
+    @Override
+    public void init_loop() {
+    }
+
+    @Override
+    public void start() {
+        telemetry.clearAll();
+    }
+
+    public void loop() {
+        //Do nothing, use these classes in the opModes
+    }
+
+    /*
+     * Code to run when the op mode is first disabled goes here
+     */
+    @Override
+    public void stop() {
+
+    }
+
+    String formatDegrees(double degrees){
+        return String.format(Locale.getDefault(), "%.1f", AngleUnit.DEGREES.normalize(degrees));
+    }
+    
+ }
