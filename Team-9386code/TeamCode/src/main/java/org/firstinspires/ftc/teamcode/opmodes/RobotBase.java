@@ -37,6 +37,7 @@ public class RobotBase extends OpMode
 
     //Make subsystems available to all class extensions
     public Drive drive;
+    public Shooter shooter;
     //public Lift lift;
     //public SensorHuskyLens sensorHuskyLens;
 
