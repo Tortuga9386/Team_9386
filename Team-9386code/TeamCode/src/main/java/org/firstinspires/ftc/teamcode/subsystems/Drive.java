@@ -50,26 +50,26 @@ public class Drive {
     protected void initHardware() {
         try {
             leftFrontMotor = hardwareMap.get(DcMotorEx.class, "FL");
+            leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
         } catch (Exception e) {
 //            Log.v("Drive", ":leftFrontMotor init failed");
         }
 
         try {
             leftRearMotor = hardwareMap.get(DcMotorEx.class, "BL");
+            leftRearMotor.setDirection(DcMotor.Direction.REVERSE);
         } catch (Exception e){
 //            Log.v("Drive", ":leftRearMotor init failed");
         }
 
         try {
             rightFrontMotor = hardwareMap.get(DcMotorEx.class, "FR");
-            rightFrontMotor.setDirection(DcMotor.Direction.REVERSE);
         } catch (Exception e){
 //            Log.v("Drive", ":rightFrontMotor init failed");
         }
 
         try {
             rightRearMotor = hardwareMap.get(DcMotorEx.class, "BR");
-            rightRearMotor.setDirection(DcMotor.Direction.REVERSE);
         } catch (Exception e){
 //            Log.v("Drive", ":rightRearMotor init failed");
         }
