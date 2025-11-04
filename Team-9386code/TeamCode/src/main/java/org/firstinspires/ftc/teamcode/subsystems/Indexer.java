@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -15,7 +16,7 @@ public class Indexer {
     protected HardwareMap hardwareMap;
     protected Telemetry telemetry;
     protected RobotBase robotBase;
-    public IndexerMotor indexerMotor;
+    public IndexerSystem indexerSystem;
 
     public Indexer(HardwareMap hardwareMap, RobotBase opMode) {
         this.hardwareMap = hardwareMap;
@@ -30,20 +31,36 @@ public class Indexer {
     }
 
     protected void initHardware() {
-        indexerMotor = new IndexerMotor();
+        indexerSystem = new IndexerSystem();
 
     }
 
-    public class IndexerMotor {
-
+    public class IndexerSystem {
         public DcMotor indexerMotor;
 
-        public IndexerMotor() { //HardwareMap hardwareMap, RobotBase opMode
+        private final ElapsedTime sequenceTimer = new ElapsedTime();
+
+        public IndexerSystem() { //HardwareMap hardwareMap, RobotBase opMode
             initHardware();
         }
 
         public double indexerPower = 0;
         public boolean triggerRollerForward = false;
+
+        // Shooter selector
+        public boolean leftChamberReady = false;
+        public boolean rightChamberReady = false;
+        public boolean intakeChamberReady = false;
+
+        //Sequences
+        public boolean rightChamberSequence = false;
+        public boolean leftChamberSequence = false;
+        public boolean intakeChamberSequence = false;
+        public boolean quitter = false;
+
+        public double shooterSelection = 0;
+        public double gamepadSelection = 0;
+
 
 
         protected void initHardware() {
@@ -55,7 +72,89 @@ public class Indexer {
 
         public void doIndexerStuff(Gamepad gamepad2) {
             goToTarget(indexerPower);
-            if (triggerRollerForward || gamepad2.right_trigger > 0.25 || gamepad2.right_bumper) {
+
+            //select left chamber
+            if (gamepad2.x){
+                leftChamberReady = true;
+                intakeChamberReady = false;
+                rightChamberReady = false;
+                gamepadSelection = 1;
+            }
+
+            //select right chamber
+            if (gamepad2.b){
+                leftChamberReady = false;
+                intakeChamberReady = false;
+                rightChamberReady = true;
+                gamepadSelection = 2;
+            }
+
+            //select intake chamber
+            if (gamepad2.a){
+                leftChamberReady = false;
+                intakeChamberReady = true;
+                rightChamberReady = false;
+                gamepadSelection = 3;
+            }
+
+            if (gamepad2.y){
+                shooterSelection = 0;
+                gamepadSelection = 0;
+            }
+
+            //confirm selection
+            if (gamepad2.right_bumper /*&& apriltagLock*/ || gamepad2.right_bumper && gamepad2.y){
+
+                //confirming left chamber
+                if (leftChamberReady){
+                    leftChamberSequence = true;
+                    rightChamberSequence = false;
+                    intakeChamberSequence = false;
+                }
+
+                //confirming right chamber
+                if (rightChamberReady){
+                    leftChamberSequence = false;
+                    rightChamberSequence = true;
+                    intakeChamberSequence = false;
+                }
+
+                //confirming intake chamber
+                if (intakeChamberReady){
+                    leftChamberSequence = false;
+                    rightChamberSequence = false;
+                    intakeChamberSequence = true;
+                }
+
+                if (quitter){
+                    leftChamberSequence = false;
+                    rightChamberSequence = false;
+                    intakeChamberSequence = false;
+                    quitter = false;
+                }
+
+
+            }
+
+            if (leftChamberSequence){
+                shooterSelection = 1;
+                quitter = true;
+            }
+
+            if (rightChamberSequence){
+                shooterSelection = 2;
+                quitter = true;
+            }
+
+            if (intakeChamberSequence){
+                shooterSelection = 3;
+                quitter = true;
+            }
+
+
+
+// motor/servo control
+            if (triggerRollerForward) {
                 indexerPower = 1;
             }
 

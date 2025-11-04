@@ -57,12 +57,13 @@ public class MainTeleOp extends RobotBase
         shooter_loop();
         intake_loop();
         indexer_loop();
+        telemetry_loop();
         //lift_loop();
         //husky_loop();
     }
 
     protected void indexer_loop(){
-        indexer.indexerMotor.doIndexerStuff(gamepad2);
+        indexer.indexerSystem.doIndexerStuff(gamepad2);
     }
 
     protected void intake_loop(){
@@ -83,6 +84,8 @@ public class MainTeleOp extends RobotBase
 
     protected void telemetry_loop() {
         telemetry.addData("Hood Angle", shooter.shooterMotor.hoodAngle);
+        telemetry.addData("selection for seq", indexer.indexerSystem.shooterSelection);
+        telemetry.addData("selection for selector", indexer.indexerSystem.gamepadSelection);
         telemetry.update();
     }
 

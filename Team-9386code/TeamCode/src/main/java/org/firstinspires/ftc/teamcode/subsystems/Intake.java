@@ -57,11 +57,11 @@ public class Intake {
         public void doIntakeStuff(Gamepad gamepad2) {
             goToTarget(intakePower);
 
-            if (intakeForward || gamepad2.right_bumper){
-                intakePower = -1;
-            }
+//            if (intakeForward || gamepad2.right_bumper){
+//                intakePower = -1;
+//            }
 
-            else if (intakeBackwards || gamepad2.left_bumper){
+            if (intakeBackwards || gamepad2.left_bumper){
                 intakePower = 1;
             }
 
