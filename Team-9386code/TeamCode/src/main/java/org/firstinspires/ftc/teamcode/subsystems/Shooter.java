@@ -38,6 +38,7 @@ public class Shooter {
 
         private CRServo helperWheel;
         public DcMotor shooterMotor;
+        public Servo shooterHood;
 
         public ShooterMotor() { //HardwareMap hardwareMap, RobotBase opMode
             initHardware();
@@ -46,6 +47,7 @@ public class Shooter {
         public double targetSpeed = 0;
         public double servoTargetSpeed = 0;
         public boolean shooterForward = false;
+        public double hoodAngle = 1;
 
 
 
@@ -55,14 +57,18 @@ public class Shooter {
             shooterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             helperWheel = hardwareMap.get(CRServo.class, "helperWheel");
             helperWheel.setDirection(CRServo.Direction.REVERSE);
+            shooterHood = hardwareMap.get(Servo.class, "shooterHood");
+            shooterHood.setPosition(hoodAngle);
+
+
 
         }
 
         public void doShooterStuff(Gamepad gamepad2) {
             goToTargetSpeed(targetSpeed);
 
-            if (gamepad2.y || shooterForward) {
-                targetSpeed = 0.75;
+            if (gamepad2.right_trigger > 0.25 || shooterForward) {
+                targetSpeed = 1;
                 servoTargetSpeed = 1;
 
 
@@ -70,11 +76,23 @@ public class Shooter {
                 targetSpeed = 0;
                 servoTargetSpeed = 0;
             }
+
+            if (gamepad2.dpad_up) {
+                hoodAngle = hoodAngle - 0.0001;
+            }
+
+            if (gamepad2.dpad_down) {
+                hoodAngle = hoodAngle + 0.0001;
+            }
+
+
         }
 
         public void goToTargetSpeed(double targetSpeed) {
             shooterMotor.setPower(targetSpeed);
             helperWheel.setPower(servoTargetSpeed);
+            shooterHood.setPosition(hoodAngle);
+            telemetry.addData("Shooter hood", hoodAngle);
         }
 
 
