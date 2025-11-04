@@ -85,6 +85,14 @@ public class Shooter {
                 hoodAngle = hoodAngle + 0.0001;
             }
 
+            if (gamepad2.a){
+                hoodAngle = 1;
+            }
+
+            if (gamepad2.b){
+                hoodAngle = 0.7327;
+            }
+
 
         }
 
@@ -92,7 +100,6 @@ public class Shooter {
             shooterMotor.setPower(targetSpeed);
             helperWheel.setPower(servoTargetSpeed);
             shooterHood.setPosition(hoodAngle);
-            telemetry.addData("Shooter hood", hoodAngle);
         }
 
 

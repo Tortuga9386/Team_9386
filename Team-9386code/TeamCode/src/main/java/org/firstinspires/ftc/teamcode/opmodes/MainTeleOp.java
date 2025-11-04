@@ -60,6 +60,8 @@ public class MainTeleOp extends RobotBase
         indexer_loop();
         //lift_loop();
         //husky_loop();
+        telemetry.addData("Hood Angle", shooter.shooterMotor.hoodAngle);
+        telemetry.update();
     }
 
     protected void indexer_loop(){
