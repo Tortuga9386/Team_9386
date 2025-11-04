@@ -49,14 +49,16 @@ public class Indexer {
         protected void initHardware() {
             indexerMotor = hardwareMap.get(DcMotor.class, "TriggerRoller");
             indexerMotor.setDirection(DcMotor.Direction.FORWARD);
+            indexerMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             indexerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
 
         public void doIndexerStuff(Gamepad gamepad2) {
             goToTarget(indexerPower);
-            if (triggerRollerForward) {
+            if (triggerRollerForward || gamepad2.right_trigger > 0.25 || gamepad2.right_bumper) {
                 indexerPower = 1;
             }
+
             else {
                 indexerPower = 0;
             }

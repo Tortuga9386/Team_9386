@@ -39,6 +39,7 @@ public class Shooter {
         private CRServo helperWheel;
         public DcMotor shooterMotor;
         public Servo shooterHood;
+        public DcMotor test;
 
         public ShooterMotor() { //HardwareMap hardwareMap, RobotBase opMode
             initHardware();
@@ -59,10 +60,7 @@ public class Shooter {
             helperWheel.setDirection(CRServo.Direction.REVERSE);
             shooterHood = hardwareMap.get(Servo.class, "shooterHood");
             shooterHood.setPosition(hoodAngle);
-
-
-
-        }
+            }
 
         public void doShooterStuff(Gamepad gamepad2) {
             goToTargetSpeed(targetSpeed);
@@ -100,6 +98,7 @@ public class Shooter {
             shooterMotor.setPower(targetSpeed);
             helperWheel.setPower(servoTargetSpeed);
             shooterHood.setPosition(hoodAngle);
+
         }
 
 

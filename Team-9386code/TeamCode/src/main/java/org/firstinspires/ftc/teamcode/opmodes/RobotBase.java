@@ -39,7 +39,7 @@ public class RobotBase extends OpMode
     public Drive drive;
     public Shooter shooter;
     public Indexer indexer;
-    //public Intake intake;
+    public Intake intake;
     //public Lift lift;
     //public SensorHuskyLens sensorHuskyLens;
 
@@ -56,7 +56,7 @@ public class RobotBase extends OpMode
         //Initialize system
         drive = new Drive(hardwareMap, this);
         shooter = new Shooter(hardwareMap, this);
-        //intake = new Intake(hardwareMap, this);
+        intake = new Intake(hardwareMap, this);
         indexer = new Indexer(hardwareMap, this);
     }
 
