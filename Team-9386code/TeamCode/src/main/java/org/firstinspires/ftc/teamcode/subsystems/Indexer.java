@@ -56,7 +56,6 @@ public class Indexer {
         public boolean rightChamberSequence = false;
         public boolean leftChamberSequence = false;
         public boolean intakeChamberSequence = false;
-        public boolean quitter = false;
 
         public double shooterSelection = 0;
         public double gamepadSelection = 0;
@@ -126,29 +125,22 @@ public class Indexer {
                     intakeChamberSequence = true;
                 }
 
-                if (quitter){
-                    leftChamberSequence = false;
-                    rightChamberSequence = false;
-                    intakeChamberSequence = false;
-                    quitter = false;
-                }
-
 
             }
 
             if (leftChamberSequence){
                 shooterSelection = 1;
-                quitter = true;
+                leftChamberSequence = false;
             }
 
             if (rightChamberSequence){
                 shooterSelection = 2;
-                quitter = true;
+                rightChamberSequence = false;
             }
 
             if (intakeChamberSequence){
                 shooterSelection = 3;
-                quitter = true;
+                intakeChamberSequence = false;
             }
 
 
