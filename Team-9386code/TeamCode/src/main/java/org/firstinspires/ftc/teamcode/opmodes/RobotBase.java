@@ -38,6 +38,8 @@ public class RobotBase extends OpMode
     //Make subsystems available to all class extensions
     public Drive drive;
     public Shooter shooter;
+    public Indexer indexer;
+    //public Intake intake;
     //public Lift lift;
     //public SensorHuskyLens sensorHuskyLens;
 
@@ -53,7 +55,9 @@ public class RobotBase extends OpMode
         //sensorHuskyLens = new SensorHuskyLens(hardwareMap, this);
         //Initialize system
         drive = new Drive(hardwareMap, this);
-
+        shooter = new Shooter(hardwareMap, this);
+        //intake = new Intake(hardwareMap, this);
+        indexer = new Indexer(hardwareMap, this);
     }
 
     @Override

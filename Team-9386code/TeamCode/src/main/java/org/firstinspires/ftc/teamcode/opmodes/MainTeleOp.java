@@ -5,9 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.subsystems.Lift;
+//import org.firstinspires.ftc.teamcode.subsystems.Lift;
 import org.firstinspires.ftc.teamcode.subsystems.Indexer;
-import org.firstinspires.ftc.teamcode.subsystems.Intake;
+//import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Shooter;
 
 
@@ -26,6 +26,7 @@ public class MainTeleOp extends RobotBase
     public void init() {
 
         super.INITIALIZE_DRIVE  = true;
+
         super.init();
 
         //Set initial positions
@@ -55,34 +56,26 @@ public class MainTeleOp extends RobotBase
     public void loop() {
         drive_loop();
         shooter_loop();
-        //intake_loop();
-        //indexer_loop();
+        intake_loop();
+        indexer_loop();
         //lift_loop();
         //husky_loop();
     }
 
-
-    protected void lift_loop() {
-//        lift.liftSlide.doSlideStuff(gamepad2);
-//        lift.intakeSlide.doIntakeSlideStuff(gamepad2);
-//        lift.intakeClaw.doIntakeClawStuff(gamepad2);
-//        lift.intakelinkage.doIntakeLinkageStuff(gamepad2);
-//        lift.climber.doClimberStuff(gamepad1);
-//        lift.roller.doIntakeRollerStuff(gamepad2);
-//        lift.tilter.doIntakeTilterStuff(gamepad2);
-//        telemetry.addData("encoder", lift.liftSlide.liftMotor.getCurrentPosition());
-//        telemetry.addData("encoderslide", lift.intakeSlide.intakeliftMotor.getCurrentPosition());
-//        telemetry.addData("linkage pos",lift.intakelinkage.intakeLinkage.getPosition());
-//        telemetry.addData("climber pos1",lift.climber.climberMotor1.getCurrentPosition());
-//        telemetry.addData("Distance_MM's",lift.roller.intakeSensor.getDistance(DistanceUnit.MM));
+    protected void indexer_loop(){
+        indexer.indexerMotor.doIndexerStuff(gamepad2);
     }
 
-    protected void drive_loop() {
-        drive.driveFromGamepad(gamepad1);
+    protected void intake_loop(){
+        //intake.intakeMotor.doIntakeStuff(gamepad2);
     }
 
     protected void shooter_loop(){
         shooter.shooterMotor.doShooterStuff(gamepad2);
+    }
+
+    protected void drive_loop() {
+        drive.driveFromGamepad(gamepad1);
     }
 //    protected void husky_loop() {
 //        sensorHuskyLens.setAlgorithm("COLOR");

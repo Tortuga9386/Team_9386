@@ -17,13 +17,6 @@ public class Shooter {
     protected Telemetry telemetry;
     protected RobotBase robotBase;
     public ShooterMotor shooterMotor;
-//    public LiftSlide liftSlide;
-//    public IntakeSlide intakeSlide;
-//    public IntakeClaw intakeClaw;
-//    public IntakeLinkage intakelinkage;
-//    public Climber climber;
-//    public Roller roller;
-//    public Tilter tilter;
 
     public Shooter(HardwareMap hardwareMap, RobotBase opMode) {
         this.hardwareMap = hardwareMap;
@@ -43,6 +36,7 @@ public class Shooter {
 
     public class ShooterMotor {
 
+        private CRServo helperWheel;
         public DcMotor shooterMotor;
 
         public ShooterMotor() { //HardwareMap hardwareMap, RobotBase opMode
@@ -50,28 +44,42 @@ public class Shooter {
         }
 
         public double targetSpeed = 0;
-        ;
+        public double servoTargetSpeed = 0;
+        public boolean shooterForward = false;
+
 
 
         protected void initHardware() {
             shooterMotor = hardwareMap.get(DcMotor.class, "shooter");
             shooterMotor.setDirection(DcMotor.Direction.REVERSE);
             shooterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            helperWheel = hardwareMap.get(CRServo.class, "helperWheel");
+            helperWheel.setDirection(CRServo.Direction.REVERSE);
+
         }
 
         public void doShooterStuff(Gamepad gamepad2) {
+            goToTargetSpeed(targetSpeed);
 
-            if (gamepad2.y) {
+            if (gamepad2.y || shooterForward) {
                 targetSpeed = 0.75;
+                servoTargetSpeed = 1;
+
+
+            } else {
+                targetSpeed = 0;
+                servoTargetSpeed = 0;
             }
-            if (gamepad2.y) {
-                targetSpeed = 0.75;
-            }
-            else {
-                targetSpeed = 0;      }
+        }
+
+        public void goToTargetSpeed(double targetSpeed) {
+            shooterMotor.setPower(targetSpeed);
+            helperWheel.setPower(servoTargetSpeed);
+        }
+
 
 
         }
 
         }
-    }
+
