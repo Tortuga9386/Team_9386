@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -53,7 +54,7 @@ public class Turret {
 
         protected void initHardware() {
             turretMotor = hardwareMap.get(DcMotor.class, "Turret");
-            turretMotor.setDirection(DcMotor.Direction.REVERSE);
+            turretMotor.setDirection(DcMotor.Direction.FORWARD);
             turretMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             limelight = hardwareMap.get(Limelight3A.class, "limelight");
@@ -65,7 +66,7 @@ public class Turret {
         public void doTurretStuff() {
 
 
-            targetSpeed = (limelight.getLatestResult().getTx() / 27.25);
+            targetSpeed = ((limelight.getLatestResult().getTx() / 27.25)*0.75);
 
             goToTargetSpeed(targetSpeed);
         }
