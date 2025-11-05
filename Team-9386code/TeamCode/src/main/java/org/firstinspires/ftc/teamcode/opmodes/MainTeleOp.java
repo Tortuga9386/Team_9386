@@ -88,6 +88,7 @@ public class MainTeleOp extends RobotBase
         telemetry.addData("Hood Angle", shooter.shooterMotor.hoodAngle);
         telemetry.addData("selection for seq", indexer.indexerSystem.shooterSelection);
         telemetry.addData("selection for selector", indexer.indexerSystem.gamepadSelection);
+        telemetry.addData("lifterHeight", indexer.indexerSystem.lifterPos);
         telemetry.update();
     }
 
