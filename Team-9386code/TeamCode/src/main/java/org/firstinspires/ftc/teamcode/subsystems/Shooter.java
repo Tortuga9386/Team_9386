@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import org.firstinspires.ftc.teamcode.subsystems.Indexer;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.opmodes.RobotBase;
@@ -39,7 +40,6 @@ public class Shooter {
         private CRServo helperWheel;
         public DcMotor shooterMotor;
         public Servo shooterHood;
-        public DcMotor test;
 
         public ShooterMotor() { //HardwareMap hardwareMap, RobotBase opMode
             initHardware();
@@ -66,7 +66,9 @@ public class Shooter {
             goToTargetSpeed(targetSpeed);
 
             if (gamepad2.right_trigger > 0.25 || shooterForward) {
-                targetSpeed = 1;
+                targetSpeed = 0.95;
+
+
                 servoTargetSpeed = 1;
 
 
@@ -98,7 +100,6 @@ public class Shooter {
             shooterMotor.setPower(targetSpeed);
             helperWheel.setPower(servoTargetSpeed);
             shooterHood.setPosition(hoodAngle);
-
         }
 
 

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -37,6 +38,11 @@ public class Indexer {
 
     public class IndexerSystem {
         public DcMotor indexerMotor;
+        public Servo rightLifter;
+        public Servo leftLifter;
+        public ColorSensor rightColorSensor;
+        public ColorSensor leftColorSensor;
+
 
         private final ElapsedTime sequenceTimer = new ElapsedTime();
 
@@ -67,8 +73,20 @@ public class Indexer {
             indexerMotor.setDirection(DcMotor.Direction.FORWARD);
             indexerMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             indexerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+            leftColorSensor = hardwareMap.get(ColorSensor.class, "leftColor");
+            rightColorSensor = hardwareMap.get(ColorSensor.class, "rightColor");
+
+            leftLifter = hardwareMap.get(Servo.class, "leftLifter");
+            rightLifter = hardwareMap.get(Servo.class, "rightLifter");
+            rightLifter.setDirection(Servo.Direction.REVERSE);
+
+
         }
 
+        public void colorSensorStuff(){
+
+        }
         public void doIndexerStuff(Gamepad gamepad2) {
             goToTarget(indexerPower);
 
@@ -140,10 +158,16 @@ public class Indexer {
 
             if (intakeChamberSequence){
                 shooterSelection = 3;
+
                 intakeChamberSequence = false;
             }
 
-
+            if (gamepad2.right_trigger > 0.25){
+                triggerRollerForward = true;
+            }
+            if (gamepad2.right_trigger < 0.25){
+                triggerRollerForward = false;
+            }
 
 // motor/servo control
             if (triggerRollerForward) {

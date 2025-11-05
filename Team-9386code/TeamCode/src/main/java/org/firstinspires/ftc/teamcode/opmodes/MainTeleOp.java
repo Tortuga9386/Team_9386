@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.opmodes;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -64,6 +65,7 @@ public class MainTeleOp extends RobotBase
 
     protected void indexer_loop(){
         indexer.indexerSystem.doIndexerStuff(gamepad2);
+        indexer.indexerSystem.colorSensorStuff();
     }
 
     protected void intake_loop(){
