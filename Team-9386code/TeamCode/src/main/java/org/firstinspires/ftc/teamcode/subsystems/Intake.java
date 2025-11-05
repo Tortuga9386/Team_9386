@@ -7,9 +7,11 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import org.firstinspires.ftc.teamcode.subsystems.Indexer;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.opmodes.RobotBase;
+import org.firstinspires.ftc.teamcode.subsystems.Drive;
 
 public class Intake {
     protected HardwareMap hardwareMap;
@@ -57,11 +59,11 @@ public class Intake {
         public void doIntakeStuff(Gamepad gamepad2) {
             goToTarget(intakePower);
 
-//            if (intakeForward || gamepad2.right_bumper){
-//                intakePower = -1;
-//            }
+            if (gamepad2.right_bumper){
+                intakePower = -1;
+            }
 
-            if (intakeBackwards || gamepad2.left_bumper){
+            else if (gamepad2.left_bumper){
                 intakePower = 1;
             }
 

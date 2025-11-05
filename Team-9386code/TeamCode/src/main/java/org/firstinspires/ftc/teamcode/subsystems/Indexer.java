@@ -53,16 +53,6 @@ public class Indexer {
         public double indexerPower = 0;
         public boolean triggerRollerForward = false;
 
-        // Shooter selector
-        public boolean leftChamberReady = false;
-        public boolean rightChamberReady = false;
-        public boolean intakeChamberReady = false;
-
-        //Sequences
-        public boolean rightChamberSequence = false;
-        public boolean leftChamberSequence = false;
-        public boolean intakeChamberSequence = false;
-
         public double shooterSelection = 0;
         public double gamepadSelection = 0;
         public double lifterPos;
@@ -88,90 +78,24 @@ public class Indexer {
 
         }
         public void doIndexerStuff(Gamepad gamepad2) {
-            goToTarget(indexerPower);
+            goToSpeedTriggerTarget(indexerPower, lifterPos);
 
-            //select left chamber
-            if (gamepad2.x){
-                leftChamberReady = true;
-                intakeChamberReady = false;
-                rightChamberReady = false;
-                gamepadSelection = 1;
-            }
-
-            //select right chamber
-            if (gamepad2.b){
-                leftChamberReady = false;
-                intakeChamberReady = false;
-                rightChamberReady = true;
-                gamepadSelection = 2;
-            }
-
-            //select intake chamber
-            if (gamepad2.a){
-                leftChamberReady = false;
-                intakeChamberReady = true;
-                rightChamberReady = false;
-                gamepadSelection = 3;
-            }
-
-            if (gamepad2.y){
-                shooterSelection = 0;
-                gamepadSelection = 0;
-            }
-
-            //confirm selection
-            if (gamepad2.right_bumper /*&& apriltagLock*/ || gamepad2.right_bumper && gamepad2.y){
-
-                //confirming left chamber
-                if (leftChamberReady){
-                    leftChamberSequence = true;
-                    rightChamberSequence = false;
-                    intakeChamberSequence = false;
-                }
-
-                //confirming right chamber
-                if (rightChamberReady){
-                    leftChamberSequence = false;
-                    rightChamberSequence = true;
-                    intakeChamberSequence = false;
-                }
-
-                //confirming intake chamber
-                if (intakeChamberReady){
-                    leftChamberSequence = false;
-                    rightChamberSequence = false;
-                    intakeChamberSequence = true;
-                }
-
-
-            }
-
-            if (leftChamberSequence){
-                shooterSelection = 1;
-                leftChamberSequence = false;
-            }
-
-            if (rightChamberSequence){
-                shooterSelection = 2;
-                rightChamberSequence = false;
-            }
-
-            if (intakeChamberSequence){
-                shooterSelection = 3;
-
-                intakeChamberSequence = false;
-            }
 
             //Lifters
 
             if (gamepad2.a){
-                lifterPos = 0.5;
+                lifterPos = 0;
             }
 
-            if (gamepad2.right_trigger > 0.25){
+            if (!gamepad2.a){
+                lifterPos = 0.7;
+            }
+
+            if (gamepad2.right_trigger > 0.25 || gamepad2.right_bumper){
                 triggerRollerForward = true;
             }
-            if (gamepad2.right_trigger < 0.25){
+
+            if (gamepad2.right_trigger < 0.25 && !gamepad2.right_bumper){
                 triggerRollerForward = false;
             }
 
@@ -180,15 +104,16 @@ public class Indexer {
                 indexerPower = 1;
             }
 
-            else {
+            if (!triggerRollerForward) {
                 indexerPower = 0;
-                lifterPos = 0;
             }
 
         }
 
-        public void goToTarget(double indexerPower) {
+        public void goToSpeedTriggerTarget(double indexerPower, double lifterPos) {
                 indexerMotor.setPower(indexerPower);
+                leftLifter.setPosition(lifterPos);
+                rightLifter.setPosition(lifterPos);
             }
         }
 

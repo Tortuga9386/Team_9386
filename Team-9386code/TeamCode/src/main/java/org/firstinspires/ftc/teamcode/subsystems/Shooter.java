@@ -66,7 +66,7 @@ public class Shooter {
             goToTargetSpeed(targetSpeed);
 
             if (gamepad2.right_trigger > 0.25 || shooterForward) {
-                targetSpeed = 0.95;
+                targetSpeed = 0.75;
 
 
                 servoTargetSpeed = 1;
@@ -85,12 +85,16 @@ public class Shooter {
                 hoodAngle = hoodAngle + 0.0001;
             }
 
-            if (gamepad2.a){
+            if (gamepad2.x){
                 hoodAngle = 1;
             }
 
             if (gamepad2.b){
                 hoodAngle = 0.7327;
+            }
+
+            if (gamepad2.y){
+                hoodAngle = 0.6;
             }
 
 
