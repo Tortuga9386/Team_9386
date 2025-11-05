@@ -40,6 +40,7 @@ public class RobotBase extends OpMode
     public Shooter shooter;
     public Indexer indexer;
     public Intake intake;
+    public Turret turret;
     //public Lift lift;
     //public SensorHuskyLens sensorHuskyLens;
 
@@ -58,6 +59,7 @@ public class RobotBase extends OpMode
         shooter = new Shooter(hardwareMap, this);
         intake = new Intake(hardwareMap, this);
         indexer = new Indexer(hardwareMap, this);
+        turret = new Turret(hardwareMap, this);
     }
 
     @Override
