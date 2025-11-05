@@ -65,7 +65,7 @@ public class Indexer {
 
         public double shooterSelection = 0;
         public double gamepadSelection = 0;
-
+        public double lifterPos;
 
 
         protected void initHardware() {
@@ -162,6 +162,12 @@ public class Indexer {
                 intakeChamberSequence = false;
             }
 
+            //Lifters
+
+            if (gamepad2.a){
+                lifterPos = 0.5;
+            }
+
             if (gamepad2.right_trigger > 0.25){
                 triggerRollerForward = true;
             }
@@ -176,6 +182,7 @@ public class Indexer {
 
             else {
                 indexerPower = 0;
+                lifterPos = 0;
             }
 
         }
