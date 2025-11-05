@@ -9,6 +9,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.subsystems.Indexer;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Shooter;
+import org.firstinspires.ftc.teamcode.subsystems.Turret;
 
 
 @TeleOp(name="***TeleOp***", group="teleop")
@@ -78,6 +79,10 @@ public class MainTeleOp extends RobotBase
 
     protected void drive_loop() {
         drive.driveFromGamepad(gamepad1);
+    }
+
+    protected void turret_loop(){
+        turret.turretMotor.doTurretStuff();
     }
 
     protected void imu_loop() {
