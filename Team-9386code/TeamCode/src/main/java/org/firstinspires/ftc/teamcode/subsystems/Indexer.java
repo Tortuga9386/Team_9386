@@ -107,14 +107,14 @@ public class Indexer {
             }
 
             //select intake chamber
-            if (gamepad2.a){
+            if (gamepad2.y){
                 leftChamberReady = false;
                 intakeChamberReady = true;
                 rightChamberReady = false;
                 gamepadSelection = 3;
             }
 
-            if (gamepad2.y){
+            if (gamepad2.x){
                 shooterSelection = 0;
                 gamepadSelection = 0;
             }
