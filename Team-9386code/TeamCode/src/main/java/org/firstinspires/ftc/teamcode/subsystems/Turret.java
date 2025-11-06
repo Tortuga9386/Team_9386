@@ -46,6 +46,7 @@ public class Turret {
             initHardware();
         }
 
+        public double targetSpeedl = 0;
         public double targetSpeed = 0;
         public double servoTargetSpeed = 0;
         public boolean shooterForward = false;
@@ -63,10 +64,21 @@ public class Turret {
             limelight.pipelineSwitch(0);
         }
 
-        public void doTurretStuff() {
+        public void doTurretStuff(Gamepad gamepad2) {
 
+            targetSpeed = ((limelight.getLatestResult().getTx() / 27.25)*1);
+            if (gamepad2.right_trigger > 0.25) {
+                if (targetSpeed < 0.125) {
+                    targetSpeed = targetSpeed - 0.025;
+                }
+                if (targetSpeed > 0.125) {
+                    targetSpeed = targetSpeed + 0.025;
+                }
+            }
+            else {
+                targetSpeed = 0;
+            }
 
-            targetSpeed = ((limelight.getLatestResult().getTx() / 27.25)*0.75);
 
             goToTargetSpeed(targetSpeed);
         }

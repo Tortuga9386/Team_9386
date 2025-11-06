@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.opmodes;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -77,7 +78,7 @@ public class MainTeleOp extends RobotBase
     }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretStuff();
+        turret.turretMotor.doTurretStuff(gamepad2);
     }
 
     protected void otos_loop (){
@@ -95,6 +96,7 @@ public class MainTeleOp extends RobotBase
         telemetry.addData("x", turret.limelight.getLatestResult().getTx());
         telemetry.addData("area", turret.limelight.getLatestResult().getTa());
         telemetry.addData("y", turret.limelight.getLatestResult().getTy());
+        telemetry.addData("turretSpeed", turret.turretMotor.targetSpeed);
         telemetry.update();
     }
 
