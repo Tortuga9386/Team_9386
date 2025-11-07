@@ -10,9 +10,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.opmodes.RobotBase;
 import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.hardware.limelightvision.LLResultTypes;
+import com.qualcomm.hardware.limelightvision.LLResultTypes.*;
 import com.qualcomm.hardware.limelightvision.LLStatus;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
+
+import java.util.List;
 
 public class Turret {
     protected HardwareMap hardwareMap;
@@ -51,6 +53,7 @@ public class Turret {
         public double servoTargetSpeed = 0;
         public boolean shooterForward = false;
         public double hoodAngle = 1;
+        int id;
 
 
         protected void initHardware() {
@@ -65,6 +68,30 @@ public class Turret {
         }
 
         public void doTurretStuff(Gamepad gamepad2) {
+
+            Limelight3A limelight = hardwareMap.get(Limelight3A.class, "limelight");
+// limelight.start(); // Ensure polling is started
+
+            LLResult result = limelight.getLatestResult();
+
+            if (result != null && result.isValid()) {
+                // Get the list of all detected AprilTags
+                List<FiducialResult> fiducials = result.getFiducialResults();
+
+                for (FiducialResult fiducial : fiducials) {
+                    // **This is the key method to get the ID**
+                    int aprilTagId = fiducial.getFiducialId();
+
+                    // Example: Display the ID and other data
+                    telemetry.addData("Detected AprilTag ID", aprilTagId);
+
+                    // You can also get pose data (distance, rotation, etc.) here
+                    // double distance = fiducial.getRobotPoseTargetSpace().getY();
+                }
+            }
+
+
+
 
             targetSpeed = ((limelight.getLatestResult().getTx() / 27.25)*1);
             if (gamepad2.right_trigger > 0.25) {
