@@ -92,7 +92,7 @@ public class Drive {
 
         double strafe = 0;
         if (Math.abs(gamepad.left_stick_x) > deadZone) {
-            strafe = -gamepad.left_stick_x * turtleFactor;
+            strafe = gamepad.left_stick_x * turtleFactor;
         }
         double twist = 0;
         if (Math.abs(gamepad.right_stick_x) > deadZone) {
