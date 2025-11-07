@@ -88,7 +88,7 @@ public class Indexer {
             }
 
             if (!gamepad2.a){
-                lifterPos = 0.2;
+                lifterPos = 0.1;
             }
 
             if (gamepad2.right_trigger > 0.25 || gamepad2.right_bumper){
