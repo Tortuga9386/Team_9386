@@ -2,22 +2,16 @@ package org.firstinspires.ftc.teamcode.opmodes;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.subsystems.Indexer;
-import org.firstinspires.ftc.teamcode.subsystems.Intake;
-import org.firstinspires.ftc.teamcode.subsystems.Shooter;
 
-
-@TeleOp(name="***TeleOp***", group="teleop")
-public class MainTeleOp extends RobotBase
+@TeleOp(name="***TeleOp_red***", group="teleop")
+public class MainTeleOpRed extends RobotBase
 {
 
     private   ElapsedTime   runtime = new ElapsedTime();
 
-    public MainTeleOp() {}
+    public MainTeleOpRed() {}
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -78,7 +72,7 @@ public class MainTeleOp extends RobotBase
     }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretStuff(gamepad2);
+        turret.turretMotor.doTurretRStuff(gamepad2);
     }
 
     protected void drive_loop() {

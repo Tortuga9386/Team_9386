@@ -48,7 +48,8 @@ public class Turret {
             initHardware();
         }
 
-        public double targetSpeedl = 0;
+        public double targetSpeedb = 0;
+        public double targetSpeedr = 0;
         public double targetSpeed = 0;
         public double servoTargetSpeed = 0;
         public boolean shooterForward = false;
@@ -64,53 +65,60 @@ public class Turret {
             limelight = hardwareMap.get(Limelight3A.class, "limelight");
             limelight.setPollRateHz(100); // This sets how often we ask Limelight for data (100 times per second)
             limelight.start(); // This tells Limelight to start looking!
-            limelight.pipelineSwitch(0);
         }
 
-        public void doTurretStuff(Gamepad gamepad2) {
-
+        public void doTurretRStuff(Gamepad gamepad2) {
+            limelight.pipelineSwitch(0);
             Limelight3A limelight = hardwareMap.get(Limelight3A.class, "limelight");
-// limelight.start(); // Ensure polling is started
-
-            LLResult result = limelight.getLatestResult();
-
-            if (result != null && result.isValid()) {
-                // Get the list of all detected AprilTags
-                List<FiducialResult> fiducials = result.getFiducialResults();
-
-                for (FiducialResult fiducial : fiducials) {
-                    // **This is the key method to get the ID**
-                    int aprilTagId = fiducial.getFiducialId();
-
-                    // Example: Display the ID and other data
-                    telemetry.addData("Detected AprilTag ID", aprilTagId);
-
-                    // You can also get pose data (distance, rotation, etc.) here
-                    // double distance = fiducial.getRobotPoseTargetSpace().getY();
-                }
-            }
 
 
-
-
-            targetSpeed = ((limelight.getLatestResult().getTx() / 27.25)*1);
+            targetSpeedr = ((limelight.getLatestResult().getTx() / 27.25)*1);
             if (gamepad2.right_trigger > 0.25) {
-                if (targetSpeed < 0.125) {
-                    targetSpeed = targetSpeed - 0.025;
+                if (targetSpeedr < 0.125) {
+                    targetSpeedr = targetSpeedr - 0.025;
                 }
-                if (targetSpeed > 0.125) {
-                    targetSpeed = targetSpeed + 0.025;
+                if (targetSpeedr > 0.125) {
+                    targetSpeedr = targetSpeedr + 0.025;
                 }
             }
             else {
-                targetSpeed = 0;
+                targetSpeedr = 0;
             }
 
 
-            goToTargetSpeed(targetSpeed);
+            goToTargetSpeed(targetSpeedr);
         }
         public void goToTargetSpeed ( double targetSpeed) {
-            turretMotor.setPower(targetSpeed);
+            turretMotor.setPower(targetSpeedr);
+        }
+
+
+
+
+
+    public void doTurretBStuff(Gamepad gamepad2) {
+        limelight.pipelineSwitch(1);
+            Limelight3A limelight = hardwareMap.get(Limelight3A.class, "limelight");
+
+
+            targetSpeedb = ((limelight.getLatestResult().getTx() / 27.25)*1);
+            if (gamepad2.right_trigger > 0.25) {
+                if (targetSpeedb < 0.125) {
+                    targetSpeedb = targetSpeedb - 0.025;
+                }
+                if (targetSpeedb > 0.125) {
+                    targetSpeedb = targetSpeedb + 0.025;
+                }
+            }
+            else {
+                targetSpeedb = 0;
+            }
+
+
+            goToTargetSpeed2(targetSpeedb);
+        }
+        public void goToTargetSpeed2 ( double targetSpeed) {
+            turretMotor.setPower(targetSpeedb);
         }
 
 
