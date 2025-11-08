@@ -50,6 +50,8 @@ public class Turret {
 
         public double targetSpeedb = 0;
         public double targetSpeedr = 0;
+        public double targetSpeedRA = 0;
+        public double targetSpeedBA = 0;
         public double targetSpeed = 0;
         public double servoTargetSpeed = 0;
         public boolean shooterForward = false;
@@ -67,13 +69,13 @@ public class Turret {
             limelight.start(); // This tells Limelight to start looking!
         }
 
-        public void doTurretRStuff(Gamepad gamepad2) {
+        public void doTurretRStuff(Gamepad gamepad2 , Gamepad gamepad1) {
             limelight.pipelineSwitch(0);
             Limelight3A limelight = hardwareMap.get(Limelight3A.class, "limelight");
 
 
             targetSpeedr = ((limelight.getLatestResult().getTx() / 27.25)*1);
-            if (gamepad2.right_trigger > 0.25) {
+            if (gamepad2.right_trigger > 0.25 || gamepad1.right_trigger > 0.25 || gamepad1.left_stick_button) {
                 if (targetSpeedr < 0.125) {
                     targetSpeedr = targetSpeedr - 0.025;
                 }
@@ -96,13 +98,13 @@ public class Turret {
 
 
 
-    public void doTurretBStuff(Gamepad gamepad2) {
+    public void doTurretBStuff(Gamepad gamepad2, Gamepad gamepad1) {
         limelight.pipelineSwitch(1);
             Limelight3A limelight = hardwareMap.get(Limelight3A.class, "limelight");
 
 
             targetSpeedb = ((limelight.getLatestResult().getTx() / 27.25)*1);
-            if (gamepad2.right_trigger > 0.25) {
+            if (gamepad2.right_trigger > 0.25 || gamepad1.right_trigger > 0.25 || gamepad1.left_stick_button) {
                 if (targetSpeedb < 0.125) {
                     targetSpeedb = targetSpeedb - 0.025;
                 }
@@ -119,6 +121,50 @@ public class Turret {
         }
         public void goToTargetSpeed2 ( double targetSpeed) {
             turretMotor.setPower(targetSpeedb);
+        }
+
+        public void TargetSpeedRA() {
+        limelight.pipelineSwitch(0);
+            Limelight3A limelight = hardwareMap.get(Limelight3A.class, "limelight");
+
+
+            targetSpeedRA = ((limelight.getLatestResult().getTx() / 27.25)*1);
+
+                if (targetSpeedRA < 0.125) {
+                    targetSpeedRA = targetSpeedRA - 0.025;
+                }
+                if (targetSpeedRA > 0.125) {
+                    targetSpeedRA = targetSpeedRA + 0.025;
+                }
+
+
+
+            goToTargetSpeedRA(targetSpeedRA);
+        }
+        public void goToTargetSpeedRA ( double targetSpeedRA) {
+            turretMotor.setPower(targetSpeedRA);
+        }
+
+        public void TargetSpeedBA() {
+        limelight.pipelineSwitch(1);
+            Limelight3A limelight = hardwareMap.get(Limelight3A.class, "limelight");
+
+
+            targetSpeedBA = ((limelight.getLatestResult().getTx() / 27.25)*1);
+
+                if (targetSpeedBA < 0.125) {
+                    targetSpeedBA = targetSpeedBA - 0.025;
+                }
+                if (targetSpeedBA > 0.125) {
+                    targetSpeedBA = targetSpeedBA + 0.025;
+                }
+
+
+
+            goToTargetSpeedBA(targetSpeedBA);
+        }
+        public void goToTargetSpeedBA ( double targetSpeedBA) {
+            turretMotor.setPower(targetSpeedBA);
         }
 
 

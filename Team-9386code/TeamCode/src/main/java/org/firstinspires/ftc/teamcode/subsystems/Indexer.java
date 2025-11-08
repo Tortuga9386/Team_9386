@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import org.firstinspires.ftc.teamcode.opmodes.*;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.opmodes.RobotBase;
@@ -46,6 +47,10 @@ public class Indexer {
 
         private final ElapsedTime sequenceTimer = new ElapsedTime();
 
+        public void resetSequenceTimer(){
+            sequenceTimer.reset();
+        }
+
         public IndexerSystem() { //HardwareMap hardwareMap, RobotBase opMode
             initHardware();
         }
@@ -55,7 +60,7 @@ public class Indexer {
 
         public double shooterSelection = 0;
         public double gamepadSelection = 0;
-        public double lifterPos;
+        public double lifterPos = 0.1;
 
 
         protected void initHardware() {
@@ -77,25 +82,25 @@ public class Indexer {
         public void colorSensorStuff(){
 
         }
-        public void doIndexerStuff(Gamepad gamepad2) {
+        public void doIndexerStuff(Gamepad gamepad2 , Gamepad gamepad1) {
             goToSpeedTriggerTarget(indexerPower, lifterPos);
 
 
             //Lifters
 
-            if (gamepad2.a){
+            if (gamepad2.a || gamepad1.left_trigger > 0.25){
                 lifterPos = 0;
             }
 
-            if (!gamepad2.a){
+            if (!gamepad2.a && gamepad1.left_trigger < 0.25){
                 lifterPos = 0.1;
             }
 
-            if (gamepad2.right_trigger > 0.25 || gamepad2.right_bumper){
+            if (gamepad2.right_trigger > 0.25 || gamepad2.right_bumper || gamepad1.right_trigger > 0.25){
                 triggerRollerForward = true;
             }
 
-            if (gamepad2.right_trigger < 0.25 && !gamepad2.right_bumper){
+            if (gamepad2.right_trigger < 0.25 && !gamepad2.right_bumper && gamepad1.right_trigger < 0.25){
                 triggerRollerForward = false;
             }
 
@@ -108,6 +113,24 @@ public class Indexer {
                 indexerPower = 0;
             }
 
+        }
+
+        public void doIndexerStuffAuto(){
+
+            if (sequenceTimer.seconds() < 17){
+                indexerPower = 1;
+            }
+
+            if ((sequenceTimer.seconds() > 6 && sequenceTimer.seconds() < 8.5) || (sequenceTimer.seconds() > 12 && sequenceTimer.seconds() < 17)  ){
+                lifterPos = 0;
+            }
+            else if ((sequenceTimer.seconds() < 6 || sequenceTimer.seconds() > 8.5) || (sequenceTimer.seconds() < 12 || sequenceTimer.seconds() > 17)){
+                lifterPos = 0.115;
+            }
+            else if (sequenceTimer.seconds() > 17){
+                indexerPower = 0;
+            }
+            goToSpeedTriggerTarget(indexerPower,lifterPos);
         }
 
         public void goToSpeedTriggerTarget(double indexerPower, double lifterPos) {

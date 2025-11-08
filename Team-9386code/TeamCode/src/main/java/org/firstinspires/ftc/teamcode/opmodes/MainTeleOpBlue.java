@@ -63,7 +63,7 @@ public class MainTeleOpBlue extends RobotBase
     }
 
     protected void indexer_loop(){
-        indexer.indexerSystem.doIndexerStuff(gamepad2);
+        indexer.indexerSystem.doIndexerStuff(gamepad2 , gamepad1);
         indexer.indexerSystem.colorSensorStuff();
     }
 
@@ -72,11 +72,11 @@ public class MainTeleOpBlue extends RobotBase
     }
 
     protected void shooter_loop(){
-        shooter.shooterMotor.doShooterStuff(gamepad2);
+        shooter.shooterMotor.doShooterStuff(gamepad2 , gamepad1);
     }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretBStuff(gamepad2);
+        turret.turretMotor.doTurretBStuff(gamepad2 , gamepad1);
     }
 
     protected void drive_loop() {

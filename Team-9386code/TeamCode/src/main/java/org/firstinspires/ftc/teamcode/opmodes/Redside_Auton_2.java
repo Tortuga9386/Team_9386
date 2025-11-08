@@ -1,21 +1,21 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
 
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.List;
 
 
-@TeleOp(name="***TeleOp_red***", group="teleop")
-public class MainTeleOpRed extends RobotBase
+@Autonomous(name="Redside_auto_longshot", group="autonomous")
+public class Redside_Auton_2 extends RobotBase
 {
 
     private   ElapsedTime   runtime = new ElapsedTime();
 
-    public MainTeleOpRed() {}
+    public Redside_Auton_2() {}
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -45,6 +45,9 @@ public class MainTeleOpRed extends RobotBase
     @Override
     public void start() {
         runtime.reset();
+        indexer.indexerSystem.resetSequenceTimer();
+        intake.intakeRoller.resetSequenceTimer();
+        shooter.shooterMotor.resetSequenceTimer();
     }
 
     /*
@@ -52,7 +55,7 @@ public class MainTeleOpRed extends RobotBase
      */
     @Override
     public void loop() {
-        drive_loop();
+        auto_loop();
         shooter_loop();
         intake_loop();
         indexer_loop();
@@ -63,25 +66,30 @@ public class MainTeleOpRed extends RobotBase
     }
 
     protected void indexer_loop(){
-        indexer.indexerSystem.doIndexerStuff(gamepad2 , gamepad1);
-        indexer.indexerSystem.colorSensorStuff();
+        indexer.indexerSystem.doIndexerStuffAuto();
+
     }
 
     protected void intake_loop(){
-        intake.intakeRoller.doIntakeStuff(gamepad2);
+        intake.intakeRoller.doIntakeStuffAuto();
     }
 
     protected void shooter_loop(){
-        shooter.shooterMotor.doShooterStuff(gamepad2 , gamepad1);
-    }
+        shooter.shooterMotor.autoTestRev2(); }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretRStuff(gamepad2 , gamepad1);
+        turret.turretMotor.TargetSpeedRA();
     }
 
-    protected void drive_loop() {
-        drive.driveFromGamepad(gamepad1);
+    protected void auto_loop(){
+        if (runtime.seconds() > 17){
+            auto_Paths.moveToPos(0,22,10);
+        }
+        else {
+            auto_Paths.moveToPos(0, 0, 0);
+        }
     }
+
 
     protected void imu_loop() {
 
@@ -129,6 +137,7 @@ public class MainTeleOpRed extends RobotBase
             telemetry.addData("Limelight Error", e.getMessage());
         }
         // --- End Limelight AprilTag ID Extraction ---
+
         telemetry.update();
     }
 

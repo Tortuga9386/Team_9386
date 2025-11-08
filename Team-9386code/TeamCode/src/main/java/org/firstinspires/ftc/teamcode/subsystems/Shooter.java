@@ -8,7 +8,10 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.subsystems.Indexer;
+import org.firstinspires.ftc.teamcode.opmodes.*;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.opmodes.RobotBase;
@@ -41,6 +44,12 @@ public class Shooter {
         public DcMotor shooterMotor;
         public Servo shooterHood;
 
+        private final ElapsedTime sequenceTimer = new ElapsedTime();
+
+        public void resetSequenceTimer(){
+            sequenceTimer.reset();
+        }
+
         public ShooterMotor() { //HardwareMap hardwareMap, RobotBase opMode
             initHardware();
         }
@@ -48,6 +57,7 @@ public class Shooter {
         public double targetSpeed = 0;
         public double servoTargetSpeed = 0;
         public boolean shooterForward = false;
+        public boolean shooterForwardAuto1 = false;
         public double hoodAngle = 1;
 
 
@@ -62,10 +72,9 @@ public class Shooter {
             shooterHood.setPosition(hoodAngle);
             }
 
-        public void doShooterStuff(Gamepad gamepad2) {
-            goToTargetSpeed(targetSpeed);
+        public void doShooterStuff(Gamepad gamepad2 , Gamepad gamepad1) {
 
-            if (gamepad2.right_trigger > 0.25 || shooterForward) {
+            if (gamepad2.right_trigger > 0.25 || shooterForward || gamepad1.right_trigger > 0.25) {
                 targetSpeed = 0.85;
 
 
@@ -94,10 +103,42 @@ public class Shooter {
             }
 
             if (gamepad2.y){
-                hoodAngle = 0.6;
+                hoodAngle = 0.5462;
+            }
+            goToTargetSpeed(targetSpeed);
+
+        }
+
+        public void autoTestRev (){
+
+            if (sequenceTimer.seconds() > 15 ){
+                targetSpeed = 0;
+                hoodAngle = 1;
+                servoTargetSpeed = 0;
             }
 
+            else {
+                targetSpeed = 0.8;
+                hoodAngle = 0.5462;
+                servoTargetSpeed = 1;
+            }
+            goToTargetSpeed(targetSpeed);
+        }
 
+        public void autoTestRev2 (){
+
+            if (sequenceTimer.seconds() > 18 ){
+                targetSpeed = 0;
+                hoodAngle = 1;
+                servoTargetSpeed = 0;
+            }
+
+            else {
+                targetSpeed = 0.825;
+                hoodAngle = 0.7327;
+                servoTargetSpeed = 1;
+            }
+            goToTargetSpeed(targetSpeed);
         }
 
         public void goToTargetSpeed(double targetSpeed) {

@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import org.firstinspires.ftc.teamcode.opmodes.*;
 import org.firstinspires.ftc.teamcode.subsystems.Indexer;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -36,6 +38,12 @@ public class Intake {
     }
 
     public class IntakeRoller {
+
+        private final ElapsedTime sequenceTimer = new ElapsedTime();
+
+        public void resetSequenceTimer(){
+            sequenceTimer.reset();
+        }
 
         public DcMotor intakeMotor;;
 
@@ -67,10 +75,20 @@ public class Intake {
                 intakePower = 1;
             }
 
-            else {
+            else if (!gamepad2.left_bumper && !gamepad2.right_bumper){
                 intakePower = 0;
             }
 
+        }
+
+        public void doIntakeStuffAuto (){
+            if (sequenceTimer.seconds() > 12 && sequenceTimer.seconds() < 17){
+                intakePower = -1;
+            }
+            else {
+                intakePower = 0;
+            }
+            goToTarget(intakePower);
         }
 
         public void goToTarget(double intakePower) {

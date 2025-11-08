@@ -85,18 +85,18 @@ public class Drive {
 
         double forward  = 0;
         if (Math.abs(gamepad.left_stick_y) > deadZone) {
-            forward = gamepad.left_stick_y * turtleFactor;
+            forward = -gamepad.left_stick_y;
         }
 //        Log.v("Drive", "left_stick_y:"+gamepad.left_stick_y);
 //        Log.v("Drive", "forward:"+forward);
 
         double strafe = 0;
         if (Math.abs(gamepad.left_stick_x) > deadZone) {
-            strafe = gamepad.left_stick_x * turtleFactor;
+            strafe = -gamepad.left_stick_x;
         }
         double twist = 0;
         if (Math.abs(gamepad.right_stick_x) > deadZone) {
-            twist = -(gamepad.right_stick_x * 1);
+            twist = gamepad.right_stick_x;
         }
 //        Log.v("Drive", "left_stick_x:"+gamepad.left_stick_x);
 //        Log.v("Drive", "strafe:"+strafe);

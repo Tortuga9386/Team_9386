@@ -5,6 +5,7 @@ import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.List;
@@ -46,6 +47,9 @@ public class Redside_Auton extends RobotBase
     @Override
     public void start() {
         runtime.reset();
+        indexer.indexerSystem.resetSequenceTimer();
+        intake.intakeRoller.resetSequenceTimer();
+        shooter.shooterMotor.resetSequenceTimer();
     }
 
     /*
@@ -64,24 +68,27 @@ public class Redside_Auton extends RobotBase
     }
 
     protected void indexer_loop(){
-        indexer.indexerSystem.doIndexerStuff(gamepad2);
-        indexer.indexerSystem.colorSensorStuff();
+        indexer.indexerSystem.doIndexerStuffAuto();
     }
 
     protected void intake_loop(){
-        intake.intakeRoller.doIntakeStuff(gamepad2);
+        intake.intakeRoller.doIntakeStuffAuto();
     }
 
     protected void shooter_loop(){
-        shooter.shooterMotor.doShooterStuff(gamepad2);
-    }
+        shooter.shooterMotor.autoTestRev(); }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretBStuff(gamepad2);
+        turret.turretMotor.TargetSpeedRA();
     }
 
     protected void auto_loop(){
-        auto_Paths.redside_auto_path_v1();
+        if (runtime.seconds() > 16){
+            auto_Paths.moveToPos(0,23,-50);
+        }
+        else {
+            auto_Paths.moveToPos(0, 0, -50);
+        }
     }
 
 
