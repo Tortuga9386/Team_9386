@@ -121,10 +121,10 @@ public class Indexer {
                 indexerPower = 1;
             }
 
-            if ((sequenceTimer.seconds() > 6 && sequenceTimer.seconds() < 8.5) || (sequenceTimer.seconds() > 12 && sequenceTimer.seconds() < 17)  ){
+            if ((sequenceTimer.seconds() > 6 && sequenceTimer.seconds() < 8.5) || (sequenceTimer.seconds() > 13 && sequenceTimer.seconds() < 17)  ){
                 lifterPos = 0;
             }
-            else if ((sequenceTimer.seconds() < 6 || sequenceTimer.seconds() > 8.5) || (sequenceTimer.seconds() < 12 || sequenceTimer.seconds() > 17)){
+            else if ((sequenceTimer.seconds() < 6 || sequenceTimer.seconds() > 8.5) || (sequenceTimer.seconds() < 13 || sequenceTimer.seconds() > 17)){
                 lifterPos = 0.115;
             }
             else if (sequenceTimer.seconds() > 17){
