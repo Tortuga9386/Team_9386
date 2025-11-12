@@ -1,18 +1,20 @@
 package org.firstinspires.ftc.teamcode.opmodes.AutoOp;
 
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.subsystems.RobotBase;
+import org.firstinspires.ftc.teamcode.subsystems.Subsystem;
 
 import java.util.List;
 
 
 @Autonomous(name="Blueside_auto", group="autonomous")
-public class Blueside_Auton extends RobotBase
+public class Blueside_Auton extends Subsystem
 {
 
     private   ElapsedTime   runtime = new ElapsedTime();

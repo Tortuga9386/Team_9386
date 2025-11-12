@@ -6,13 +6,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
 
-import org.firstinspires.ftc.teamcode.subsystems.RobotBase;
+import org.firstinspires.ftc.teamcode.subsystems.Subsystem;
 
 import java.util.List;
 
 
 @TeleOp(name="***TeleOp_red***", group="teleop")
-public class MainTeleOpRed extends RobotBase
+public class MainTeleOpRed extends Subsystem
 {
 
     private   ElapsedTime   runtime = new ElapsedTime();

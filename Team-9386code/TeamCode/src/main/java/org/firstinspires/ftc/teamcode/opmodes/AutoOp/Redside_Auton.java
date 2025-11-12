@@ -6,14 +6,13 @@ import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.subsystems.RobotBase;
+import org.firstinspires.ftc.teamcode.subsystems.Subsystem;
 
 import java.util.List;
 
 
 @Autonomous(name="Redside_auto", group="autonomous")
-public class Redside_Auton extends RobotBase
-{
+public class Redside_Auton extends Subsystem {
 
     private   ElapsedTime   runtime = new ElapsedTime();
 
