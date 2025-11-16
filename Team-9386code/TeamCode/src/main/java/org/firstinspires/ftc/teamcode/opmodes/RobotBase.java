@@ -32,7 +32,6 @@ import java.util.Locale;
 public class RobotBase extends OpMode
 {
     //Define constants that should NOT be adjusted by manual calibration
-    protected boolean           INITIALIZE_IMU      = true;
     protected boolean           INITIALIZE_DRIVE    = true;
 
     //Make subsystems available to all class extensions
@@ -48,11 +47,7 @@ public class RobotBase extends OpMode
     /* Initialize standard Hardware interfaces */
     @Override
     public void init() {
-
         //Initialize subsystems
-       // lift = new Lift(hardwareMap, this);
-        //sensorHuskyLens = new SensorHuskyLens(hardwareMap, this);
-        //Initialize system
         drive = new Drive(hardwareMap, this);
         shooter = new Shooter(hardwareMap, this);
         intake = new Intake(hardwareMap, this);
