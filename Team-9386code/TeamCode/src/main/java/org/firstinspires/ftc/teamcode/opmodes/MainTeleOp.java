@@ -54,11 +54,8 @@ public class MainTeleOp extends RobotBase
         intake_loop();
         indexer_loop();
         telemetry_loop();
-        otos_loop();
         turret_loop();
-        //lift_loop();
-        //husky_loop();
-    }
+   }
 
     protected void indexer_loop(){
         indexer.indexerSystem.doIndexerStuff(gamepad2);
@@ -81,9 +78,6 @@ public class MainTeleOp extends RobotBase
         turret.turretMotor.doTurretStuff(gamepad2);
     }
 
-    protected void otos_loop (){
-        ca_localizer.otos.doOtosStuff();
-    }
 
     protected void imu_loop() {
 

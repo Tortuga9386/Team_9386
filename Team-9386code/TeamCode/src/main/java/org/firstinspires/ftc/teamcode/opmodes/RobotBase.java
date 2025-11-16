@@ -41,9 +41,6 @@ public class RobotBase extends OpMode
     public Indexer indexer;
     public Intake intake;
     public Turret turret;
-    public CA_localizer ca_localizer;
-    //public Lift lift;
-    //public SensorHuskyLens sensorHuskyLens;
 
     /* Constructor */
     public RobotBase(){ }
@@ -61,7 +58,6 @@ public class RobotBase extends OpMode
         intake = new Intake(hardwareMap, this);
         indexer = new Indexer(hardwareMap, this);
         turret = new Turret(hardwareMap, this);
-        ca_localizer = new CA_localizer(hardwareMap, this);
     }
 
     @Override
