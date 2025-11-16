@@ -12,7 +12,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.opmodes.RobotBase;
 
-//public class CA_localizer {
+public class CA_localizer {
     protected HardwareMap hardwareMap;
     protected Telemetry telemetry;
     protected RobotBase robotBase;
