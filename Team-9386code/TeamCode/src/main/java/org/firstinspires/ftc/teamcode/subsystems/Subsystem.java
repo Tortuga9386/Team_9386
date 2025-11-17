@@ -244,7 +244,8 @@ public class Subsystem {
             indexerSystem = new IndexerSystem(hardwareMap); // Passed hardwareMap to inner class
         }
 
-        public class IndexerSystem {
+        // FIX: Added 'static' keyword here
+        public static class IndexerSystem {
             public DcMotor indexerMotor;
             public Servo rightLifter;
             public Servo leftLifter;
@@ -429,7 +430,8 @@ public class Subsystem {
             shooterMotor  = new ShooterMotor(hardwareMap); // Passed hardwareMap to inner class
         }
 
-        public class ShooterMotor {
+        // FIX: Added 'static' keyword here
+        public static class ShooterMotor {
 
             private CRServo helperWheel;
             public DcMotor shooterMotor;
@@ -527,7 +529,8 @@ public class Subsystem {
             turretMotor = new TurretMotor(hardwareMap); // Passed hardwareMap to inner class
         }
 
-        public class TurretMotor {
+        // FIX: Added 'static' keyword here
+        public static class TurretMotor {
 
 
             public DcMotor turretMotor;
@@ -614,7 +617,8 @@ public class Subsystem {
             intakeRoller = new IntakeRoller(hardwareMap); // Passed hardwareMap to inner class
         }
 
-        public class IntakeRoller {
+        // FIX: Added 'static' keyword here
+        public static class IntakeRoller {
 
             public DcMotor intakeMotor;;
 

@@ -15,7 +15,9 @@ import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.subsystems.*;
+
+// FIX: Change to a static import to use the nested static classes (Drive, Shooter, etc.) directly.
+import static org.firstinspires.ftc.teamcode.subsystems.Subsystem.*;
 
 import java.util.List;
 import java.util.Locale;
@@ -35,12 +37,12 @@ public class RobotBase extends OpMode
     protected boolean           INITIALIZE_DRIVE    = true;
 
     //Make subsystems available to all class extensions
-//    public Drive drive;
-//    public Shooter shooter;
-//    public Indexer indexer;
-//    public Intake intake;
-//    public Turret turret;
-    public Subsystem subsystem;
+    // FIX: Revert to short names (Drive, Shooter, etc.)
+    public Drive drive;
+    public Shooter shooter;
+    public Indexer indexer;
+    public Intake intake;
+    public Turret turret;
 
     /* Constructor */
     public RobotBase(){ }
@@ -49,12 +51,12 @@ public class RobotBase extends OpMode
     @Override
     public void init() {
         //Initialize subsystems
-//        drive = new Drive(hardwareMap, this);
-//        shooter = new Shooter(hardwareMap, this);
-//        intake = new Intake(hardwareMap, this);
-//        indexer = new Indexer(hardwareMap, this);
-//        turret = new Turret(hardwareMap, this);
-        subsystem = new Subsystem(hardwareMap, this);
+        // FIX: Revert to short names for instantiation
+        drive = new Drive(hardwareMap, this);
+        shooter = new Shooter(hardwareMap, this);
+        intake = new Intake(hardwareMap, this);
+        indexer = new Indexer(hardwareMap, this);
+        turret = new Turret(hardwareMap, this);
     }
 
     @Override
@@ -81,5 +83,5 @@ public class RobotBase extends OpMode
     String formatDegrees(double degrees){
         return String.format(Locale.getDefault(), "%.1f", AngleUnit.DEGREES.normalize(degrees));
     }
-    
- }
+
+}
