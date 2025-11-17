@@ -35,11 +35,12 @@ public class RobotBase extends OpMode
     protected boolean           INITIALIZE_DRIVE    = true;
 
     //Make subsystems available to all class extensions
-    public Drive drive;
-    public Shooter shooter;
-    public Indexer indexer;
-    public Intake intake;
-    public Turret turret;
+//    public Drive drive;
+//    public Shooter shooter;
+//    public Indexer indexer;
+//    public Intake intake;
+//    public Turret turret;
+    public Subsystem subsystem;
 
     /* Constructor */
     public RobotBase(){ }
@@ -48,11 +49,12 @@ public class RobotBase extends OpMode
     @Override
     public void init() {
         //Initialize subsystems
-        drive = new Drive(hardwareMap, this);
-        shooter = new Shooter(hardwareMap, this);
-        intake = new Intake(hardwareMap, this);
-        indexer = new Indexer(hardwareMap, this);
-        turret = new Turret(hardwareMap, this);
+//        drive = new Drive(hardwareMap, this);
+//        shooter = new Shooter(hardwareMap, this);
+//        intake = new Intake(hardwareMap, this);
+//        indexer = new Indexer(hardwareMap, this);
+//        turret = new Turret(hardwareMap, this);
+        subsystem = new Subsystem(hardwareMap, this);
     }
 
     @Override
