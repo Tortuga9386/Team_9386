@@ -89,11 +89,11 @@ public class Indexer {
             //Lifters
 
             if (gamepad2.a || gamepad1.left_trigger > 0.25){
-                lifterPos = 0;
+                lifterPos = 0.65;
             }
 
             if (!gamepad2.a && gamepad1.left_trigger < 0.25){
-                lifterPos = 0.1;
+                lifterPos = 0.875;
             }
 
             if (gamepad2.right_trigger > 0.25 || gamepad2.right_bumper || gamepad1.right_trigger > 0.25){
