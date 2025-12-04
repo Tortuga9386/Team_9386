@@ -182,7 +182,7 @@ public class Indexer {
 
         public void goToTarget(double indexerPower) {
                 indexerMotor.setPower(indexerPower);
-                robotBase.intake.intakeRoller.goToTarget(1);
+                robotBase.intake.intakeRoller.goToTarget(0);
             }
         }
 
