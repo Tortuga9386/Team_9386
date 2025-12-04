@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import android.util.Log;
 
+import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -9,10 +10,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.opmodes.RobotBase;
 
 public class Drive {
-
+    SparkFunOTOS leftOtos;
+    SparkFunOTOS rightOtos;
     //Inherited data objects
     protected HardwareMap hardwareMap;
     public Telemetry telemetry;
@@ -65,13 +69,36 @@ public class Drive {
         leftRearMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightRearMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        leftOtos = hardwareMap.get(SparkFunOTOS.class, "LeftOtos");
+        rightOtos = hardwareMap.get(SparkFunOTOS.class, "RightOtos");
+
+        leftOtos.setLinearUnit(DistanceUnit.INCH);
+        rightOtos.setLinearUnit(DistanceUnit.INCH);
+
+        leftOtos.setAngularUnit(AngleUnit.DEGREES);
+        rightOtos.setAngularUnit(AngleUnit.DEGREES);
+
+        leftOtos.setOffset();
+        rightOtos.setOffset();
+
+        leftOtos.calibrateImu();
+        rightOtos.calibrateImu();
+
+        leftOtos.resetTracking();
+        rightOtos.resetTracking();
     }
 
     public void moveToPos (double y, double x, double r) {
+        double otosForward = (leftOtos.getPosition().y + rightOtos.getPosition().y) / 2.0;
+        double otosStrafe = (leftOtos.getPosition().x + rightOtos.getPosition().x) / 2.0;
+        double otosTwist = (leftOtos.getPosition().h + rightOtos.getPosition().h) / 2.0;
 
+        double posForward = ((otosForward + y) * Math.sin(otosTwist) + (otosStrafe + x) * Math.cos(otosTwist));
+        double posStrafe = (-(otosForward + y) * Math.cos(otosTwist) + (otosStrafe + x) * Math.sin(otosTwist));
+        double posTwist = (otosTwist + r);
 
-
-
+        runMotors(posForward, posStrafe, posTwist);
     }
 
     public void driveFromGamepad(Gamepad gamepad) {
@@ -85,6 +112,11 @@ public class Drive {
         twist = -gamepad.right_stick_x;
 
 
+        runMotors(forward, strafe, twist);
+    }
+
+
+    public void runMotors (double forward, double strafe, double twist) {
         double[] speeds = {
                 (forward + strafe + twist),
                 (forward - strafe - twist),
