@@ -79,8 +79,11 @@ public class Drive {
         leftOtos.setAngularUnit(AngleUnit.DEGREES);
         rightOtos.setAngularUnit(AngleUnit.DEGREES);
 
-        leftOtos.setOffset();
-        rightOtos.setOffset();
+        SparkFunOTOS.Pose2D offset = new SparkFunOTOS.Pose2D(-7.65827, 3.50149, 0);
+        SparkFunOTOS.Pose2D offset2 = new SparkFunOTOS.Pose2D(-7.65827, 3.50149, 0);
+
+        leftOtos.setOffset(offset);
+        rightOtos.setOffset(offset2);
 
         leftOtos.calibrateImu();
         rightOtos.calibrateImu();
