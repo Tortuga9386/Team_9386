@@ -114,10 +114,10 @@ public class Indexer {
                 gamepadSelection = 3;
             }
 
-            if (gamepad2.x){
-                shooterSelection = 0;
-                gamepadSelection = 0;
-            }
+//            if (gamepad2.x){
+//                shooterSelection = 0;
+//                gamepadSelection = 0;
+//            }
 
             //confirm selection
             if (gamepad2.right_bumper /*&& apriltagLock*/ || gamepad2.right_bumper && gamepad2.y){
@@ -158,7 +158,6 @@ public class Indexer {
 
             if (intakeChamberSequence){
                 shooterSelection = 3;
-
                 intakeChamberSequence = false;
             }
 
