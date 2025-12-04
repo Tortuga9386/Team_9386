@@ -79,11 +79,11 @@ public class Drive {
         leftOtos.setAngularUnit(AngleUnit.DEGREES);
         rightOtos.setAngularUnit(AngleUnit.DEGREES);
 
-        SparkFunOTOS.Pose2D offset = new SparkFunOTOS.Pose2D(-7.65827, 3.50149, 0);
-        SparkFunOTOS.Pose2D offset2 = new SparkFunOTOS.Pose2D(-7.65827, 3.50149, 0);
+        SparkFunOTOS.Pose2D offsetRight = new SparkFunOTOS.Pose2D(-7.65827, 3.58023, 0);
+        SparkFunOTOS.Pose2D offsetLeft = new SparkFunOTOS.Pose2D(7.61476, 3.58023, 0);
 
-        leftOtos.setOffset(offset);
-        rightOtos.setOffset(offset2);
+        leftOtos.setOffset(offsetLeft);
+        rightOtos.setOffset(offsetRight);
 
         leftOtos.calibrateImu();
         rightOtos.calibrateImu();
@@ -92,16 +92,28 @@ public class Drive {
         rightOtos.resetTracking();
     }
 
-    public void moveToPos (double y, double x, double r) {
-        double otosForward = (leftOtos.getPosition().y + rightOtos.getPosition().y) / 2.0;
-        double otosStrafe = (leftOtos.getPosition().x + rightOtos.getPosition().x) / 2.0;
-        double otosTwist = (leftOtos.getPosition().h + rightOtos.getPosition().h) / 2.0;
+    public void moveToPos (double y, double x, double r,Gamepad gamepad1) {
 
-        double posForward = ((otosForward + y) * Math.sin(otosTwist) + (otosStrafe + x) * Math.cos(otosTwist));
-        double posStrafe = (-(otosForward + y) * Math.cos(otosTwist) + (otosStrafe + x) * Math.sin(otosTwist));
-        double posTwist = (otosTwist + r);
+        //averages
+        double avForward = (leftOtos.getPosition().y + rightOtos.getPosition().y) / 2.0;
+        double avStrafe = (leftOtos.getPosition().x + rightOtos.getPosition().x) / 2.0;
+        double avTwist = (leftOtos.getPosition().h + rightOtos.getPosition().h) / 2.0;
 
-        runMotors(posForward, posStrafe, posTwist);
+        //degrees to radians
+        double convertedTwist = Math.toRadians(avTwist);
+
+
+        double posForward = (((-avForward + y) * Math.sin(convertedTwist)) /* + ((avStrafe + x) * Math.cos(otosTwist))*/);
+        double posStrafe = (((-avStrafe + x) * Math.cos(convertedTwist)) /* + ((avStrafe + x) * Math.sin(otosTwist))*/);
+        double posTwist = (-avTwist + r);
+
+        telemetry.addData("f", posForward);
+        telemetry.addData("s", posStrafe);
+        telemetry.addData("t", posTwist);
+        telemetry.addData("t2", avTwist);
+        telemetry.addData("tc", convertedTwist);
+
+        runMotors(0, 0, gamepad1.right_stick_x);
     }
 
     public void driveFromGamepad(Gamepad gamepad) {

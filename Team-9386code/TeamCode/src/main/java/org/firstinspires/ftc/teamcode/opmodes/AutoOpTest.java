@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.subsystems.Drive;
+
 
 @Autonomous(name="TEST", group="Autonomous")
 public class AutoOpTest extends RobotBase
@@ -71,7 +73,7 @@ public class AutoOpTest extends RobotBase
     }
 
     protected void drive_loop() {
-        drive.driveFromGamepad(gamepad1);
+        drive.moveToPos(5,0,45,gamepad1);
     }
 
     protected void turret_loop(){
@@ -83,13 +85,11 @@ public class AutoOpTest extends RobotBase
 
 
     protected void telemetry_loop() {
-        telemetry.addData("Hood Angle", shooter.shooterMotor.hoodAngle);
-        telemetry.addData("selection for seq", indexer.indexerSystem.shooterSelection);
-        telemetry.addData("selection for selector", indexer.indexerSystem.gamepadSelection);
-        telemetry.addData("x", turret.limelight.getLatestResult().getTx());
-        telemetry.addData("area", turret.limelight.getLatestResult().getTa());
-        telemetry.addData("y", turret.limelight.getLatestResult().getTy());
-        telemetry.addData("turretSpeed", turret.turretMotor.targetSpeed);
+        telemetry.addData("MOTOR RF", drive.rightFrontMotor.getPower());
+        telemetry.addData("MOTOR LF", drive.leftFrontMotor.getPower());
+        telemetry.addData("MOTOR RR", drive.rightRearMotor.getPower());
+        telemetry.addData("MOTOR LR", drive.leftRearMotor.getPower());
+
         telemetry.update();
     }
 
