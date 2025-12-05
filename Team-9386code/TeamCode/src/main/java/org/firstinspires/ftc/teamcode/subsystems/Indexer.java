@@ -53,6 +53,9 @@ public class Indexer {
         public double indexerPower = 0;
         public boolean triggerRollerForward = false;
 
+        public double leftLifterHeight;
+        public double rightLifterHeight;
+
         // Shooter selector
         public boolean leftChamberReady = false;
         public boolean rightChamberReady = false;
@@ -168,6 +171,11 @@ public class Indexer {
                 triggerRollerForward = false;
             }
 
+            if (gamepad2.a){
+                leftLifterHeight = 0.65;
+                rightLifterHeight = 0.65;
+            }
+
 // motor/servo control
             if (triggerRollerForward) {
                 indexerPower = 1;
@@ -175,12 +183,16 @@ public class Indexer {
 
             else {
                 indexerPower = 0;
+                rightLifterHeight = 0.875;
+                leftLifterHeight = 0.875;
             }
 
         }
 
         public void goToTarget(double indexerPower) {
                 indexerMotor.setPower(indexerPower);
+                leftLifter.setPosition(leftLifterHeight);
+                rightLifter.setPosition(rightLifterHeight);
                 robotBase.intake.intakeRoller.goToTarget(0);
             }
         }
