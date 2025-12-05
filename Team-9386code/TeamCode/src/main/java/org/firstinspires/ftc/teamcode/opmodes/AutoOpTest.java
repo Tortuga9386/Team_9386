@@ -73,7 +73,7 @@ public class AutoOpTest extends RobotBase
     }
 
     protected void drive_loop() {
-        drive.moveToPos(5,0,45,gamepad1);
+        drive.moveToPos(0,36,90,gamepad1);
     }
 
     protected void turret_loop(){

@@ -100,11 +100,11 @@ public class Drive {
         double avTwist = (leftOtos.getPosition().h + rightOtos.getPosition().h) / 2.0;
 
         //degrees to radians
-        double convertedTwist = Math.toRadians(avTwist);
+        double convertedTwist = Math.toRadians(avTwist + 90);
 
         //calculations
-        double posForward = (((-avForward + y) * Math.sin(convertedTwist)) /* + ((avStrafe + x) * Math.cos(otosTwist))*/);
-        double posStrafe = (((-avStrafe + x) * Math.cos(convertedTwist)) /* + ((avStrafe + x) * Math.sin(otosTwist))*/);
+        double posForward = (((-avForward + y) * Math.sin(convertedTwist))  + ((-avStrafe + x) * Math.cos(convertedTwist)));
+        double posStrafe = (((-avStrafe + x) * Math.sin(convertedTwist))  - ((-avForward + y) * Math.cos(convertedTwist)));
         double posTwist = (-avTwist + r);
 
         //telemetry
@@ -115,25 +115,30 @@ public class Drive {
         telemetry.addData("tc", convertedTwist);
 
         //run motors
-        runMotors(0, 0, gamepad1.right_stick_x);
+        runMotors(-posForward * 0.5, posStrafe * 0.5, posTwist /45);
     }
 
     public void driveFromGamepad(Gamepad gamepad) {
 
-        double forward = 0;
-        double strafe = 0;
-        double twist = 0;
+        double forwardRM = 0;
+        double strafeRM = 0;
+        double twistRM = 0;
 
-        forward = gamepad.left_stick_y;
-        strafe = gamepad.left_stick_x;
-        twist = -gamepad.right_stick_x;
+        forwardRM = gamepad.left_stick_y;
+        strafeRM = gamepad.left_stick_x;
+        twistRM = -gamepad.right_stick_x;
+
+        telemetry.addData("GFWD", forwardRM);
 
 
-        runMotors(forward, strafe, twist);
+        runMotors(forwardRM, strafeRM, twistRM);
     }
 
 
     public void runMotors (double forward, double strafe, double twist) {
+
+        telemetry.addData("forward", forward);
+
         double[] speeds = {
                 (forward + strafe + twist),
                 (forward - strafe - twist),
