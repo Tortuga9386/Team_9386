@@ -85,6 +85,11 @@ public class Drive {
         leftOtos.setOffset(offsetLeft);
         rightOtos.setOffset(offsetRight);
 
+        SparkFunOTOS.Pose2D fieldOffset = new SparkFunOTOS.Pose2D(0,0,0);
+
+        leftOtos.setPosition(fieldOffset);
+        rightOtos.setPosition(fieldOffset);
+
         leftOtos.calibrateImu();
         rightOtos.calibrateImu();
 
