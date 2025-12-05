@@ -102,17 +102,19 @@ public class Drive {
         //degrees to radians
         double convertedTwist = Math.toRadians(avTwist);
 
-
+        //calculations
         double posForward = (((-avForward + y) * Math.sin(convertedTwist)) /* + ((avStrafe + x) * Math.cos(otosTwist))*/);
         double posStrafe = (((-avStrafe + x) * Math.cos(convertedTwist)) /* + ((avStrafe + x) * Math.sin(otosTwist))*/);
         double posTwist = (-avTwist + r);
 
+        //telemetry
         telemetry.addData("f", posForward);
         telemetry.addData("s", posStrafe);
         telemetry.addData("t", posTwist);
         telemetry.addData("t2", avTwist);
         telemetry.addData("tc", convertedTwist);
 
+        //run motors
         runMotors(0, 0, gamepad1.right_stick_x);
     }
 
