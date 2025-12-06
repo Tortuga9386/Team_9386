@@ -44,7 +44,7 @@ public class Indexer {
         public ColorSensor leftColorSensor;
 
 
-        private final ElapsedTime indexerTimer = new ElapsedTime();
+        public final ElapsedTime indexerTimer = new ElapsedTime();
 
         public IndexerSystem() { //HardwareMap hardwareMap, RobotBase opMode
             initHardware();
@@ -185,13 +185,19 @@ public class Indexer {
                 intakePower = 0;
             }
 //Auto control
-            if (indexerTimer.seconds() < 10){
+            if (indexerTimer.seconds() > 9.5){
+                intakePower = -1;
+            }
+            if (indexerTimer.seconds() < 9.5 || indexerTimer.seconds() > 15){
+                intakePower = 0;
+            }
+            if (indexerTimer.seconds() < 20){
                 triggerRollerForward = true;
             }
-            if (indexerTimer.seconds() > 5){
+            if (indexerTimer.seconds() > 5 || indexerTimer.seconds() > 15){
                 leftLifterUp = true;
             }
-            if (indexerTimer.seconds() > 6.25 ){
+            if (indexerTimer.seconds() > 6.25 || indexerTimer.seconds() > 15){
                 rightLifterUp = true;
             }
             if (indexerTimer.seconds() < 5 || indexerTimer.seconds() > 8 ){
@@ -201,6 +207,8 @@ public class Indexer {
             if (indexerTimer.seconds() < 6.25 || indexerTimer.seconds() > 9.25 ){
                 rightLifterUp = false;
             }
+
+
 
 
 // motor/servo control

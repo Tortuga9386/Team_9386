@@ -45,6 +45,9 @@ public class AutoOpBackRed extends RobotBase
     @Override
     public void start() {
         runtime.reset();
+        shooter.shooterMotor.shooterTime.reset();
+        turret.turretMotor.turretTimer.reset();
+        indexer.indexerSystem.indexerTimer.reset();
     }
 
     /*
@@ -84,7 +87,7 @@ public class AutoOpBackRed extends RobotBase
     }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretStuff(gamepad2);
+        turret.turretMotor.doTurretStuffRA();
     }
 
 

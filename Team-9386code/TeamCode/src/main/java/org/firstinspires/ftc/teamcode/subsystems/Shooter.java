@@ -106,6 +106,7 @@ public class Shooter {
             if (shooterTime.seconds() < 10) {
                 targetSpeed = 1;
                 servoTargetSpeed = 1;
+                hoodAngle = 0.7327;
                 goToTargetSpeed(targetSpeed);
             }
             else {

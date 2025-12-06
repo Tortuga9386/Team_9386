@@ -13,6 +13,7 @@ import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.LLStatus;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class Turret {
     protected HardwareMap hardwareMap;
@@ -46,8 +47,11 @@ public class Turret {
             initHardware();
         }
 
+        public final ElapsedTime turretTimer = new ElapsedTime();
+
         public double targetSpeedl = 0;
         public double targetSpeed = 0;
+        public double targetSpeedRa = 0;
         public double servoTargetSpeed = 0;
         public boolean shooterForward = false;
         public double hoodAngle = 1;
@@ -84,6 +88,30 @@ public class Turret {
         }
             public void goToTargetSpeed ( double targetSpeed) {
                 turretMotor.setPower(targetSpeed);
+            }
+
+
+
+
+            public void doTurretStuffRA() {
+            targetSpeedRa = ((limelight.getLatestResult().getTx() / 27.25)*1);
+            if (turretTimer.seconds() > 0) {
+                if (targetSpeedRa < 0.125) {
+                    targetSpeedRa = targetSpeedRa - 0.025;
+                }
+                if (targetSpeedRa > 0.125) {
+                    targetSpeedRa = targetSpeedRa + 0.025;
+                }
+            }
+            if (turretTimer.seconds() > 8) {
+                targetSpeedRa = 0;
+            }
+
+
+            goToTargetSpeedRa(targetSpeedRa);
+        }
+            public void goToTargetSpeedRa ( double targetSpeedRa) {
+                turretMotor.setPower(targetSpeedRa);
             }
 
 

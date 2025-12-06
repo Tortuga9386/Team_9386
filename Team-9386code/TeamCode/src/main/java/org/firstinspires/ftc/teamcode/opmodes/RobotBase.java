@@ -71,8 +71,7 @@ public class RobotBase extends OpMode
     @Override
     public void start() {
         telemetry.clearAll();
-
-    }
+        }
 
     public void loop() {
         //Do nothing, use these classes in the opModes
