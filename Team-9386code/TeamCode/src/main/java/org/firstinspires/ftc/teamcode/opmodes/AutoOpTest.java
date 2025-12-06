@@ -65,7 +65,7 @@ public class AutoOpTest extends RobotBase
     }
 
     protected void intake_loop(){
-        intake.intakeRoller.doIntakeStuff(gamepad2);
+        //intake.intakeRoller.doIntakeStuff();
     }
 
     protected void shooter_loop(){
@@ -73,7 +73,7 @@ public class AutoOpTest extends RobotBase
     }
 
     protected void drive_loop() {
-        drive.moveToPos(0,36,90,gamepad1);
+        drive.moveToPos(0,36,90);
     }
 
     protected void turret_loop(){

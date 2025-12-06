@@ -97,7 +97,7 @@ public class Drive {
         rightOtos.resetTracking();
     }
 
-    public void moveToPos (double y, double x, double r,Gamepad gamepad1) {
+    public void moveToPos (double y, double x, double r) {
 
         //averages
         double avForward = (leftOtos.getPosition().y + rightOtos.getPosition().y) / 2.0;
@@ -120,7 +120,7 @@ public class Drive {
         telemetry.addData("tc", convertedTwist);
 
         //run motors
-        runMotors(-posForward * 0.5, posStrafe * 0.5, posTwist /45);
+        runMotors(-posForward * 0.5, posStrafe * 0.5, posTwist /25);
     }
 
     public void driveFromGamepad(Gamepad gamepad) {

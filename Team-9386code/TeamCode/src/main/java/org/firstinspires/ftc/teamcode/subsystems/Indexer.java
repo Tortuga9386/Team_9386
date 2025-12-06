@@ -44,7 +44,7 @@ public class Indexer {
         public ColorSensor leftColorSensor;
 
 
-        private final ElapsedTime sequenceTimer = new ElapsedTime();
+        private final ElapsedTime indexerTimer = new ElapsedTime();
 
         public IndexerSystem() { //HardwareMap hardwareMap, RobotBase opMode
             initHardware();
@@ -55,6 +55,7 @@ public class Indexer {
 
         public double leftLifterHeight;
         public double rightLifterHeight;
+        public double intakePower;
 
         // Shooter selector
         public boolean leftChamberReady = false;
@@ -68,6 +69,9 @@ public class Indexer {
 
         public double shooterSelection = 0;
         public double gamepadSelection = 0;
+
+        public boolean leftLifterUp = false;
+        public boolean rightLifterUp = false;
 
 
 
@@ -91,7 +95,6 @@ public class Indexer {
 
         }
         public void doIndexerStuff(Gamepad gamepad2) {
-            goToTarget(indexerPower);
 
             //select left chamber
             if (gamepad2.x){
@@ -164,37 +167,76 @@ public class Indexer {
                 intakeChamberSequence = false;
             }
 
-            if (gamepad2.right_trigger > 0.25){
+            if (gamepad2.right_trigger > 0.25 || gamepad2.right_bumper){
                 triggerRollerForward = true;
             }
-            if (gamepad2.right_trigger < 0.25){
+            if (gamepad2.right_trigger < 0.25 && !gamepad2.right_bumper){
                 triggerRollerForward = false;
             }
+            if (gamepad2.right_bumper){
+                intakePower = -1;
+            }
 
-            if (gamepad2.a){
+            if (gamepad2.left_bumper){
+                intakePower = 1;
+            }
+
+            if (!gamepad2.right_bumper && !gamepad2.left_bumper){
+                intakePower = 0;
+            }
+//Auto control
+            if (indexerTimer.seconds() < 10){
+                triggerRollerForward = true;
+            }
+            if (indexerTimer.seconds() > 5){
+                leftLifterUp = true;
+            }
+            if (indexerTimer.seconds() > 6.25 ){
+                rightLifterUp = true;
+            }
+            if (indexerTimer.seconds() < 5 || indexerTimer.seconds() > 8 ){
+                leftLifterUp = false;
+            }
+
+            if (indexerTimer.seconds() < 6.25 || indexerTimer.seconds() > 9.25 ){
+                rightLifterUp = false;
+            }
+
+
+// motor/servo control
+            if (leftLifterUp){
                 leftLifterHeight = 0.65;
+            }
+
+            if (rightLifterUp){
                 rightLifterHeight = 0.65;
-            } else if (!gamepad2.a) {
-                rightLifterHeight = 0.875;
+            }
+
+            if (!leftLifterUp){
                 leftLifterHeight = 0.875;
             }
 
-// motor/servo control
+            if (!rightLifterUp) {
+                rightLifterHeight = 0.875;
+            }
+
             if (triggerRollerForward) {
                 indexerPower = 1;
             }
 
-            else {
+
+            if (!triggerRollerForward) {
                 indexerPower = 0;
             }
 
+            goToTarget(indexerPower);
         }
 
         public void goToTarget(double indexerPower) {
                 indexerMotor.setPower(indexerPower);
                 leftLifter.setPosition(leftLifterHeight);
                 rightLifter.setPosition(rightLifterHeight);
-                robotBase.intake.intakeRoller.goToTarget(0);
+                robotBase.intake.intakeRoller.intakeMotor.setPower(intakePower);
             }
         }
 

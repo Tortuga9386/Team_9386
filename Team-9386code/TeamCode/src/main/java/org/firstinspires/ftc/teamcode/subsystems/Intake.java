@@ -41,12 +41,7 @@ public class Intake {
             initHardware();
         }
 
-        public boolean intakeForward = false;
-        public boolean intakeBackwards = false;
-        public double intakePower = 0;
-
-
-
+        //public double intakePower = 0;
 
         protected void initHardware() {
             intakeMotor = hardwareMap.get(DcMotor.class, "IntakeRollers");
@@ -54,26 +49,13 @@ public class Intake {
             intakeMotor.setDirection(DcMotor.Direction.FORWARD);
         }
 
-        public void doIntakeStuff(Gamepad gamepad2) {
-            goToTarget(intakePower);
-
-//            if (intakeForward || gamepad2.right_bumper){
-//                intakePower = -1;
-//            }
-
-            if (intakeBackwards || gamepad2.left_bumper){
-                intakePower = 1;
-            }
-
-            else {
-                intakePower = 0;
-            }
-
-        }
-
-        public void goToTarget(double intakePower) {
-            intakeMotor.setPower(intakePower);
-        }
+//        public void doIntakeStuff() {
+//            goToTarget(intakePower);
+//        }
+//
+//        public void goToTarget(double intakePower) {
+//            intakeMotor.setPower(intakePower);
+//        }
     }
 }
 

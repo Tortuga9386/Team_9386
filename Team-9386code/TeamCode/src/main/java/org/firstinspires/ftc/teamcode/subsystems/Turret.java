@@ -64,10 +64,10 @@ public class Turret {
             limelight.pipelineSwitch(0);
         }
 
-        public void doTurretStuff(Gamepad gamepad2) {
+        public void doTurretStuff(Gamepad gamepad1) {
 
             targetSpeed = ((limelight.getLatestResult().getTx() / 27.25)*1);
-            if (gamepad2.right_trigger > 0.25) {
+            if (gamepad1.left_trigger > 0.25) {
                 if (targetSpeed < 0.125) {
                     targetSpeed = targetSpeed - 0.025;
                 }

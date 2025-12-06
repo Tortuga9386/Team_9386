@@ -66,7 +66,7 @@ public class MainTeleOp extends RobotBase
     }
 
     protected void intake_loop(){
-        intake.intakeRoller.doIntakeStuff(gamepad2);
+        //intake.intakeRoller.doIntakeStuff();
     }
 
     protected void shooter_loop(){
@@ -78,7 +78,7 @@ public class MainTeleOp extends RobotBase
     }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretStuff(gamepad2);
+        turret.turretMotor.doTurretStuff(gamepad1);
     }
 
     protected void otos_loop (){

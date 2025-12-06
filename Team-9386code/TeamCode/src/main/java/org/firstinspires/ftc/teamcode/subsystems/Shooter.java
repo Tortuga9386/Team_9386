@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.subsystems.Indexer;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -35,6 +37,8 @@ public class Shooter {
         shooterMotor  = new ShooterMotor();
     }
 
+
+
     public class ShooterMotor {
 
         private CRServo helperWheel;
@@ -49,6 +53,8 @@ public class Shooter {
         public double servoTargetSpeed = 0;
         public boolean shooterForward = false;
         public double hoodAngle = 1;
+
+        public final ElapsedTime shooterTime = new ElapsedTime();
 
 
 
@@ -85,15 +91,28 @@ public class Shooter {
                 hoodAngle = hoodAngle + 0.0001;
             }
 
-            if (gamepad2.a){
+            if (gamepad2.b){
                 hoodAngle = 1;
             }
 
-            if (gamepad2.b){
+            if (gamepad2.y){
                 hoodAngle = 0.7327;
             }
 
 
+        }
+
+        public void Backshot(){
+            if (shooterTime.seconds() < 10) {
+                targetSpeed = 1;
+                servoTargetSpeed = 1;
+                goToTargetSpeed(targetSpeed);
+            }
+            else {
+                servoTargetSpeed = 0;
+                targetSpeed = 0;
+                goToTargetSpeed(targetSpeed);
+            }
         }
 
         public void goToTargetSpeed(double targetSpeed) {
