@@ -174,6 +174,9 @@ public class Indexer {
             if (gamepad2.a){
                 leftLifterHeight = 0.65;
                 rightLifterHeight = 0.65;
+            } else if (!gamepad2.a) {
+                rightLifterHeight = 0.875;
+                leftLifterHeight = 0.875;
             }
 
 // motor/servo control
@@ -183,8 +186,6 @@ public class Indexer {
 
             else {
                 indexerPower = 0;
-                rightLifterHeight = 0.875;
-                leftLifterHeight = 0.875;
             }
 
         }
