@@ -9,13 +9,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import java.util.List;
 
 
-@Autonomous(name="BackRed", group="Autonomous")
-public class AutoOpBackRed extends RobotBase
+@Autonomous(name="BackBlue", group="Autonomous")
+public class AutoOpBackBlue extends RobotBase
 {
 
     private   ElapsedTime   runtime = new ElapsedTime();
 
-    public AutoOpBackRed() {}
+    public AutoOpBackBlue() {}
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -119,12 +119,12 @@ public class AutoOpBackRed extends RobotBase
         }
 
         if (runtime.seconds() > 17){
-            drive.moveToPos(26,18, -90);
+            drive.moveToPos(26,-18, 90);
         }
     }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretStuffRA();
+        turret.turretMotor.doTurretStuffBA();
     }
 
 

@@ -1,25 +1,25 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Disabled
-@TeleOp(name="***TeleOp***", group="teleop")
-public class MainTeleOp extends RobotBase
+
+@TeleOp(name="***TeleOp_RED***", group="teleop")
+public class MainTeleOpRed extends RobotBase
 {
 
     private   ElapsedTime   runtime = new ElapsedTime();
 
-    public MainTeleOp() {}
+    public MainTeleOpRed() {}
 
     /*
      * Code to run ONCE when the driver hits INIT
      */
     @Override
     public void init() {
+
+
 
         super.INITIALIZE_DRIVE  = true;
 

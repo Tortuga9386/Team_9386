@@ -53,8 +53,8 @@ public class Indexer {
         public double indexerPower = 0;
         public boolean triggerRollerForward = false;
 
-        public double leftLifterHeight;
-        public double rightLifterHeight;
+        public double leftLifterHeight = 0.875;
+        public double rightLifterHeight = 0.875;
         public double intakePower;
 
         // Shooter selector
@@ -97,7 +97,7 @@ public class Indexer {
         public void doIndexerStuff(Gamepad gamepad2) {
 
             //select left chamber
-            if (gamepad2.x){
+            if (gamepad2.x) {
                 leftChamberReady = true;
                 intakeChamberReady = false;
                 rightChamberReady = false;
@@ -105,7 +105,7 @@ public class Indexer {
             }
 
             //select right chamber
-            if (gamepad2.b){
+            if (gamepad2.b) {
                 leftChamberReady = false;
                 intakeChamberReady = false;
                 rightChamberReady = true;
@@ -113,7 +113,7 @@ public class Indexer {
             }
 
             //select intake chamber
-            if (gamepad2.y){
+            if (gamepad2.y) {
                 leftChamberReady = false;
                 intakeChamberReady = true;
                 rightChamberReady = false;
@@ -126,24 +126,24 @@ public class Indexer {
 //            }
 
             //confirm selection
-            if (gamepad2.right_bumper /*&& apriltagLock*/ || gamepad2.right_bumper && gamepad2.y){
+            if (gamepad2.right_bumper /*&& apriltagLock*/ || gamepad2.right_bumper && gamepad2.y) {
 
                 //confirming left chamber
-                if (leftChamberReady){
+                if (leftChamberReady) {
                     leftChamberSequence = true;
                     rightChamberSequence = false;
                     intakeChamberSequence = false;
                 }
 
                 //confirming right chamber
-                if (rightChamberReady){
+                if (rightChamberReady) {
                     leftChamberSequence = false;
                     rightChamberSequence = true;
                     intakeChamberSequence = false;
                 }
 
                 //confirming intake chamber
-                if (intakeChamberReady){
+                if (intakeChamberReady) {
                     leftChamberSequence = false;
                     rightChamberSequence = false;
                     intakeChamberSequence = true;
@@ -152,61 +152,86 @@ public class Indexer {
 
             }
 
-            if (leftChamberSequence){
+            if (leftChamberSequence) {
                 shooterSelection = 1;
                 leftChamberSequence = false;
             }
 
-            if (rightChamberSequence){
+            if (rightChamberSequence) {
                 shooterSelection = 2;
                 rightChamberSequence = false;
             }
 
-            if (intakeChamberSequence){
+            if (intakeChamberSequence) {
                 shooterSelection = 3;
                 intakeChamberSequence = false;
             }
 
-            if (gamepad2.right_trigger > 0.25 || gamepad2.right_bumper){
+            if (gamepad2.right_trigger > 0.25 || gamepad2.right_bumper) {
                 triggerRollerForward = true;
             }
-            if (gamepad2.right_trigger < 0.25 && !gamepad2.right_bumper){
+            if (gamepad2.right_trigger < 0.25 && !gamepad2.right_bumper) {
                 triggerRollerForward = false;
             }
-            if (gamepad2.right_bumper){
+            if (gamepad2.right_bumper) {
                 intakePower = -1;
             }
 
-            if (gamepad2.left_bumper){
+            if (gamepad2.left_bumper) {
                 intakePower = 1;
             }
 
-            if (!gamepad2.right_bumper && !gamepad2.left_bumper){
+            if (!gamepad2.right_bumper && !gamepad2.left_bumper) {
                 intakePower = 0;
             }
+            if (gamepad2.a){
+                leftLifterHeight = 0.62;
+            }
+            if (gamepad2.x){
+                rightLifterHeight = 0.65;
+            }
+            if (!gamepad2.a && !gamepad2.x){
+                leftLifterHeight = 0.875;
+                rightLifterHeight = 0.875;
+            }
+            if (triggerRollerForward) {
+                indexerPower = 1;
+            }
+
+
+            if (!triggerRollerForward) {
+                indexerPower = 0;
+            }
+
+            goToTarget(indexerPower);
+        }
 //Auto control
-            if (indexerTimer.seconds() > 9.5){
+
+        public void intakeAutoLONG() {
+
+            if (indexerTimer.seconds() > 9.5) {
                 intakePower = -1;
             }
-            if (indexerTimer.seconds() < 9.5 || indexerTimer.seconds() > 15){
+            if (indexerTimer.seconds() < 9.5 || indexerTimer.seconds() > 15) {
                 intakePower = 0;
             }
-            if (indexerTimer.seconds() < 20){
-                triggerRollerForward = true;
+            if (indexerTimer.seconds() < 20) {
+                indexerPower = 1;
             }
-            if (indexerTimer.seconds() > 5 || indexerTimer.seconds() > 15){
+            if (indexerTimer.seconds() > 5 || indexerTimer.seconds() > 11) {
                 leftLifterUp = true;
             }
-            if (indexerTimer.seconds() > 6.25 || indexerTimer.seconds() > 15){
+            if (indexerTimer.seconds() > 6.25 || indexerTimer.seconds() > 11) {
                 rightLifterUp = true;
             }
-            if (indexerTimer.seconds() < 5 || indexerTimer.seconds() > 8 ){
+            if (indexerTimer.seconds() < 5 || indexerTimer.seconds() > 8 && indexerTimer.seconds() < 11) {
                 leftLifterUp = false;
             }
 
-            if (indexerTimer.seconds() < 6.25 || indexerTimer.seconds() > 9.25 ){
+            if (indexerTimer.seconds() < 6.25 || indexerTimer.seconds() > 9.25 && indexerTimer.seconds() < 11) {
                 rightLifterUp = false;
             }
+
 
 
 
@@ -226,15 +251,6 @@ public class Indexer {
 
             if (!rightLifterUp) {
                 rightLifterHeight = 0.875;
-            }
-
-            if (triggerRollerForward) {
-                indexerPower = 1;
-            }
-
-
-            if (!triggerRollerForward) {
-                indexerPower = 0;
             }
 
             goToTarget(indexerPower);

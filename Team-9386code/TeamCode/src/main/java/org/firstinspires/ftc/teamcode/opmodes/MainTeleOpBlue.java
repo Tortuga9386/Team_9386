@@ -1,19 +1,17 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Disabled
-@TeleOp(name="***TeleOp***", group="teleop")
-public class MainTeleOp extends RobotBase
+
+@TeleOp(name="***TeleOp_BLUE***", group="teleop")
+public class MainTeleOpBlue extends RobotBase
 {
 
     private   ElapsedTime   runtime = new ElapsedTime();
 
-    public MainTeleOp() {}
+    public MainTeleOpBlue() {}
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -24,6 +22,8 @@ public class MainTeleOp extends RobotBase
         super.INITIALIZE_DRIVE  = true;
 
         super.init();
+
+
 
         //Set initial positions
         telemetry.addData("Status", "init complete");
@@ -76,7 +76,7 @@ public class MainTeleOp extends RobotBase
     }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretStuffRT(gamepad1);
+        turret.turretMotor.doTurretStuffBT(gamepad1);
     }
 
     protected void otos_loop (){

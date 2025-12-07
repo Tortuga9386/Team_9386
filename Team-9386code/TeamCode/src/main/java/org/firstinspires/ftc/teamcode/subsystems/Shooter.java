@@ -72,7 +72,7 @@ public class Shooter {
             goToTargetSpeed(targetSpeed);
 
             if (gamepad2.right_trigger > 0.25 || shooterForward) {
-                targetSpeed = 0.95;
+                targetSpeed = 0.9;
 
 
                 servoTargetSpeed = 1;
@@ -103,8 +103,8 @@ public class Shooter {
         }
 
         public void Backshot(){
-            if (shooterTime.seconds() < 10) {
-                targetSpeed = 1;
+            if (shooterTime.seconds() < 17) {
+                targetSpeed = 0.9;
                 servoTargetSpeed = 1;
                 hoodAngle = 0.7327;
                 goToTargetSpeed(targetSpeed);
