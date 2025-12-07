@@ -218,6 +218,9 @@ public class Indexer {
             if (indexerTimer.seconds() < 20) {
                 indexerPower = 1;
             }
+            if (indexerTimer.seconds() > 20){
+                indexerPower = 0;
+            }
             if (indexerTimer.seconds() > 5 || indexerTimer.seconds() > 11) {
                 leftLifterUp = true;
             }
@@ -238,7 +241,7 @@ public class Indexer {
 
 // motor/servo control
             if (leftLifterUp){
-                leftLifterHeight = 0.65;
+                leftLifterHeight = 0.62;
             }
 
             if (rightLifterUp){

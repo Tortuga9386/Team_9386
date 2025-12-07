@@ -118,7 +118,7 @@ public class Turret {
             public void doTurretStuffRA() {
             limelight.pipelineSwitch(0);
 
-            targetSpeedRa = (((limelight.getLatestResult().getTx() - 2) / 27.25)*1);
+            targetSpeedRa = (((limelight.getLatestResult().getTx() - 2) / 27.25)*0.9);
             if (turretTimer.seconds() > 0) {
                 if (targetSpeedRa < 0.125) {
                     targetSpeedRa = targetSpeedRa - 0.025;
@@ -142,7 +142,7 @@ public class Turret {
             public void doTurretStuffBA() {
             limelight.pipelineSwitch(1);
 
-                targetSpeedBa = (((limelight.getLatestResult().getTx() + 2) / 27.25)*1);
+                targetSpeedBa = (((limelight.getLatestResult().getTx() + 2) / 27.25)*0.9);
             if (turretTimer.seconds() > 0) {
                 if (targetSpeedBa < 0.125) {
                     targetSpeedBa = targetSpeedBa - 0.025;
