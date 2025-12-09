@@ -59,6 +59,7 @@ public class Turret {
         protected void initHardware() {
             turretMotor = hardwareMap.get(DcMotor.class, "Turret");
             turretMotor.setDirection(DcMotor.Direction.FORWARD);
+            turretMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             turretMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             limelight = hardwareMap.get(Limelight3A.class, "limelight");
