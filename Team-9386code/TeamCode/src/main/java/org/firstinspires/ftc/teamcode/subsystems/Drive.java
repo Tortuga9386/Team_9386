@@ -120,7 +120,7 @@ public class Drive {
         telemetry.addData("tc", convertedTwist);
 
         //run motors
-        runMotors(-posForward * 0.5, posStrafe * 0.5, posTwist /25);
+        runMotors(-posForward * 0.4, posStrafe * 0.4, posTwist /25);
     }
 
     public void driveFromGamepad(Gamepad gamepad) {

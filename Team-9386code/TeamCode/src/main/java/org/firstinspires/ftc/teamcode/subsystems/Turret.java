@@ -128,7 +128,7 @@ public class Turret {
                     targetSpeedRa = targetSpeedRa + 0.025;
                 }
             }
-            if (turretTimer.seconds() > 8) {
+            if (turretTimer.seconds() > 17) {
                 targetSpeedRa = 0;
             }
 
@@ -152,7 +152,7 @@ public class Turret {
                     targetSpeedBa = targetSpeedBa + 0.025;
                 }
             }
-            if (turretTimer.seconds() > 8) {
+            if (turretTimer.seconds() > 17) {
                 targetSpeedBa = 0;
             }
 

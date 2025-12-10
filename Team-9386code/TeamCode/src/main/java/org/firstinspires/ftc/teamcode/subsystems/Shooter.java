@@ -104,9 +104,9 @@ public class Shooter {
 
         public void Backshot(){
             if (shooterTime.seconds() < 17) {
-                targetSpeed = 0.9;
+                targetSpeed = 1;
                 servoTargetSpeed = 1;
-                hoodAngle = 0.7327;
+                hoodAngle = 0.75;
                 goToTargetSpeed(targetSpeed);
             }
             else {

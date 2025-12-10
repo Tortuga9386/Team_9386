@@ -221,17 +221,17 @@ public class Indexer {
             if (indexerTimer.seconds() > 20){
                 indexerPower = 0;
             }
-            if (indexerTimer.seconds() > 5 || indexerTimer.seconds() > 11) {
+            if (indexerTimer.seconds() > 3 || indexerTimer.seconds() > 11) {
                 leftLifterUp = true;
             }
-            if (indexerTimer.seconds() > 6.25 || indexerTimer.seconds() > 11) {
+            if (indexerTimer.seconds() > 6 || indexerTimer.seconds() > 11) {
                 rightLifterUp = true;
             }
-            if (indexerTimer.seconds() < 5 || indexerTimer.seconds() > 8 && indexerTimer.seconds() < 11) {
+            if (indexerTimer.seconds() < 3 || indexerTimer.seconds() > 5 && indexerTimer.seconds() < 11) {
                 leftLifterUp = false;
             }
 
-            if (indexerTimer.seconds() < 6.25 || indexerTimer.seconds() > 9.25 && indexerTimer.seconds() < 11) {
+            if (indexerTimer.seconds() < 6 || indexerTimer.seconds() > 9.25 && indexerTimer.seconds() < 11) {
                 rightLifterUp = false;
             }
 

@@ -115,7 +115,7 @@ public class AutoOpBackBlue extends RobotBase
 
     protected void drive_loop() {
         if (runtime.seconds() < 17) {
-            drive.moveToPos(0, 0, 0);
+            drive.moveToPos(16, 0, 0);
         }
 
         if (runtime.seconds() > 17){
