@@ -71,7 +71,10 @@ public class CONTROL_CENTER {
         }
     }
 
-    public void indexerAndIntakeAndShooterAutoOp (){
+    public void indexerAndIntakeLongAutoOp (){
+        if (controlCenterRuntime.seconds() < 5){
+            robotBase.indexer.indexerSystem.goToTarget(1, );
+        }
 
     }
 

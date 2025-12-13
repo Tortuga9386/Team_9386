@@ -99,7 +99,7 @@ public class AutoOpBackRed extends RobotBase
     }
 
     protected void indexerAndIntakeAndShooter_loop(){
-        control_center.indexerAndIntakeAndShooterAutoOp();
+        control_center.indexerAndIntakeLongAutoOp();
     }
 
     protected void shooter_loop(){
