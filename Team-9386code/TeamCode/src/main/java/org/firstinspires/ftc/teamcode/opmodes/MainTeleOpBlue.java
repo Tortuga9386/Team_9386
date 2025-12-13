@@ -60,8 +60,7 @@ public class MainTeleOpBlue extends RobotBase
     }
 
     protected void indexer_loop(){
-        indexer.indexerSystem.doIndexerStuff(gamepad2);
-        indexer.indexerSystem.colorSensorStuff();
+        control_center.intakeAndIndexerTeleop(gamepad2);
     }
 
 

@@ -55,10 +55,7 @@ public class MainTeleOpRed extends RobotBase
         shooter_loop();
         indexer_loop();
         telemetry_loop();
-        otos_loop();
         turret_loop();
-        //lift_loop();
-        //husky_loop();
     }
 
     protected void indexer_loop(){
@@ -77,12 +74,10 @@ public class MainTeleOpRed extends RobotBase
     }
 
     protected void turret_loop(){
-        control_center.doTurretStuffTeleOp(gamepad1, 24);
+        control_center.TurretTeleOp(gamepad1, 24);
     }
 
-    protected void otos_loop (){
-        ca_localizer.otos.doOtosStuff();
-    }
+
 
     protected void imu_loop() {
 
