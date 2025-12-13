@@ -82,9 +82,8 @@ public class AutoOpBackRed extends RobotBase
     @Override
     public void start() {
         runtime.reset();
-        shooter.shooterMotor.shooterTime.reset();
-        turret.turretMotor.turretTimer.reset();
-        indexer.indexerSystem.indexerTimer.reset();
+
+        control_center.startControlCenter();
     }
 
     /*
@@ -94,37 +93,25 @@ public class AutoOpBackRed extends RobotBase
     public void loop() {
         drive_loop();
         shooter_loop();
-        intake_loop();
-        indexer_loop();
+        indexerAndIntakeAndShooter_loop();
         telemetry_loop();
         turret_loop();
     }
 
-    protected void indexer_loop(){
-        indexer.indexerSystem.intakeAutoLONG();
-        indexer.indexerSystem.colorSensorStuff();
-    }
-
-    protected void intake_loop(){
-        //intake.intakeRoller.doIntakeStuff();
+    protected void indexerAndIntakeAndShooter_loop(){
+        control_center.indexerAndIntakeAndShooterAutoOp();
     }
 
     protected void shooter_loop(){
-        shooter.shooterMotor.Backshot();
+        control_center.shooterLongShotAutoOp();
     }
 
     protected void drive_loop() {
-        if (runtime.seconds() < 17) {
-            drive.moveToPos(16, 0, 0);
-        }
-
-        if (runtime.seconds() > 17){
-            drive.moveToPos(26,18, -90);
-        }
+        control_center.driveLongAutoOp();
     }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretStuffRA();
+        control_center.TurretLongAutoOp(24);
     }
 
 

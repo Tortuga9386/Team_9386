@@ -49,12 +49,6 @@ public class Shooter {
             initHardware();
         }
 
-
-
-        public final ElapsedTime shooterTime = new ElapsedTime();
-
-
-
         protected void initHardware() {
             shooterMotor = hardwareMap.get(DcMotor.class, "shooter");
             shooterMotor.setDirection(DcMotor.Direction.REVERSE);

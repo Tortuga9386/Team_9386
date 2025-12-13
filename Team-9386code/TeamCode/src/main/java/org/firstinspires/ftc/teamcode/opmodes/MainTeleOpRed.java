@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.opmodes;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -76,7 +77,7 @@ public class MainTeleOpRed extends RobotBase
     }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretStuffRT(gamepad1);
+        control_center.doTurretStuffTeleOp(gamepad1, 24);
     }
 
     protected void otos_loop (){

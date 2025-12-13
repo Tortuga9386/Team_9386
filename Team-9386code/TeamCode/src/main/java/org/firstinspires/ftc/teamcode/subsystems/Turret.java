@@ -47,8 +47,6 @@ public class Turret {
             initHardware();
         }
 
-        public final ElapsedTime turretTimer = new ElapsedTime();
-
         protected void initHardware() {
             turretMotor = hardwareMap.get(DcMotor.class, "Turret");
             turretMotor.setDirection(DcMotor.Direction.FORWARD);

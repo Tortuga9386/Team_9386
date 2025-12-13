@@ -43,18 +43,9 @@ public class Indexer {
         public ColorSensor rightColorSensor;
         public ColorSensor leftColorSensor;
 
-
-        public final ElapsedTime indexerTimer = new ElapsedTime();
-
         public IndexerSystem() { //HardwareMap hardwareMap, RobotBase opMode
             initHardware();
         }
-
-        public double leftLifterHeight = 0.875;
-        public double rightLifterHeight = 0.875;
-        public double intakePower;
-
-
 
 
         protected void initHardware() {

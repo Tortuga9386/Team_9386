@@ -35,6 +35,7 @@ public class MainTeleOpBlue extends RobotBase
     @Override
     public void init_loop() {
 
+
     }
 
     /*
@@ -56,8 +57,6 @@ public class MainTeleOpBlue extends RobotBase
         telemetry_loop();
         otos_loop();
         turret_loop();
-        //lift_loop();
-        //husky_loop();
     }
 
     protected void indexer_loop(){
@@ -76,7 +75,7 @@ public class MainTeleOpBlue extends RobotBase
     }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretStuffBT(gamepad1);
+        control_center.doTurretStuffTeleOp(gamepad1, 20);
     }
 
     protected void otos_loop (){
@@ -88,13 +87,12 @@ public class MainTeleOpBlue extends RobotBase
     }
 
     protected void telemetry_loop() {
-        telemetry.addData("Hood Angle", shooter.shooterMotor.hoodAngle);
-        telemetry.addData("selection for seq", indexer.indexerSystem.shooterSelection);
-        telemetry.addData("selection for selector", indexer.indexerSystem.gamepadSelection);
+//        telemetry.addData("Hood Angle", shooter.shooterMotor.hoodAngle);
+//        telemetry.addData("selection for seq", indexer.indexerSystem.shooterSelection);
+//        telemetry.addData("selection for selector", indexer.indexerSystem.gamepadSelection);
         telemetry.addData("x", turret.limelight.getLatestResult().getTx());
         telemetry.addData("area", turret.limelight.getLatestResult().getTa());
         telemetry.addData("y", turret.limelight.getLatestResult().getTy());
-//        telemetry.addData("turretSpeed", turret.turretMotor.targetSpeed);
         telemetry.update();
     }
 
