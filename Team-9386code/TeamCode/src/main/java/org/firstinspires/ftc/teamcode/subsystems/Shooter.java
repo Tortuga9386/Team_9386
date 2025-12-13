@@ -49,10 +49,7 @@ public class Shooter {
             initHardware();
         }
 
-        public double targetSpeed = 0;
-        public double servoTargetSpeed = 0;
-        public boolean shooterForward = false;
-        public double hoodAngle = 1;
+
 
         public final ElapsedTime shooterTime = new ElapsedTime();
 
@@ -62,63 +59,21 @@ public class Shooter {
             shooterMotor = hardwareMap.get(DcMotor.class, "shooter");
             shooterMotor.setDirection(DcMotor.Direction.REVERSE);
             shooterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
             helperWheel = hardwareMap.get(CRServo.class, "helperWheel");
             helperWheel.setDirection(CRServo.Direction.REVERSE);
+
             shooterHood = hardwareMap.get(Servo.class, "shooterHood");
-            shooterHood.setPosition(hoodAngle);
-            }
+            shooterHood.setPosition(1);
 
-        public void doShooterStuff(Gamepad gamepad2) {
-            goToTargetSpeed(targetSpeed);
-
-            if (gamepad2.right_trigger > 0.25 || shooterForward) {
-                targetSpeed = 0.9;
-
-
-                servoTargetSpeed = 1;
-
-
-            } else {
-                targetSpeed = 0;
-                servoTargetSpeed = 0;
-            }
-
-            if (gamepad2.dpad_up) {
-                hoodAngle = hoodAngle - 0.0001;
-            }
-
-            if (gamepad2.dpad_down) {
-                hoodAngle = hoodAngle + 0.0001;
-            }
-
-            if (gamepad2.b){
-                hoodAngle = 1;
-            }
-
-            if (gamepad2.y){
-                hoodAngle = 0.7327;
+            goToTarget(0,0,1);
             }
 
 
-        }
 
-        public void Backshot(){
-            if (shooterTime.seconds() < 17) {
-                targetSpeed = 1;
-                servoTargetSpeed = 1;
-                hoodAngle = 0.75;
-                goToTargetSpeed(targetSpeed);
-            }
-            else {
-                servoTargetSpeed = 0;
-                targetSpeed = 0;
-                goToTargetSpeed(targetSpeed);
-            }
-        }
-
-        public void goToTargetSpeed(double targetSpeed) {
-            shooterMotor.setPower(targetSpeed);
-            helperWheel.setPower(servoTargetSpeed);
+        public void goToTarget(double shooterPower, double sushiRollerSpeed, double hoodAngle) {
+            shooterMotor.setPower(shooterPower);
+            helperWheel.setPower(sushiRollerSpeed);
             shooterHood.setPosition(hoodAngle);
         }
 

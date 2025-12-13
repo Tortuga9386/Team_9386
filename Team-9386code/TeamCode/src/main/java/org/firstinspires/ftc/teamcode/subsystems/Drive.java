@@ -142,8 +142,6 @@ public class Drive {
 
     public void runMotors (double forward, double strafe, double twist) {
 
-        telemetry.addData("forward", forward);
-
         double[] speeds = {
                 (forward + strafe + twist),
                 (forward - strafe - twist),

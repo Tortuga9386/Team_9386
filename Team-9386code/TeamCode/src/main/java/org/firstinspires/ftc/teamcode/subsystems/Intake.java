@@ -41,21 +41,17 @@ public class Intake {
             initHardware();
         }
 
-        //public double intakePower = 0;
-
         protected void initHardware() {
             intakeMotor = hardwareMap.get(DcMotor.class, "IntakeRollers");
             intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+
+            gotoTarget(0);
         }
 
-//        public void doIntakeStuff() {
-//            goToTarget(intakePower);
-//        }
-//
-//        public void goToTarget(double intakePower) {
-//            intakeMotor.setPower(intakePower);
-//        }
+        public void gotoTarget (double intakePower) {
+            intakeMotor.setPower(intakePower);
+        }
     }
 }
 
