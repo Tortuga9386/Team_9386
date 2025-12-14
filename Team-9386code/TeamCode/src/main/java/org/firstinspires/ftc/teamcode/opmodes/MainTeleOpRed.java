@@ -20,8 +20,6 @@ public class MainTeleOpRed extends RobotBase
     @Override
     public void init() {
 
-
-
         super.INITIALIZE_DRIVE  = true;
 
         super.init();
@@ -59,14 +57,11 @@ public class MainTeleOpRed extends RobotBase
     }
 
     protected void indexer_loop(){
-        indexer.indexerSystem.doIndexerStuff(gamepad2);
-        indexer.indexerSystem.colorSensorStuff();
+        control_center.intakeAndIndexerTeleop(gamepad2);
     }
 
-
-
     protected void shooter_loop(){
-        shooter.shooterMotor.doShooterStuff(gamepad2);
+        control_center.shooterTeleop(gamepad2);
     }
 
     protected void drive_loop() {
@@ -78,19 +73,10 @@ public class MainTeleOpRed extends RobotBase
     }
 
 
-
-    protected void imu_loop() {
-
-    }
-
     protected void telemetry_loop() {
-        telemetry.addData("Hood Angle", shooter.shooterMotor.hoodAngle);
-        telemetry.addData("selection for seq", indexer.indexerSystem.shooterSelection);
-        telemetry.addData("selection for selector", indexer.indexerSystem.gamepadSelection);
         telemetry.addData("x", turret.limelight.getLatestResult().getTx());
         telemetry.addData("area", turret.limelight.getLatestResult().getTa());
         telemetry.addData("y", turret.limelight.getLatestResult().getTy());
-//        telemetry.addData("turretSpeed", turret.turretMotor.targetSpeed);
         telemetry.update();
     }
 

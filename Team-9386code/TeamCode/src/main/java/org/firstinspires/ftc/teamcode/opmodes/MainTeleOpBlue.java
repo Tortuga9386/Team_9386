@@ -23,8 +23,6 @@ public class MainTeleOpBlue extends RobotBase
 
         super.init();
 
-
-
         //Set initial positions
         telemetry.addData("Status", "init complete");
     }
@@ -34,7 +32,6 @@ public class MainTeleOpBlue extends RobotBase
      */
     @Override
     public void init_loop() {
-
 
     }
 
@@ -55,7 +52,6 @@ public class MainTeleOpBlue extends RobotBase
         shooter_loop();
         indexer_loop();
         telemetry_loop();
-        otos_loop();
         turret_loop();
     }
 
@@ -63,10 +59,8 @@ public class MainTeleOpBlue extends RobotBase
         control_center.intakeAndIndexerTeleop(gamepad2);
     }
 
-
-
     protected void shooter_loop(){
-        shooter.shooterMotor.doShooterStuff(gamepad2);
+        control_center.shooterTeleop(gamepad2);
     }
 
     protected void drive_loop() {
@@ -74,21 +68,11 @@ public class MainTeleOpBlue extends RobotBase
     }
 
     protected void turret_loop(){
-        control_center.doTurretStuffTeleOp(gamepad1, 20);
+        control_center.TurretTeleOp(gamepad1, 20);
     }
 
-    protected void otos_loop (){
-        ca_localizer.otos.doOtosStuff();
-    }
-
-    protected void imu_loop() {
-
-    }
 
     protected void telemetry_loop() {
-//        telemetry.addData("Hood Angle", shooter.shooterMotor.hoodAngle);
-//        telemetry.addData("selection for seq", indexer.indexerSystem.shooterSelection);
-//        telemetry.addData("selection for selector", indexer.indexerSystem.gamepadSelection);
         telemetry.addData("x", turret.limelight.getLatestResult().getTx());
         telemetry.addData("area", turret.limelight.getLatestResult().getTa());
         telemetry.addData("y", turret.limelight.getLatestResult().getTy());
