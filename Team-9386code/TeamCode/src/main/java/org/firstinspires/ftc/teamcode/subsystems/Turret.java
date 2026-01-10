@@ -54,9 +54,9 @@ public class Turret {
 
 
         protected void initHardware() {
-            turretMotor = hardwareMap.get(DcMotor.class, "Turret");
-            turretMotor.setDirection(DcMotor.Direction.FORWARD);
-            turretMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//            turretMotor = hardwareMap.get(DcMotor.class, "Turret");
+//            turretMotor.setDirection(DcMotor.Direction.FORWARD);
+//            turretMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             limelight = hardwareMap.get(Limelight3A.class, "limelight");
             limelight.setPollRateHz(100); // This sets how often we ask Limelight for data (100 times per second)
@@ -83,7 +83,7 @@ public class Turret {
             goToTargetSpeed(targetSpeed);
         }
             public void goToTargetSpeed ( double targetSpeed) {
-                turretMotor.setPower(targetSpeed);
+//                turretMotor.setPower(targetSpeed);
             }
 
 

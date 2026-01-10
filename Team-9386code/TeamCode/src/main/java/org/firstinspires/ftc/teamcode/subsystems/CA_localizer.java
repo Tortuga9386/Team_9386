@@ -48,8 +48,8 @@ public class CA_localizer {
 
 
         protected void initHardware() {
-            leftOtos = hardwareMap.get(SparkFunOTOS.class,"LeftOtos");
-            rightOtos = hardwareMap.get(SparkFunOTOS.class,"RightOtos");
+            leftOtos = hardwareMap.get(SparkFunOTOS.class,"leftOtos");
+            rightOtos = hardwareMap.get(SparkFunOTOS.class,"rightOtos");
 
             SparkFunOTOS.Pose2D pos = leftOtos.getPosition();
             SparkFunOTOS.Pose2D pos2 = rightOtos.getPosition();

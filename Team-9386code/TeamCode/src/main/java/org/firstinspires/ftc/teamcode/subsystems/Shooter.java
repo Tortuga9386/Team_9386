@@ -37,7 +37,7 @@ public class Shooter {
 
     public class ShooterMotor {
 
-        private CRServo helperWheel;
+        //private CRServo helperWheel;
         public DcMotor shooterMotor;
         public Servo shooterHood;
 
@@ -53,11 +53,11 @@ public class Shooter {
 
 
         protected void initHardware() {
-            shooterMotor = hardwareMap.get(DcMotor.class, "shooter");
+            shooterMotor = hardwareMap.get(DcMotor.class, "shooterRoller");
             shooterMotor.setDirection(DcMotor.Direction.REVERSE);
             shooterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            helperWheel = hardwareMap.get(CRServo.class, "helperWheel");
-            helperWheel.setDirection(CRServo.Direction.REVERSE);
+//            helperWheel = hardwareMap.get(CRServo.class, "helperWheel");
+//            helperWheel.setDirection(CRServo.Direction.REVERSE);
             shooterHood = hardwareMap.get(Servo.class, "shooterHood");
             shooterHood.setPosition(hoodAngle);
             }
@@ -98,7 +98,7 @@ public class Shooter {
 
         public void goToTargetSpeed(double targetSpeed) {
             shooterMotor.setPower(targetSpeed);
-            helperWheel.setPower(servoTargetSpeed);
+            //helperWheel.setPower(servoTargetSpeed);
             shooterHood.setPosition(hoodAngle);
         }
 

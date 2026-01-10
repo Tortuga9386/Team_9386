@@ -37,11 +37,11 @@ public class Indexer {
     }
 
     public class IndexerSystem {
-        public DcMotor indexerMotor;
-        public Servo rightLifter;
-        public Servo leftLifter;
-        public ColorSensor rightColorSensor;
-        public ColorSensor leftColorSensor;
+        //public DcMotor indexerMotor;
+//        public Servo rightLifter;
+//        public Servo leftLifter;
+//        public ColorSensor rightColorSensor;
+//        public ColorSensor leftColorSensor;
 
 
         private final ElapsedTime sequenceTimer = new ElapsedTime();
@@ -69,17 +69,17 @@ public class Indexer {
 
 
         protected void initHardware() {
-            indexerMotor = hardwareMap.get(DcMotor.class, "TriggerRoller");
-            indexerMotor.setDirection(DcMotor.Direction.FORWARD);
-            indexerMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            indexerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//            indexerMotor = hardwareMap.get(DcMotor.class, "TriggerRoller");
+//            indexerMotor.setDirection(DcMotor.Direction.FORWARD);
+//            indexerMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//            indexerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-            leftColorSensor = hardwareMap.get(ColorSensor.class, "leftColor");
-            rightColorSensor = hardwareMap.get(ColorSensor.class, "rightColor");
+            //leftColorSensor = hardwareMap.get(ColorSensor.class, "leftColor");
+            //rightColorSensor = hardwareMap.get(ColorSensor.class, "rightColor");
 
-            leftLifter = hardwareMap.get(Servo.class, "leftLifter");
-            rightLifter = hardwareMap.get(Servo.class, "rightLifter");
-            rightLifter.setDirection(Servo.Direction.REVERSE);
+//            leftLifter = hardwareMap.get(Servo.class, "leftLifter");
+//            rightLifter = hardwareMap.get(Servo.class, "rightLifter");
+//            rightLifter.setDirection(Servo.Direction.REVERSE);
 
 
         }
@@ -180,8 +180,8 @@ public class Indexer {
         }
 
         public void goToTarget(double indexerPower) {
-                indexerMotor.setPower(indexerPower);
-                robotBase.intake.intakeRoller.goToTarget(0);
+                //indexerMotor.setPower(indexerPower);
+                //robotBase.intake.intakeRoller.goToTarget(0);
             }
         }
 

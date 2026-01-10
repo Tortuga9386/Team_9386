@@ -70,8 +70,8 @@ public class Drive {
         rightFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightRearMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        leftOtos = hardwareMap.get(SparkFunOTOS.class, "LeftOtos");
-        rightOtos = hardwareMap.get(SparkFunOTOS.class, "RightOtos");
+        leftOtos = hardwareMap.get(SparkFunOTOS.class, "leftOtos");
+        rightOtos = hardwareMap.get(SparkFunOTOS.class, "rightOtos");
 
         leftOtos.setLinearUnit(DistanceUnit.INCH);
         rightOtos.setLinearUnit(DistanceUnit.INCH);
