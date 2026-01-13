@@ -61,8 +61,7 @@ public class MainTeleOp extends RobotBase
     }
 
     protected void indexer_loop(){
-        indexer.indexerSystem.doIndexerStuff(gamepad2);
-        indexer.indexerSystem.colorSensorStuff();
+        indexer.indexerSystem.goToTarget(gamepad2);
     }
 
     protected void intake_loop(){
@@ -91,8 +90,7 @@ public class MainTeleOp extends RobotBase
 
     protected void telemetry_loop() {
         telemetry.addData("Hood Angle", shooter.shooterMotor.hoodAngle);
-        telemetry.addData("selection for seq", indexer.indexerSystem.shooterSelection);
-        telemetry.addData("selection for selector", indexer.indexerSystem.gamepadSelection);
+
         telemetry.addData("x", turret.limelight.getLatestResult().getTx());
         telemetry.addData("area", turret.limelight.getLatestResult().getTa());
         telemetry.addData("y", turret.limelight.getLatestResult().getTy());

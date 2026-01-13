@@ -60,8 +60,8 @@ public class AutoOpTest extends RobotBase
     }
 
     protected void indexer_loop(){
-        indexer.indexerSystem.doIndexerStuff(gamepad2);
-        indexer.indexerSystem.colorSensorStuff();
+       // indexer.indexerSystem.doIndexerStuff(gamepad2);
+       // indexer.indexerSystem.colorSensorStuff();
     }
 
     protected void intake_loop(){
