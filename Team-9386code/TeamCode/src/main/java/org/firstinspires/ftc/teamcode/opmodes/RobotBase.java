@@ -40,8 +40,9 @@ public class RobotBase extends OpMode
     public Shooter shooter;
     public Indexer indexer;
     public Intake intake;
-    public Turret turret;
+
     public CA_localizer ca_localizer;
+    Control_center control_center;
 
     /* Constructor */
     public RobotBase(){ }
@@ -58,8 +59,9 @@ public class RobotBase extends OpMode
         shooter = new Shooter(hardwareMap, this);
         intake = new Intake(hardwareMap, this);
         indexer = new Indexer(hardwareMap, this);
-        turret = new Turret(hardwareMap, this);
+
         ca_localizer = new CA_localizer(hardwareMap, this);
+        control_center = new Control_center(hardwareMap, this);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.subsystems.Control_center;
 import org.firstinspires.ftc.teamcode.subsystems.Indexer;
 
 
@@ -51,52 +52,15 @@ public class MainTeleOp extends RobotBase
      */
     @Override
     public void loop() {
-        drive_loop();
-        shooter_loop();
-        intake_loop();
-        indexer_loop();
-        telemetry_loop();
-        otos_loop();
-        turret_loop();
-        //lift_loop();
-        //husky_loop();
+        control_center_tele();
     }
 
-    protected void indexer_loop(){
-        indexer.indexerSystem.goToTarget(gamepad2.left_stick_y,gamepad2.right_stick_y,50,50,true);
-    }
-
-    protected void intake_loop(){
-        intake.intakeRoller.doIntakeStuff(gamepad2);
-    }
-
-    protected void shooter_loop(){
-        shooter.shooterMotor.doShooterStuff(gamepad2);
-    }
-
-    protected void drive_loop() {
-        drive.driveFromGamepad(gamepad1);
-    }
-
-    protected void turret_loop(){
-        turret.turretMotor.doTurretStuff(gamepad2);
-    }
-
-    protected void otos_loop (){
-        ca_localizer.otos.doOtosStuff();
-    }
-
-    protected void imu_loop() {
-
+    protected void control_center_tele(){
+        control_center.control_center1.teleop(gamepad1,gamepad2);
     }
 
     protected void telemetry_loop() {
         telemetry.addData("Hood Angle", shooter.shooterMotor.hoodAngle);
-
-        telemetry.addData("x", turret.limelight.getLatestResult().getTx());
-        telemetry.addData("area", turret.limelight.getLatestResult().getTa());
-        telemetry.addData("y", turret.limelight.getLatestResult().getTy());
-        telemetry.addData("turretSpeed", turret.turretMotor.targetSpeed);
         telemetry.update();
     }
 

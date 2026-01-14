@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import android.util.Log;
 
+import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -27,6 +28,8 @@ public class Drive {
     public DcMotor rightFrontMotor;
     public DcMotor leftRearMotor;
     public DcMotor rightRearMotor;
+
+    public Limelight3A limelight3A;
 
     //mods
     private final ElapsedTime time = new ElapsedTime();
@@ -90,6 +93,9 @@ public class Drive {
 
         leftOtos.resetTracking();
         rightOtos.resetTracking();
+
+        //Limelight
+        limelight3A = hardwareMap.get(Limelight3A.class, "Limelight");
     }
 
     public void moveToPos (double y, double x, double r,Gamepad gamepad1) {
