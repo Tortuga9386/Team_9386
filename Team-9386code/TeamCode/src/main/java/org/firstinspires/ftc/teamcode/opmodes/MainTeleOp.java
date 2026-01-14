@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.subsystems.Indexer;
+
 
 @TeleOp(name="***TeleOp***", group="teleop")
 public class MainTeleOp extends RobotBase
@@ -61,7 +63,7 @@ public class MainTeleOp extends RobotBase
     }
 
     protected void indexer_loop(){
-        indexer.indexerSystem.goToTarget(gamepad2);
+        indexer.indexerSystem.goToTarget(gamepad2.left_stick_y,gamepad2.right_stick_y,50,50,true);
     }
 
     protected void intake_loop(){

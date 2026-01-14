@@ -68,9 +68,21 @@ public class Indexer {
 
         }
 
-        public void goToTarget(Gamepad gamepad2) {
-                leftLifterMotor.setPower(gamepad2.left_stick_y);
-                rightLifterMotor.setPower(gamepad2.right_stick_y);
+        public void goToTarget(double leftLifterSpeed, double rightLifterSpeed, int leftLifterHeight, int rightLifterHeight, boolean lifterMode) {
+                if (lifterMode){
+                leftLifterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                rightLifterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+                leftLifterMotor.setPower(leftLifterSpeed);
+                rightLifterMotor.setPower(rightLifterSpeed);
+                }
+                if (!lifterMode){
+                    leftLifterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                    rightLifterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+                    leftLifterMotor.setTargetPosition(leftLifterHeight);
+                    rightLifterMotor.setTargetPosition(rightLifterHeight);
+                }
             }
         }
 

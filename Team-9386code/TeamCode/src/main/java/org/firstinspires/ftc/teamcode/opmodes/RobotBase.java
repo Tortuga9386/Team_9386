@@ -42,8 +42,6 @@ public class RobotBase extends OpMode
     public Intake intake;
     public Turret turret;
     public CA_localizer ca_localizer;
-    //public Lift lift;
-    //public SensorHuskyLens sensorHuskyLens;
 
     /* Constructor */
     public RobotBase(){ }
