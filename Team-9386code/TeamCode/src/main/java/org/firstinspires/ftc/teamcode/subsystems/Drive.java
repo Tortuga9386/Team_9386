@@ -6,6 +6,7 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -95,7 +96,10 @@ public class Drive {
         rightOtos.resetTracking();
 
         //Limelight
-        limelight3A = hardwareMap.get(Limelight3A.class, "Limelight");
+        limelight3A = hardwareMap.get(Limelight3A.class, "limelight");
+        limelight3A.getLatestResult();
+        limelight3A.setPollRateHz(100);
+        limelight3A.start();
     }
 
     public void moveToPos (double y, double x, double r,Gamepad gamepad1) {
@@ -124,26 +128,26 @@ public class Drive {
         runMotors(-posForward * 0.5, posStrafe * 0.5, posTwist /45);
     }
 
-    public void driveFromGamepad(Gamepad gamepad) {
+    public void driveFromGamepad(Gamepad gamepad, double limeLightR) {
 
-        double forwardRM = 0;
-        double strafeRM = 0;
-        double twistRM = 0;
+        double forwardRM;
+        double strafeRM;
+        double twistRM;
+        double limeLightT;
 
-        forwardRM = gamepad.left_stick_y;
+
+        forwardRM = -gamepad.left_stick_y;
         strafeRM = gamepad.left_stick_x;
         twistRM = -gamepad.right_stick_x;
 
-        telemetry.addData("GFWD", forwardRM);
+        limeLightT = twistRM - limeLightR;
 
-
-        runMotors(forwardRM, strafeRM, twistRM);
+        runMotors(forwardRM, strafeRM, limeLightT);
     }
 
 
     public void runMotors (double forward, double strafe, double twist) {
 
-        telemetry.addData("forward", forward);
 
         double[] speeds = {
                 (forward + strafe + twist),

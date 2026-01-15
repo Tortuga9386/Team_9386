@@ -77,7 +77,7 @@ public class AutoOpTest extends RobotBase
     }
 
     protected void turret_loop(){
-        turret.turretMotor.doTurretStuff(gamepad2);
+//        turret.turretMotor.doTurretStuff(gamepad2);
     }
 
 

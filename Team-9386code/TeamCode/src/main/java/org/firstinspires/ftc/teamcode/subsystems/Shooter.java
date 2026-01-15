@@ -66,7 +66,7 @@ public class Shooter {
             goToTargetSpeed(targetSpeed);
 
             if (gamepad2.right_trigger > 0.25 || shooterForward) {
-                targetSpeed = 0.95;
+                targetSpeed = 0.67;
 
 
                 servoTargetSpeed = 1;

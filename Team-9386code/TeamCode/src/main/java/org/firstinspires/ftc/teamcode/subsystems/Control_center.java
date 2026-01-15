@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import static android.graphics.Color.BLUE;
+import static android.graphics.Color.RED;
+
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -34,16 +37,37 @@ public class Control_center {
     }
 
     public class Control_center1 {
-        public void teleop(Gamepad gamepad1, Gamepad gamepad2){
+        public void teleop(Gamepad gamepad1, Gamepad gamepad2, boolean allianceRedIsTrue){
             //Virtual_turret
+            double rawLimelightX;
+            double rotationX;
 
-            robotBase.drive.runMotors();
+            rawLimelightX = -robotBase.drive.limelight3A.getLatestResult().getTx();
+
+            if (gamepad2.right_trigger > 0.1 || gamepad1.a){
+                rotationX = rawLimelightX / 27.25;
             }
+            else {
+                rotationX = 0;
+            }
+
+            if (allianceRedIsTrue) {
+                robotBase.drive.limelight3A.pipelineSwitch(0);
+            }
+
+            if (!allianceRedIsTrue){
+                robotBase.drive.limelight3A.pipelineSwitch(1);
+            }
+
+
+            //Drive_base
+            robotBase.drive.driveFromGamepad(gamepad1, -rotationX);
+
+
         }
 
         public class Auto_op {
-
+            }
         }
-
     }
 
