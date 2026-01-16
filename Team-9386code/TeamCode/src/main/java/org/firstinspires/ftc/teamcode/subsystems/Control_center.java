@@ -37,6 +37,9 @@ public class Control_center {
     }
 
     public class Control_center1 {
+
+        public double TPS ; //far:4000 close 3550
+        public double motorTPS ;
         public void teleop(Gamepad gamepad1, Gamepad gamepad2, boolean allianceRedIsTrue){
             //Virtual_turret
             double rawLimelightX;
@@ -69,6 +72,29 @@ public class Control_center {
                 robotBase.indexer.indexerSystem.leftLifterMotor.setTargetPosition(-690);
                 robotBase.indexer.indexerSystem.rightLifterMotor.setTargetPosition(-690);
             }
+
+            //Shooter
+
+
+            if (gamepad2.dpad_up || gamepad1.dpad_up){
+                TPS = (4000 * 28) /60;
+            }
+
+            if (gamepad2.dpad_down || gamepad1.dpad_down){
+                TPS = (3550 * 28) /60;
+            }
+
+            if (gamepad2.right_trigger < 0.1){
+                motorTPS = 0;
+            }
+
+            if (gamepad2.right_trigger > 0.1 ) {
+                motorTPS = TPS;
+            }
+
+
+            robotBase.shooter.shooterMotor.goToTargetSpeed(motorTPS);
+
             //Drive_base
             robotBase.drive.driveFromGamepad(gamepad1, -rotationX);
 

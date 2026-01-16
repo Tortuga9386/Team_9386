@@ -38,38 +38,20 @@ public class Shooter {
 
     public class ShooterMotor {
 
-        //private CRServo helperWheel;
         public DcMotorEx shooterMotor;
-        public Servo shooterHood;
 
         public ShooterMotor() { //HardwareMap hardwareMap, RobotBase opMode
             initHardware();
         }
 
-        public double targetSpeed = 0;
-        public double servoTargetSpeed = 0;
-        public boolean shooterForward = false;
         public double hoodAngle = 1;
-
-        public double TPS = (3550 * 28) /60; //far:4000 close 3550
-
-
 
         protected void initHardware() {
             shooterMotor = hardwareMap.get(DcMotorEx.class, "shooterRoller");
             shooterMotor.setDirection(DcMotor.Direction.REVERSE);
             shooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            shooterMotor.setVelocityPIDFCoefficients(60,0,0,13);
             }
-
-        public void doShooterStuff(Gamepad gamepad2) {
-            goToTargetSpeed(targetSpeed);
-
-            if (gamepad2.right_trigger > 0.25 || shooterForward) {
-                targetSpeed = TPS;
-            } else {
-                targetSpeed = 0;
-            }
-        }
 
         public void goToTargetSpeed(double targetSpeed) {
             shooterMotor.setVelocity(targetSpeed);

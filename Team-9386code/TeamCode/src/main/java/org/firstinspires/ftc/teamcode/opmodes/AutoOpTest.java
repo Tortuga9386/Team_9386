@@ -69,7 +69,7 @@ public class AutoOpTest extends RobotBase
     }
 
     protected void shooter_loop(){
-        shooter.shooterMotor.doShooterStuff(gamepad2);
+
     }
 
     protected void drive_loop() {
