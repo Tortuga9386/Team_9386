@@ -75,6 +75,10 @@ public class MainTeleOp extends RobotBase
         telemetry.addData("RPM", (shooter.shooterMotor.shooterMotor.getVelocity() * 60) /28);
         telemetry.addData("TPS", shooter.shooterMotor.shooterMotor.getVelocity());
 
+        telemetry.addData("Runtime",control_center.control_center1.runtime);
+        telemetry.addData("lifterTimer1",control_center.control_center1.lifterTimer1);
+        telemetry.addData("lifterTimer2",control_center.control_center1.lifterTimer2);
+
 
         // --- Limelight AprilTag ID Extraction ---
         try {
