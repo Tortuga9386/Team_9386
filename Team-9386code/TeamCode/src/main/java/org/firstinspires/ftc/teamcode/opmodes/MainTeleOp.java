@@ -61,15 +61,10 @@ public class MainTeleOp extends RobotBase
     public void loop() {
         control_center_tele();
         telemetry_loop();
-        intake_loop();
     }
 
     protected void control_center_tele(){
         control_center.control_center1.teleop(gamepad1,gamepad2, true);
-    }
-
-    protected void intake_loop(){
-        intake.intakeRoller.doIntakeStuff(gamepad2, gamepad1);
     }
 
     protected void telemetry_loop() {

@@ -65,7 +65,6 @@ public class AutoOpTest extends RobotBase
     }
 
     protected void intake_loop(){
-        intake.intakeRoller.doIntakeStuff(gamepad2, gamepad1);
     }
 
     protected void shooter_loop(){

@@ -47,7 +47,7 @@ public class Control_center {
 
             rawLimelightX = -robotBase.drive.limelight3A.getLatestResult().getTx();
 
-            if (gamepad2.right_trigger > 0.1 || gamepad1.left_trigger > 0.1){
+            if (gamepad2.right_trigger > 0.1 || gamepad1.right_trigger > 0.1){
                 rotationX = rawLimelightX / 27.25;
             }
             else {
@@ -84,16 +84,28 @@ public class Control_center {
                 TPS = (3550 * 28) /60;
             }
 
-            if (gamepad2.right_trigger < 0.1){
+            if (gamepad2.right_trigger < 0.1 && gamepad1.right_trigger < 0.1){
                 motorTPS = 0;
             }
 
-            if (gamepad2.right_trigger > 0.1 ) {
+            if (gamepad2.right_trigger > 0.1 || gamepad1.right_trigger > 0.1) {
                 motorTPS = TPS;
             }
 
 
             robotBase.shooter.shooterMotor.goToTargetSpeed(motorTPS);
+            //Intake
+            if (gamepad2.right_bumper || gamepad1.right_bumper){
+                robotBase.intake.intakeRoller.goToTarget(1);
+            }
+
+            if (gamepad2.left_bumper || gamepad1.left_bumper){
+                robotBase.intake.intakeRoller.goToTarget(-1);
+            }
+
+            if ((!gamepad2.right_bumper && !gamepad1.right_bumper) && (!gamepad2.left_bumper && !gamepad1.left_bumper)){
+                robotBase.intake.intakeRoller.goToTarget(0);
+            }
 
             //Drive_base
             robotBase.drive.driveFromGamepad(gamepad1, -rotationX);

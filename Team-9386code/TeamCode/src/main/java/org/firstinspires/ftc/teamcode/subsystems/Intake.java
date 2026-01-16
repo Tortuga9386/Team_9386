@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -51,24 +52,7 @@ public class Intake {
         protected void initHardware() {
             intakeMotor = hardwareMap.get(DcMotor.class, "IntakeRollers");
             intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            intakeMotor.setDirection(DcMotor.Direction.FORWARD);
-        }
-
-        public void doIntakeStuff(Gamepad gamepad2 , Gamepad gamepad1) {
-            goToTarget(intakePower);
-
-            if (intakeForward || gamepad2.right_bumper || gamepad1.right_trigger > 0.1){
-                intakePower = -1;
-            }
-
-            else if  (intakeBackwards || gamepad2.left_bumper){
-                intakePower = 1;
-            }
-
-            else {
-                intakePower = 0;
-            }
-
+            intakeMotor.setDirection(DcMotor.Direction.REVERSE);
         }
 
         public void goToTarget(double intakePower) {
