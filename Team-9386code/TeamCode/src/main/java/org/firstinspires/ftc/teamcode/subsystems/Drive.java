@@ -136,8 +136,8 @@ public class Drive {
         double limeLightT;
 
 
-        forwardRM = -gamepad.left_stick_y;
-        strafeRM = gamepad.left_stick_x;
+        forwardRM = gamepad.left_stick_y;
+        strafeRM = -gamepad.left_stick_x;
         twistRM = -gamepad.right_stick_x;
 
         limeLightT = twistRM - limeLightR;

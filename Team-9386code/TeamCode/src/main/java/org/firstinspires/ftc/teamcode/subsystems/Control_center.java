@@ -44,7 +44,7 @@ public class Control_center {
 
             rawLimelightX = -robotBase.drive.limelight3A.getLatestResult().getTx();
 
-            if (gamepad2.right_trigger > 0.1 || gamepad1.a){
+            if (gamepad2.right_trigger > 0.1 || gamepad1.left_trigger > 0.1){
                 rotationX = rawLimelightX / 27.25;
             }
             else {
@@ -59,7 +59,16 @@ public class Control_center {
                 robotBase.drive.limelight3A.pipelineSwitch(1);
             }
 
-
+            //Indexer
+            if (gamepad2.a) {
+                robotBase.indexer.indexerSystem.leftLifterMotor.setTargetPosition(0);
+            }if (gamepad2.b) {
+                robotBase.indexer.indexerSystem.rightLifterMotor.setTargetPosition(0);
+            }
+            if  (!gamepad2.b && !gamepad2.a) {
+                robotBase.indexer.indexerSystem.leftLifterMotor.setTargetPosition(-690);
+                robotBase.indexer.indexerSystem.rightLifterMotor.setTargetPosition(-690);
+            }
             //Drive_base
             robotBase.drive.driveFromGamepad(gamepad1, -rotationX);
 

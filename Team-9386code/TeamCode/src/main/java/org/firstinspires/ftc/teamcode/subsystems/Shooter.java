@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -38,7 +39,7 @@ public class Shooter {
     public class ShooterMotor {
 
         //private CRServo helperWheel;
-        public DcMotor shooterMotor;
+        public DcMotorEx shooterMotor;
         public Servo shooterHood;
 
         public ShooterMotor() { //HardwareMap hardwareMap, RobotBase opMode
@@ -50,56 +51,28 @@ public class Shooter {
         public boolean shooterForward = false;
         public double hoodAngle = 1;
 
+        public double TPS = (3550 * 28) /60; //far:4000 close 3550
+
 
 
         protected void initHardware() {
-            shooterMotor = hardwareMap.get(DcMotor.class, "shooterRoller");
+            shooterMotor = hardwareMap.get(DcMotorEx.class, "shooterRoller");
             shooterMotor.setDirection(DcMotor.Direction.REVERSE);
-            shooterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//            helperWheel = hardwareMap.get(CRServo.class, "helperWheel");
-//            helperWheel.setDirection(CRServo.Direction.REVERSE);
-            shooterHood = hardwareMap.get(Servo.class, "shooterHood");
-            shooterHood.setPosition(hoodAngle);
+            shooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             }
 
         public void doShooterStuff(Gamepad gamepad2) {
             goToTargetSpeed(targetSpeed);
 
             if (gamepad2.right_trigger > 0.25 || shooterForward) {
-                targetSpeed = 0.67;
-
-
-                servoTargetSpeed = 1;
-
-
+                targetSpeed = TPS;
             } else {
                 targetSpeed = 0;
-                servoTargetSpeed = 0;
             }
-
-            if (gamepad2.dpad_up) {
-                hoodAngle = hoodAngle - 0.0001;
-            }
-
-            if (gamepad2.dpad_down) {
-                hoodAngle = hoodAngle + 0.0001;
-            }
-
-            if (gamepad2.a){
-                hoodAngle = 1;
-            }
-
-            if (gamepad2.b){
-                hoodAngle = 0.7327;
-            }
-
-
         }
 
         public void goToTargetSpeed(double targetSpeed) {
-            shooterMotor.setPower(targetSpeed);
-            //helperWheel.setPower(servoTargetSpeed);
-            shooterHood.setPosition(hoodAngle);
+            shooterMotor.setVelocity(targetSpeed);
         }
 
 

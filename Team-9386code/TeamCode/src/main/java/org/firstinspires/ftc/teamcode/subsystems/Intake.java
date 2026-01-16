@@ -54,10 +54,10 @@ public class Intake {
             intakeMotor.setDirection(DcMotor.Direction.FORWARD);
         }
 
-        public void doIntakeStuff(Gamepad gamepad2) {
+        public void doIntakeStuff(Gamepad gamepad2 , Gamepad gamepad1) {
             goToTarget(intakePower);
 
-            if (intakeForward || gamepad2.right_bumper){
+            if (intakeForward || gamepad2.right_bumper || gamepad1.right_trigger > 0.1){
                 intakePower = -1;
             }
 

@@ -62,7 +62,6 @@ public class MainTeleOp extends RobotBase
         control_center_tele();
         telemetry_loop();
         intake_loop();
-        indexer_loop();
         shooter_loop();
     }
 
@@ -71,12 +70,9 @@ public class MainTeleOp extends RobotBase
     }
 
     protected void intake_loop(){
-        intake.intakeRoller.doIntakeStuff(gamepad2);
+        intake.intakeRoller.doIntakeStuff(gamepad2, gamepad1);
     }
 
-    protected void indexer_loop(){
-        indexer.indexerSystem.goToTarget(gamepad2.left_stick_y,gamepad2.right_stick_y,0,0,true);
-    }
 
     protected void shooter_loop(){
         shooter.shooterMotor.doShooterStuff(gamepad2);
@@ -84,6 +80,10 @@ public class MainTeleOp extends RobotBase
 
     protected void telemetry_loop() {
         telemetry.addData("Hood Angle", shooter.shooterMotor.hoodAngle);
+        telemetry.addData("LeftLifterHeight", indexer.indexerSystem.rightLifterMotor.getCurrentPosition());
+        telemetry.addData("LeftLifterHeight", indexer.indexerSystem.leftLifterMotor.getCurrentPosition());
+
+        telemetry.addData("shooterWheelSpeed", (shooter.shooterMotor.shooterMotor.getVelocity() * 60) /28);
 
 
         // --- Limelight AprilTag ID Extraction ---
