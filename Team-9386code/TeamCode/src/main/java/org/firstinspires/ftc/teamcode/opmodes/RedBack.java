@@ -1,28 +1,22 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
 
-import static android.graphics.Color.RED;
-
-import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
-import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 import java.util.List;
 
 
-import org.firstinspires.ftc.teamcode.subsystems.Control_center;
-import org.firstinspires.ftc.teamcode.subsystems.Indexer;
-
-
-@TeleOp(name="***TeleOp***", group="teleop")
-public class MainTeleOp extends RobotBase
+@Autonomous(name="RedBack", group="auto")
+public class RedBack extends RobotBase
 {
 
     private   ElapsedTime   runtime = new ElapsedTime();
 
-    public MainTeleOp() {}
+    public RedBack() {}
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -52,6 +46,7 @@ public class MainTeleOp extends RobotBase
     @Override
     public void start() {
         runtime.reset();
+        control_center.control_center1.runtime.reset();
     }
 
     /*
@@ -59,13 +54,13 @@ public class MainTeleOp extends RobotBase
      */
     @Override
     public void loop() {
-        control_center_tele();
+        control_center_auto();
         telemetry_loop();
     }
 
-    protected void control_center_tele(){
+    protected void control_center_auto(){
+        control_center.control_center1.Auto_op();
         control_center.control_center1.runLifters();
-        control_center.control_center1.teleop(gamepad1,gamepad2, true);
     }
 
     protected void telemetry_loop() {

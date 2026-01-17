@@ -52,33 +52,19 @@ public class AutoOpTest extends RobotBase
     @Override
     public void loop() {
         drive_loop();
-        shooter_loop();
-        intake_loop();
-        indexer_loop();
+        auto_op_loop();
         telemetry_loop();
-        turret_loop();
+    }
+    protected void auto_op_loop(){
+        control_center.control_center1.Auto_op();
     }
 
-    protected void indexer_loop(){
-       // indexer.indexerSystem.doIndexerStuff(gamepad2);
-       // indexer.indexerSystem.colorSensorStuff();
-    }
 
-    protected void intake_loop(){
-    }
 
-    protected void shooter_loop(){
-
-    }
 
     protected void drive_loop() {
         drive.moveToPos(0,36,90,gamepad1);
     }
-
-    protected void turret_loop(){
-//        turret.turretMotor.doTurretStuff(gamepad2);
-    }
-
 
 
 
