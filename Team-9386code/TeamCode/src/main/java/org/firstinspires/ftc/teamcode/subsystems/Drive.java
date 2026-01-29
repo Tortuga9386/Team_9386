@@ -33,7 +33,10 @@ public class Drive {
     public Limelight3A limelight3A;
 
     //mods
-    private final ElapsedTime time = new ElapsedTime();
+    public final ElapsedTime time = new ElapsedTime();
+
+
+    public double limeLightOffset;
 
     public Drive(HardwareMap hardwareMap, RobotBase opMode) {
         this.hardwareMap = hardwareMap;
@@ -102,7 +105,7 @@ public class Drive {
         limelight3A.start();
     }
 
-    public void moveToPos (double y, double x, double r,Gamepad gamepad1) {
+    public void moveToPos (double y, double x, double r, double FGain, double SGain, double RGain, boolean limeLight) {
 
         //averages
         double avForward = (leftOtos.getPosition().y + rightOtos.getPosition().y) / 2.0;
@@ -124,8 +127,69 @@ public class Drive {
         telemetry.addData("t2", avTwist);
         telemetry.addData("tc", convertedTwist);
 
+        telemetry.update();
+
         //run motors
-        runMotors(-posForward * 0.5, posStrafe * 0.5, posTwist /45);
+        if (!limeLight) {
+            runMotors(-posForward * FGain, -posStrafe * SGain, posTwist / RGain);
+        }
+        if (limeLight){
+            runMotors(-posForward * FGain, -posStrafe * SGain, (
+                    -limelight3A.getLatestResult().getTx() + limeLightOffset)/27.25);
+        }
+    }
+
+    public void backShotRed (){
+        if (time.seconds() > 0 && time.seconds() < 2){
+            moveToPos(-4,-4,-17.5,0.125,0.125,22.5, false);
+        }
+        if (time.seconds() > 2 && time.seconds() < 7 ){
+            moveToPos(-4,-4,0,0.125,0.125,50, true);
+        }
+        if (time.seconds() > 7 && time.seconds() < 10){
+            moveToPos(-24,-18,90,0.25,0.25,22.5,false);
+        }
+        if (time.seconds() > 10 && time.seconds() < 15){
+            moveToPos(-24,-45,90,0.01,0.25,22.5,false);
+        }
+
+        if (time.seconds() > 15 && time.seconds() < 20){
+            moveToPos(-10,-4,-17.5,0.25,0.25,22.5,false);
+        }
+
+        if (time.seconds() > 20 && time.seconds() < 25){
+            moveToPos(-10,-4,-0,0.125,0.125,50,true);
+        }
+        if (time.seconds() > 25 && time.seconds() < 27){
+            moveToPos(-18,-4,-17.5,0.25,0.25,22.5,false);
+        }
+    }
+
+
+    public void backShotBlue (){
+        if (time.seconds() > 0 && time.seconds() < 2){
+            moveToPos(-4,4,17.5,0.125,0.125,22.5, false);
+        }
+        if (time.seconds() > 2 && time.seconds() < 7 ){
+            moveToPos(-4,4,0,0.125,0.125,50, true);
+        }
+        if (time.seconds() > 7 && time.seconds() < 10){
+            moveToPos(-24,18,-90,0.25,0.25,22.5,false);
+        }
+        if (time.seconds() > 10 && time.seconds() < 15){
+            moveToPos(-24,45,-90,0.01,0.25,22.5,false);
+        }
+
+        if (time.seconds() > 15 && time.seconds() < 20){
+            moveToPos(-10,4,17.5,0.25,0.25,22.5,false);
+        }
+
+        if (time.seconds() > 20 && time.seconds() < 25){
+            moveToPos(-10,4,-0,0.125,0.125,50,true);
+        }
+        if (time.seconds() > 25 && time.seconds() < 27){
+            moveToPos(-18,4,17.5,0.25,0.25,22.5,false);
+        }
     }
 
     public void driveFromGamepad(Gamepad gamepad, double limeLightR) {

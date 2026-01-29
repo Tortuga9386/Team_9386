@@ -56,14 +56,14 @@ public class AutoOpTest extends RobotBase
         telemetry_loop();
     }
     protected void auto_op_loop(){
-        control_center.control_center1.Auto_op();
+        control_center.control_center1.Auto_op(true);
     }
 
 
 
 
     protected void drive_loop() {
-        drive.moveToPos(0,36,90,gamepad1);
+
     }
 
 

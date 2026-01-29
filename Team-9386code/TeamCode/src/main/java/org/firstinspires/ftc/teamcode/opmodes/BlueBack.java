@@ -1,28 +1,21 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
 
-import static android.graphics.Color.RED;
-
-import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
-import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 import java.util.List;
 
 
-import org.firstinspires.ftc.teamcode.subsystems.Control_center;
-import org.firstinspires.ftc.teamcode.subsystems.Indexer;
-
-
-@TeleOp(name="***TeleOp***", group="teleop")
-public class MainTeleOp extends RobotBase
+@Autonomous(name="BlueBack", group="auto")
+public class BlueBack extends RobotBase
 {
 
     private   ElapsedTime   runtime = new ElapsedTime();
 
-    public MainTeleOp() {}
+    public BlueBack() {}
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -36,6 +29,11 @@ public class MainTeleOp extends RobotBase
 
         //Set initial positions
         telemetry.addData("Status", "init complete");
+
+        control_center.control_center1.rightLifterPos = 1;
+        control_center.control_center1.leftLifterPos = 1;
+        drive.limelight3A.pipelineSwitch(1);
+        drive.limeLightOffset = 3.5;
     }
 
     /*
@@ -44,6 +42,47 @@ public class MainTeleOp extends RobotBase
     @Override
     public void init_loop() {
 
+        control_center.control_center1.rightLifterPos = 1;
+        control_center.control_center1.leftLifterPos = 1;
+
+        drive.limelight3A.pipelineSwitch(1);
+
+        control_center.control_center1.runLifters();
+        try {
+            LLResult result = drive.limelight3A.getLatestResult();
+
+            if (result != null && result.isValid()) {
+                List<FiducialResult> fiducials = result.getFiducialResults();
+
+                if (fiducials.isEmpty()) {
+                    telemetry.addData("Detected AprilTag ID/s", "None");
+                } else {
+                    // To display all IDs detected
+                    StringBuilder ids = new StringBuilder();
+                    for (FiducialResult fiducial : fiducials) {
+                        // **The key method is getFiducialId()**
+                        int aprilTagId = fiducial.getFiducialId();
+                        ids.append(aprilTagId).append(", ");
+                    }
+
+                    // Remove the trailing ", " if there is at least one ID
+                    if (ids.length() > 0) {
+                        ids.setLength(ids.length() - 2);
+                    }
+
+                    telemetry.addData("Detected AprilTag ID/s", ids.toString());
+
+                    // If you only want the ID of the *first* detected tag:
+                    // telemetry.addData("First AprilTag ID", fiducials.get(0).getFiducialId());
+                }
+            } else {
+                telemetry.addData("Detected AprilTag ID/s", "No Valid Result");
+            }
+        } catch (Exception e) {
+            // Handle case where limelight might not be initialized or throws an error
+            telemetry.addData("Limelight Error", e.getMessage());
+        }
+        // --- End Limelight AprilTag ID Extraction ---
     }
 
     /*
@@ -52,6 +91,8 @@ public class MainTeleOp extends RobotBase
     @Override
     public void start() {
         runtime.reset();
+        control_center.control_center1.runtime.reset();
+        drive.time.reset();
     }
 
     /*
@@ -59,13 +100,18 @@ public class MainTeleOp extends RobotBase
      */
     @Override
     public void loop() {
-        control_center_tele();
+        control_center_auto();
         telemetry_loop();
+        drive_loop();
     }
 
-    protected void control_center_tele(){
+    protected void control_center_auto(){
+        control_center.control_center1.Auto_op(false);
         control_center.control_center1.runLifters();
-        control_center.control_center1.teleop(gamepad1,gamepad2, true);
+    }
+
+    protected void drive_loop(){
+        drive.backShotBlue();
     }
 
     protected void telemetry_loop() {
@@ -76,6 +122,7 @@ public class MainTeleOp extends RobotBase
         telemetry.addData("TPS", shooter.shooterMotor.shooterMotor.getVelocity());
 
         telemetry.addData("Runtime",control_center.control_center1.runtime);
+
 
         // --- Limelight AprilTag ID Extraction ---
         try {

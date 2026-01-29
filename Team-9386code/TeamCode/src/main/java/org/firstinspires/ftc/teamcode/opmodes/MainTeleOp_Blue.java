@@ -1,28 +1,21 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
 
-import static android.graphics.Color.RED;
-
-import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
-import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 import java.util.List;
 
 
-import org.firstinspires.ftc.teamcode.subsystems.Control_center;
-import org.firstinspires.ftc.teamcode.subsystems.Indexer;
-
-
-@TeleOp(name="***TeleOp***", group="teleop")
-public class MainTeleOp extends RobotBase
+@TeleOp(name="***TeleOp_Blue***", group="teleop")
+public class MainTeleOp_Blue extends RobotBase
 {
 
     private   ElapsedTime   runtime = new ElapsedTime();
 
-    public MainTeleOp() {}
+    public MainTeleOp_Blue() {}
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -36,6 +29,8 @@ public class MainTeleOp extends RobotBase
 
         //Set initial positions
         telemetry.addData("Status", "init complete");
+        drive.limelight3A.pipelineSwitch(1);
+        drive.limeLightOffset = 3.5;
     }
 
     /*
@@ -43,6 +38,8 @@ public class MainTeleOp extends RobotBase
      */
     @Override
     public void init_loop() {
+        drive.limelight3A.pipelineSwitch(1);
+
 
     }
 
@@ -65,7 +62,7 @@ public class MainTeleOp extends RobotBase
 
     protected void control_center_tele(){
         control_center.control_center1.runLifters();
-        control_center.control_center1.teleop(gamepad1,gamepad2, true);
+        control_center.control_center1.teleop(gamepad1,gamepad2, false);
     }
 
     protected void telemetry_loop() {
