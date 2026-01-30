@@ -103,38 +103,38 @@ public class Control_center {
                 if (runtime.seconds() > (snapShotRuntime + 0)) {
                     lifterTimer1 = true;
                 }
-                if (runtime.seconds() > (snapShotRuntime + 0.5)) {
+                if (runtime.seconds() > (snapShotRuntime + 0.225)) {
                     lifterTimer2 = true;
                 }
 
-                if (runtime.seconds() > (snapShotRuntime + 0.75)) {
+                if (runtime.seconds() > (snapShotRuntime + 0.45)) {
                     lifterTimer3 = true;
                 }
-                if (runtime.seconds() > (snapShotRuntime + 1.25)) {
+                if (runtime.seconds() > (snapShotRuntime + 0.675)) {
                     lifterTimer4 = true;
                 }
 
-                if (runtime.seconds() > (snapShotRuntime + 1.25)) {
+                if (runtime.seconds() > (snapShotRuntime + 0.675)) {
                     rollerTimer1 = true;
                 }
-                if (runtime.seconds() > (snapShotRuntime + 3.25)) {
+                if (runtime.seconds() > (snapShotRuntime + 1.425)) {
                     rollerTimer2 = true;
                 }
 
-                if (runtime.seconds() > (snapShotRuntime + 3.25)) {
+                if (runtime.seconds() > (snapShotRuntime + 1.425)) {
                     lifterTimer5 = true;
                 }
-                if (runtime.seconds() > (snapShotRuntime + 3.75)) {
+                if (runtime.seconds() > (snapShotRuntime + 1.65)) {
                     lifterTimer6 = true;
                 }
-                if (runtime.seconds() > (snapShotRuntime + 4.5)) {
+                if (runtime.seconds() > (snapShotRuntime + 1.875)) {
                     lifterTimer7 = true;
                 }
-                if (runtime.seconds() > (snapShotRuntime + 5)) {
+                if (runtime.seconds() > (snapShotRuntime + 2.1)) {
                     lifterTimer8 = true;
                 }
 
-                if (runtime.seconds() > (snapShotRuntime + 5.25)) {
+                if (runtime.seconds() > (snapShotRuntime + 2.13)) {
                     runTimer = true;
                 }
 
