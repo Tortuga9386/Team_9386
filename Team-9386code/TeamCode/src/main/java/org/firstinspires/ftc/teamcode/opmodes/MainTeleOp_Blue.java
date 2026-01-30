@@ -30,7 +30,7 @@ public class MainTeleOp_Blue extends RobotBase
         //Set initial positions
         telemetry.addData("Status", "init complete");
         drive.limelight3A.pipelineSwitch(1);
-        drive.limeLightOffset = 3.5;
+        drive.limeLightOffset = 2.5;
     }
 
     /*
