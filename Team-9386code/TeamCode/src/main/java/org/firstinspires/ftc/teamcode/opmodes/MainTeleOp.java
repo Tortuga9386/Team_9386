@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import static android.graphics.Color.RED;
 
 import com.qualcomm.hardware.limelightvision.LLResult;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
@@ -15,7 +16,7 @@ import java.util.List;
 import org.firstinspires.ftc.teamcode.subsystems.Control_center;
 import org.firstinspires.ftc.teamcode.subsystems.Indexer;
 
-
+@Disabled
 @TeleOp(name="***TeleOp***", group="teleop")
 public class MainTeleOp extends RobotBase
 {
@@ -57,6 +58,7 @@ public class MainTeleOp extends RobotBase
     /*
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
+
     @Override
     public void loop() {
         control_center_tele();

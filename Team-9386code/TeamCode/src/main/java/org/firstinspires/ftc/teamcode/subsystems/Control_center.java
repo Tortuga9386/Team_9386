@@ -233,58 +233,58 @@ public class Control_center {
             if (!alianceRedIsTrue){
                 robotBase.drive.limelight3A.pipelineSwitch(1);
             }
-            if (runtime.seconds() > 4 && runtime.seconds() < 5){
+            if (runtime.seconds() > 2.75 && runtime.seconds() < 3.75){
                 robotBase.intake.intakeRoller.goToTarget(1);
             }
-            if (runtime.seconds() > 5 && runtime.seconds() < 6 ){
+            if (runtime.seconds() > 3.75 && runtime.seconds() < 4 ){
                 robotBase.intake.intakeRoller.goToTarget(0);
             }
 
-            if (runtime.seconds() > 9 && runtime.seconds() < 15){
+            if (runtime.seconds() > 7.5 && runtime.seconds() < 10.75){
                 robotBase.intake.intakeRoller.goToTarget(1);
             }
-            if (runtime.seconds() > 15 && runtime.seconds() < 15.25 ){
+            if (runtime.seconds() > 10.75 && runtime.seconds() < 10.85 ){
                 robotBase.intake.intakeRoller.goToTarget(0);
             }
 
-            if (runtime.seconds() > 15.25 && runtime.seconds() < 15.5){
+            if (runtime.seconds() > 10.85 && runtime.seconds() < 11.1){
                 robotBase.intake.intakeRoller.goToTarget(-1);
             }
-            if (runtime.seconds() > 15.5 && runtime.seconds() < 16 ){
+            if (runtime.seconds() > 11.1 && runtime.seconds() < 11.35 ){
                 robotBase.intake.intakeRoller.goToTarget(0);
             }
 
-            if (runtime.seconds() < 7){
-                robotBase.shooter.shooterMotor.goToTargetSpeed((4000 * 28) / 60);
+            if (runtime.seconds() < 5.75){
+                robotBase.shooter.shooterMotor.goToTargetSpeed((3950 * 28) / 60);
             }
 
-            if (runtime .seconds() > 7 && runtime.seconds() < 10){
+            if (runtime .seconds() > 5.75 && runtime.seconds() < 6){
                 robotBase.shooter.shooterMotor.goToTargetSpeed(0);
             }
 
-            if (runtime.seconds() > 2 && runtime.seconds() < 2.5){
+            if (runtime.seconds() > 0.75 && runtime.seconds() < 1.25){
                 leftLifterPos = 3;
             }
-            if (runtime.seconds() > 2.5 && runtime.seconds() < 3){
+            if (runtime.seconds() > 1.25 && runtime.seconds() < 1.75){
                 leftLifterPos = 2;
             }
 
-            if (runtime.seconds() > 3 && runtime.seconds() < 3.5){
+            if (runtime.seconds() > 1.75 && runtime.seconds() < 2.25){
                 rightLifterPos = 3;
             }
-            if (runtime.seconds() > 3.5 && runtime.seconds() < 4){
+            if (runtime.seconds() > 2.25 && runtime.seconds() < 2.75){
                 rightLifterPos = 2;
             }
-            if (runtime.seconds() > 5 && runtime.seconds() < 5.5){
+            if (runtime.seconds() > 3.75 && runtime.seconds() < 4.25){
                 rightLifterPos = 3;
             }
-            if (runtime.seconds() > 5.5 && runtime.seconds() < 6){
+            if (runtime.seconds() > 4.25 && runtime.seconds() < 4.75){
                 rightLifterPos = 1;
             }
-            if (runtime.seconds() > 6 && runtime.seconds()  <6.5){
+            if (runtime.seconds() > 4.75 && runtime.seconds()  < 5.25){
                 leftLifterPos = 3;
             }
-            if (runtime.seconds() > 6.5 && runtime.seconds() < 7){
+            if (runtime.seconds() > 5.25 && runtime.seconds() < 5.75){
                 leftLifterPos = 1;
             }
 
@@ -293,44 +293,48 @@ public class Control_center {
 
 
 
-            if (runtime.seconds() > 20 && runtime.seconds() < 20.5){
+            if (runtime.seconds() > 12.5 && runtime.seconds() < 13){
                 leftLifterPos = 3;
             }
-            if (runtime.seconds() > 20.5 && runtime.seconds() < 21){
+            if (runtime.seconds() > 13 && runtime.seconds() < 13.5){
                 leftLifterPos = 2;
             }
 
-            if (runtime.seconds() > 21 && runtime.seconds() < 21.5){
+            if (runtime.seconds() > 13.5 && runtime.seconds() < 14){
                 rightLifterPos = 3;
             }
-            if (runtime.seconds() > 21.5 && runtime.seconds() < 22){
+            if (runtime.seconds() > 14 && runtime.seconds() < 14.5){
                 rightLifterPos = 2;
             }
-            if (runtime.seconds() > 23 && runtime.seconds() < 23.5){
+            if (runtime.seconds() > 15.5 && runtime.seconds() < 16){
                 rightLifterPos = 3;
             }
-            if (runtime.seconds() > 23.5 && runtime.seconds() < 24){
+            if (runtime.seconds() > 16 && runtime.seconds() < 16.5){
                 rightLifterPos = 1;
             }
-            if (runtime.seconds() > 24.5 && runtime.seconds()  <25){
+            if (runtime.seconds() > 16.5 && runtime.seconds()  < 17){
                 leftLifterPos = 3;
             }
-            if (runtime.seconds() > 25 && runtime.seconds() < 27){
+            if (runtime.seconds() > 17 && runtime.seconds() < 17.5){
+                leftLifterPos = 1;
+            }
+            if (runtime.seconds() > 18 && runtime.seconds() < 18.5){
+                leftLifterPos = 3;
                 rightLifterPos = 3;
             }
 
-            if (runtime.seconds() > 22 && runtime.seconds() < 23){
+            if (runtime.seconds() > 14 && runtime.seconds() < 15){
                 robotBase.intake.intakeRoller.goToTarget(1);
             }
-            if (runtime.seconds() > 23 && runtime.seconds() < 23.5 ){
+            if (runtime.seconds() > 15 && runtime.seconds() < 15.5 ){
                 robotBase.intake.intakeRoller.goToTarget(0);
             }
 
-            if (runtime.seconds() > 18 && runtime.seconds() < 27){
+            if (runtime.seconds() > 11 && runtime.seconds() < 17.5){
                 robotBase.shooter.shooterMotor.goToTargetSpeed((3950 * 28) / 60);
             }
 
-            if (runtime .seconds() > 27 && runtime.seconds() < 28){
+            if (runtime .seconds() > 17.5 && runtime.seconds() < 18.5){
                 robotBase.shooter.shooterMotor.goToTargetSpeed(0);
             }
 
