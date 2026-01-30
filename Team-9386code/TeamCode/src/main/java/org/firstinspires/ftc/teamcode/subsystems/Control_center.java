@@ -51,6 +51,8 @@ public class Control_center {
         private boolean lifterTimer4 = false;
         private boolean lifterTimer5 = false;
         private boolean lifterTimer6 = false;
+        private boolean lifterTimer7 = false;
+        private boolean lifterTimer8 = false;
 
         private boolean rollerTimer1 = false;
         private boolean rollerTimer2 = false;
@@ -122,11 +124,17 @@ public class Control_center {
                 if (runtime.seconds() > (snapShotRuntime + 3.25)) {
                     lifterTimer5 = true;
                 }
-                if (runtime.seconds() > (snapShotRuntime + 4.5)) {
+                if (runtime.seconds() > (snapShotRuntime + 3.75)) {
                     lifterTimer6 = true;
                 }
+                if (runtime.seconds() > (snapShotRuntime + 4.5)) {
+                    lifterTimer7 = true;
+                }
+                if (runtime.seconds() > (snapShotRuntime + 5)) {
+                    lifterTimer8 = true;
+                }
 
-                if (runtime.seconds() > (snapShotRuntime + 4.75)) {
+                if (runtime.seconds() > (snapShotRuntime + 5.25)) {
                     runTimer = true;
                 }
 
@@ -152,10 +160,14 @@ public class Control_center {
                 }
                 if (lifterTimer5 && !lifterTimer6) {
                     leftLifterPos = 3;
-                    rightLifterPos = 3;
                 }
                 if (lifterTimer6) {
                     leftLifterPos = 1;
+                }
+                if (lifterTimer7 && !lifterTimer8) {
+                    rightLifterPos = 3;
+                }
+                if (lifterTimer8) {
                     rightLifterPos = 1;
                 }
                 if (runTimer) {
@@ -167,6 +179,8 @@ public class Control_center {
                     lifterTimer6 = false;
                     rollerTimer1 = false;
                     rollerTimer2 = false;
+                    lifterTimer7 = false;
+                    lifterTimer8 = false;
 
                     triggerCheck = false;
                     runTimer = false;
@@ -174,7 +188,12 @@ public class Control_center {
 
             }
 
-            if (!triggerCheck){
+            if (gamepad2.a || gamepad1.a){
+                leftLifterPos = 3;
+                rightLifterPos = 3;
+            }
+
+            if (!triggerCheck && (!gamepad1.a && !gamepad2.a)){
                 leftLifterPos = 1;
                 rightLifterPos = 1;
             }
