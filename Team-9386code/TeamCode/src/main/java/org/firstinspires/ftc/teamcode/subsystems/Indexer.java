@@ -62,8 +62,6 @@ public class Indexer {
             leftLifterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             rightLifterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            leftColorSensor = hardwareMap.get(ColorSensor.class, "leftColorSensor");
-            rightColorSensor = hardwareMap.get(ColorSensor.class, "rightColorSensor");
 
             leftMagSensor = hardwareMap.get(TouchSensor.class, "leftMagSensor");
             rightMagSensor = hardwareMap.get(TouchSensor.class, "rightMagSensor");

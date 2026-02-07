@@ -145,23 +145,23 @@ public class Drive {
         if (time.seconds() > 0.75 && time.seconds() < 5.75 ){
             moveToPos(-4,-4,0,0.125,0.125,50, true);
         }
-        if (time.seconds() > 5.75 && time.seconds() < 7.5){
-            moveToPos(-24,-18,90,0.25,0.25,22.5,false);
-        }
-        if (time.seconds() > 7.5 && time.seconds() < 10.25){
-            moveToPos(-24,-45,90,0.01,0.25,22.5,false);
-        }
-
-        if (time.seconds() > 10.25 && time.seconds() < 12.5){
-            moveToPos(-4,-4,-20.5,0.25,0.25,22.5,false);
-        }
-
-        if (time.seconds() > 12.5 && time.seconds() < 17.5){
-            moveToPos(-4,-4,-0,0.125,0.125,50,true);
-        }
-        if (time.seconds() > 17.5 && time.seconds() < 30){
-            moveToPos(-18,-8,-17.5,0.25,0.25,22.5,false);
-        }
+//        if (time.seconds() > 5.75 && time.seconds() < 7.5){
+//            moveToPos(-24,-18,90,0.25,0.25,22.5,false);
+//        }
+//        if (time.seconds() > 7.5 && time.seconds() < 10.25){
+//            moveToPos(-24,-45,90,0.01,0.25,22.5,false);
+//        }
+//
+//        if (time.seconds() > 10.25 && time.seconds() < 12.5){
+//            moveToPos(-4,-4,-20.5,0.25,0.25,22.5,false);
+//        }
+//
+//        if (time.seconds() > 12.5 && time.seconds() < 17.5){
+//            moveToPos(-4,-4,-0,0.125,0.125,50,true);
+//        }
+//        if (time.seconds() > 17.5 && time.seconds() < 30){
+//            moveToPos(-18,-8,-17.5,0.25,0.25,22.5,false);
+//        }
     }
 
 

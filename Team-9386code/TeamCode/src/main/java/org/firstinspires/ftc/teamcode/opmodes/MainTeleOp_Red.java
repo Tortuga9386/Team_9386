@@ -6,6 +6,8 @@ import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
 import java.util.List;
 
 
@@ -71,7 +73,6 @@ public class MainTeleOp_Red extends RobotBase
         telemetry.addData("LeftLifterHeight", indexer.indexerSystem.leftLifterMotor.getCurrentPosition());
 
         telemetry.addData("RPM", (shooter.shooterMotor.shooterMotor.getVelocity() * 60) /28);
-        telemetry.addData("TPS", shooter.shooterMotor.shooterMotor.getVelocity());
 
         telemetry.addData("Runtime",control_center.control_center1.runtime);
 

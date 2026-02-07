@@ -37,6 +37,8 @@ public class Intake {
     public class IntakeRoller {
 
         public DcMotor intakeMotor;
+        public DistanceSensor leftDistance;
+        public DistanceSensor rightDistance;
 
         public IntakeRoller() { //HardwareMap hardwareMap, RobotBase opMode
             initHardware();
@@ -46,6 +48,9 @@ public class Intake {
             intakeMotor = hardwareMap.get(DcMotor.class, "IntakeRollers");
             intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             intakeMotor.setDirection(DcMotor.Direction.REVERSE);
+
+            leftDistance = hardwareMap.get(DistanceSensor.class, "leftDistance");
+            rightDistance = hardwareMap.get(DistanceSensor.class, "rightDistance");
             }
 
         public void goToTarget(double intakePower) {

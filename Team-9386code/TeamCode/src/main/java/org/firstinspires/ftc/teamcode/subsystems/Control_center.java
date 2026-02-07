@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import static android.graphics.Color.BLUE;
 import static android.graphics.Color.RED;
 
+import static org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit.INCH;
+
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -11,6 +13,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.internal.usb.UsbSerialNumber;
 import org.firstinspires.ftc.teamcode.opmodes.RobotBase;
 
@@ -44,6 +47,7 @@ public class Control_center {
         public double motorTPS;
 
         private double snapShotRuntime;
+        private double snapShotRuntimeIntakeOut;
 
         public boolean lifterTimer1 = false;
         public boolean lifterTimer2 = false;
@@ -61,8 +65,10 @@ public class Control_center {
 
         private boolean runTimer = false;
 
-        public int leftLifterPos;
-        public int rightLifterPos;
+        public boolean slightLift = false;
+
+        public double leftLifterPos;
+        public double rightLifterPos;
 
 
         public boolean triggerCheck;
@@ -195,10 +201,23 @@ public class Control_center {
                 rightLifterPos = 3;
             }
 
-            if (!triggerCheck && (!gamepad1.a && !gamepad2.a)){
+            if (!triggerCheck && (!gamepad1.a && !gamepad2.a) && (!gamepad1.right_bumper && !gamepad2.right_bumper)){
                 leftLifterPos = 1;
                 rightLifterPos = 1;
             }
+
+            if (gamepad1.right_bumper || gamepad2.right_bumper) {
+                if ((robotBase.intake.intakeRoller.leftDistance.getDistance(DistanceUnit.MM) < 65 && robotBase.intake.intakeRoller.rightDistance.getDistance(DistanceUnit.MM) < 65)) {
+                    leftLifterPos = 1.5;
+                    rightLifterPos = 1.5;
+                }
+
+                if ((robotBase.intake.intakeRoller.leftDistance.getDistance(DistanceUnit.MM) > 65 && robotBase.intake.intakeRoller.rightDistance.getDistance(DistanceUnit.MM) < 65)){
+                    leftLifterPos = 1;
+                    rightLifterPos = 1;
+                }
+            }
+
 
 
             //Shooter
@@ -210,6 +229,10 @@ public class Control_center {
 
             if (gamepad2.dpad_down || gamepad1.dpad_down) {
                 TPS = (3550 * 28) / 60;
+            }
+
+            if (gamepad1.rightBumperWasReleased() || gamepad2.rightBumperWasReleased()){
+                snapShotRuntimeIntakeOut = runtime.seconds() + 0.2;
             }
 
 
@@ -228,11 +251,11 @@ public class Control_center {
 
             }
 
-            if ((gamepad2.left_bumper || gamepad1.left_bumper)) {
+            if (gamepad2.left_bumper || gamepad1.left_bumper || (snapShotRuntimeIntakeOut > runtime.seconds() && (!gamepad1.right_bumper && !gamepad2.right_bumper))) {
                 robotBase.intake.intakeRoller.goToTarget(-1);
             }
 
-            if ((!gamepad2.right_bumper && !gamepad1.right_bumper) && (!gamepad2.left_bumper && !gamepad1.left_bumper) && !runRoller) {
+            if ((!gamepad2.right_bumper && !gamepad1.right_bumper) && (!gamepad2.left_bumper && !gamepad1.left_bumper) && !runRoller && (snapShotRuntimeIntakeOut < runtime.seconds())) {
             robotBase.intake.intakeRoller.goToTarget(0);
             }
 
@@ -362,6 +385,9 @@ public class Control_center {
                 if (leftLifterPos == 1) {
             robotBase.indexer.indexerSystem.leftLifterMotor.setTargetPosition(-662);
         }
+                if (leftLifterPos == 1.5) {
+            robotBase.indexer.indexerSystem.leftLifterMotor.setTargetPosition(-525);
+        }
                 if (leftLifterPos == 2) {
             robotBase.indexer.indexerSystem.leftLifterMotor.setTargetPosition(-490);
         }
@@ -371,6 +397,9 @@ public class Control_center {
 
                 if (rightLifterPos == 1) {
             robotBase.indexer.indexerSystem.rightLifterMotor.setTargetPosition(-662);
+        }
+                if (rightLifterPos == 1.5) {
+            robotBase.indexer.indexerSystem.rightLifterMotor.setTargetPosition(-525);
         }
                 if (rightLifterPos == 2) {
             robotBase.indexer.indexerSystem.rightLifterMotor.setTargetPosition(-490);
