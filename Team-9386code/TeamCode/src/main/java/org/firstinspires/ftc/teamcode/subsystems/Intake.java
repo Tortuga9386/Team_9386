@@ -36,24 +36,17 @@ public class Intake {
 
     public class IntakeRoller {
 
-        public DcMotor intakeMotor;;
+        public DcMotor intakeMotor;
 
         public IntakeRoller() { //HardwareMap hardwareMap, RobotBase opMode
             initHardware();
         }
 
-        public boolean intakeForward = false;
-        public boolean intakeBackwards = false;
-        public double intakePower = 0;
-
-
-
-
         protected void initHardware() {
             intakeMotor = hardwareMap.get(DcMotor.class, "IntakeRollers");
             intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             intakeMotor.setDirection(DcMotor.Direction.REVERSE);
-        }
+            }
 
         public void goToTarget(double intakePower) {
             intakeMotor.setPower(intakePower);

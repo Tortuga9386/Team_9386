@@ -66,6 +66,7 @@ public class MainTeleOp_Red extends RobotBase
     }
 
     protected void telemetry_loop() {
+
         telemetry.addData("LeftLifterHeight", indexer.indexerSystem.rightLifterMotor.getCurrentPosition());
         telemetry.addData("LeftLifterHeight", indexer.indexerSystem.leftLifterMotor.getCurrentPosition());
 
@@ -110,7 +111,6 @@ public class MainTeleOp_Red extends RobotBase
             telemetry.addData("Limelight Error", e.getMessage());
         }
         // --- End Limelight AprilTag ID Extraction ---
-
 
         telemetry.update();
     }

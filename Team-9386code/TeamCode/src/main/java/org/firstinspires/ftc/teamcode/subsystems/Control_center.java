@@ -67,6 +67,8 @@ public class Control_center {
 
         public boolean triggerCheck;
 
+
+
         public void teleop(Gamepad gamepad1, Gamepad gamepad2, boolean allianceRedIsTrue) {
             //Virtual_turret
             double rawLimelightX;
@@ -110,31 +112,31 @@ public class Control_center {
                 if (runtime.seconds() > (snapShotRuntime + 0.45)) {
                     lifterTimer3 = true;
                 }
-                if (runtime.seconds() > (snapShotRuntime + 0.675)) {
+                if (runtime.seconds() > (snapShotRuntime + 0.75)) {//0.675
                     lifterTimer4 = true;
                 }
 
-                if (runtime.seconds() > (snapShotRuntime + 0.675)) {
+                if (runtime.seconds() > (snapShotRuntime + 0.925)) {
                     rollerTimer1 = true;
                 }
-                if (runtime.seconds() > (snapShotRuntime + 1.425)) {
+                if (runtime.seconds() > (snapShotRuntime + 1.675)) {
                     rollerTimer2 = true;
                 }
 
-                if (runtime.seconds() > (snapShotRuntime + 1.425)) {
+                if (runtime.seconds() > (snapShotRuntime + 1.675)) {
                     lifterTimer5 = true;
                 }
-                if (runtime.seconds() > (snapShotRuntime + 1.65)) {
+                if (runtime.seconds() > (snapShotRuntime + 1.9)) {
                     lifterTimer6 = true;
                 }
-                if (runtime.seconds() > (snapShotRuntime + 1.875)) {
+                if (runtime.seconds() > (snapShotRuntime + 2.125)) {
                     lifterTimer7 = true;
                 }
-                if (runtime.seconds() > (snapShotRuntime + 2.1)) {
+                if (runtime.seconds() > (snapShotRuntime + 2.35)) {
                     lifterTimer8 = true;
                 }
 
-                if (runtime.seconds() > (snapShotRuntime + 2.13)) {
+                if (runtime.seconds() > (snapShotRuntime + 2.4)) {
                     runTimer = true;
                 }
 
@@ -210,17 +212,14 @@ public class Control_center {
                 TPS = (3550 * 28) / 60;
             }
 
-            if (gamepad2.right_trigger < 0.1 && gamepad1.right_trigger < 0.1) {
-                motorTPS = 0;
-            }
-
-            if (gamepad2.right_trigger > 0.1 || gamepad1.right_trigger > 0.1) {
-                motorTPS = TPS;
-            }
 
 
-            robotBase.shooter.shooterMotor.goToTargetSpeed(motorTPS);
-            //Intake
+
+
+
+            robotBase.shooter.shooterMotor.goToTargetSpeed(TPS);
+
+
             if (runRoller){
                 robotBase.intake.intakeRoller.goToTarget(1);
             }
@@ -276,10 +275,7 @@ public class Control_center {
             if (runtime.seconds() < 5.75){
                 robotBase.shooter.shooterMotor.goToTargetSpeed((3950 * 28) / 60);
             }
-
-            if (runtime .seconds() > 5.75 && runtime.seconds() < 6){
-                robotBase.shooter.shooterMotor.goToTargetSpeed(0);
-            }
+            
 
             if (runtime.seconds() > 0.75 && runtime.seconds() < 1.25){
                 leftLifterPos = 3;
@@ -356,6 +352,7 @@ public class Control_center {
             if (runtime .seconds() > 17.5 && runtime.seconds() < 18.5){
                 robotBase.shooter.shooterMotor.goToTargetSpeed(0);
             }
+
 
 
 
