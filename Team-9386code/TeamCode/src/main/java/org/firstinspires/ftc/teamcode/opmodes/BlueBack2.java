@@ -9,13 +9,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import java.util.List;
 
 
-@Autonomous(name="BlueBack6", group="auto")
-public class BlueBack extends RobotBase
+@Autonomous(name="BlueBack9", group="auto")
+public class BlueBack2 extends RobotBase
 {
 
     private   ElapsedTime   runtime = new ElapsedTime();
 
-    public BlueBack() {}
+    public BlueBack2() {}
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -106,12 +106,12 @@ public class BlueBack extends RobotBase
     }
 
     protected void control_center_auto(){
-        control_center.control_center1.Auto_op(false);
+        control_center.control_center1.Auto_op2(false);
         control_center.control_center1.runLifters();
     }
 
     protected void drive_loop(){
-        drive.backShotBlue();
+        drive.backShotBlue2();
     }
 
     protected void telemetry_loop() {

@@ -197,25 +197,51 @@ public class Drive {
         if (time.seconds() > 0 && time.seconds() < 0.75){
             moveToPos(-4,4,21,0.125,0.125,22.5, false);
         }
-        if (time.seconds() > 0.75 && time.seconds() < 5.75 ){
+        if (time.seconds() > 0.75 && time.seconds() < 3.9 ){
             moveToPos(-4,4,0,0.125,0.125,50, true);
         }
-        if (time.seconds() > 5.75 && time.seconds() < 7.5){
-            moveToPos(-24,18,-90,0.25,0.25,22.5,false);
+        if (time.seconds() > 3.9 && time.seconds() < 5.75){
+            moveToPos(-22,18,-90,0.25,0.25,22.5,false);
         }
-        if (time.seconds() > 7.5 && time.seconds() < 10.25){
-            moveToPos(-24,45,-90,0.01,0.25,22.5,false);
+        if (time.seconds() > 5.75 && time.seconds() < 8.5){
+            moveToPos(-22,55,-90,0.02,0.25,22.5,false);
         }
 
-        if (time.seconds() > 10.25 && time.seconds() < 12.5){
+        if (time.seconds() > 8.5 && time.seconds() < 12){
             moveToPos(-4,4,20.5,0.25,0.25,22.5,false);
         }
 
-        if (time.seconds() > 12.5 && time.seconds() < 17.5){
+        if (time.seconds() > 12 && time.seconds() < 15.15){
+            moveToPos(-4,4,0,0.125,0.125,50,true);
+        }
+        if (time.seconds() > 15.15 && time.seconds() < 18){
+            moveToPos(-18,18,-130,0.25,0.25,22.5,false);
+        }
+    }
+
+    public void backShotBlue2 () {
+        if (time.seconds() > 0 && time.seconds() < 0.75){
+            moveToPos(-4,4,21,0.125,0.125,22.5, false);
+        }
+        if (time.seconds() > 0.75 && time.seconds() < 3.9 ){
+            moveToPos(-4,4,0,0.125,0.125,50, true);
+        }
+        if (time.seconds() > 3.9 && time.seconds() < 5.75){
+            moveToPos(-22,18,-90,0.25,0.25,22.5,false);
+        }
+        if (time.seconds() > 5.75 && time.seconds() < 8.5){
+            moveToPos(-22,55,-90,0.02,0.25,22.5,false);
+        }
+
+        if (time.seconds() > 8.5 && time.seconds() < 12){
+            moveToPos(-4,4,20.5,0.25,0.25,22.5,false);
+        }
+
+        if (time.seconds() > 12 && time.seconds() < 15.15){
             moveToPos(-4,4,-0,0.125,0.125,50,true);
         }
-        if (time.seconds() > 17.5 && time.seconds() < 30){
-            moveToPos(-18,8,17.5,0.25,0.25,22.5,false);
+        if (time.seconds() > 15.15 && time.seconds() < 18){
+            moveToPos(-18,18,-130,0.25,0.25,22.5,false);
         }
     }
 
