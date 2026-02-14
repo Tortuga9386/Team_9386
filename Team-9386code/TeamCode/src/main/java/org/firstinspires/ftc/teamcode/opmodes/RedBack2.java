@@ -4,19 +4,18 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.List;
 
 
-@Autonomous(name="RedBack6", group="auto")
-public class RedBack extends RobotBase
+@Autonomous(name="RedBack9", group="auto")
+public class RedBack2 extends RobotBase
 {
 
     private   ElapsedTime   runtime = new ElapsedTime();
 
-    public RedBack() {}
+    public RedBack2() {}
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -107,12 +106,12 @@ public class RedBack extends RobotBase
     }
 
     protected void control_center_auto(){
-        control_center.control_center1.Auto_op(true);
+        control_center.control_center1.Auto_op2(true);
         control_center.control_center1.runLifters();
     }
 
     protected void drive_loop(){
-        drive.backShotRed();
+        drive.backShotRed2();
     }
 
     protected void telemetry_loop() {

@@ -112,6 +112,8 @@ public class MainTeleOp_Red extends RobotBase
             telemetry.addData("Limelight Error", e.getMessage());
         }
         // --- End Limelight AprilTag ID Extraction ---
+        telemetry.addData(">>>", intake.intakeRoller.rightDistance.getDistance(DistanceUnit.MM));
+        telemetry.addData("<<<", intake.intakeRoller.leftDistance.getDistance(DistanceUnit.MM));
 
         telemetry.update();
     }

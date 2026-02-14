@@ -207,12 +207,12 @@ public class Control_center {
             }
 
             if (gamepad1.right_bumper || gamepad2.right_bumper) {
-                if ((robotBase.intake.intakeRoller.leftDistance.getDistance(DistanceUnit.MM) < 65 && robotBase.intake.intakeRoller.rightDistance.getDistance(DistanceUnit.MM) < 65)) {
+                if ((robotBase.intake.intakeRoller.leftDistance.getDistance(DistanceUnit.MM) < 75 && robotBase.intake.intakeRoller.rightDistance.getDistance(DistanceUnit.MM) < 75)) {
                     leftLifterPos = 1.5;
                     rightLifterPos = 1.5;
                 }
 
-                if ((robotBase.intake.intakeRoller.leftDistance.getDistance(DistanceUnit.MM) > 65 && robotBase.intake.intakeRoller.rightDistance.getDistance(DistanceUnit.MM) < 65)){
+                if ((robotBase.intake.intakeRoller.leftDistance.getDistance(DistanceUnit.MM) > 75 && robotBase.intake.intakeRoller.rightDistance.getDistance(DistanceUnit.MM) < 75)){
                     leftLifterPos = 1;
                     rightLifterPos = 1;
                 }
@@ -274,55 +274,55 @@ public class Control_center {
             if (!alianceRedIsTrue){
                 robotBase.drive.limelight3A.pipelineSwitch(1);
             }
-            if (runtime.seconds() > 2.75 && runtime.seconds() < 3.75){
+            if (runtime.seconds() > 1.95 && runtime.seconds() < 2.7){
                 robotBase.intake.intakeRoller.goToTarget(1);
             }
-            if (runtime.seconds() > 3.75 && runtime.seconds() < 4 ){
+            if (runtime.seconds() > 2.7 && runtime.seconds() < 3 ){
                 robotBase.intake.intakeRoller.goToTarget(0);
             }
 
-            if (runtime.seconds() > 7.5 && runtime.seconds() < 10.75){
+            if (runtime.seconds() > 5 && runtime.seconds() < 9){
                 robotBase.intake.intakeRoller.goToTarget(1);
             }
-            if (runtime.seconds() > 10.75 && runtime.seconds() < 10.85 ){
+            if (runtime.seconds() > 9 && runtime.seconds() < 9.6 ){
                 robotBase.intake.intakeRoller.goToTarget(0);
             }
 
-            if (runtime.seconds() > 10.85 && runtime.seconds() < 11.1){
+            if (runtime.seconds() > 9.6 && runtime.seconds() < 9.75){
                 robotBase.intake.intakeRoller.goToTarget(-1);
             }
-            if (runtime.seconds() > 11.1 && runtime.seconds() < 11.35 ){
+            if (runtime.seconds() > 9.75 && runtime.seconds() < 10.1 ){
                 robotBase.intake.intakeRoller.goToTarget(0);
             }
 
             if (runtime.seconds() < 5.75){
                 robotBase.shooter.shooterMotor.goToTargetSpeed((3950 * 28) / 60);
             }
-            
 
-            if (runtime.seconds() > 0.75 && runtime.seconds() < 1.25){
+
+            if (runtime.seconds() > 0.75 && runtime.seconds() < 1.05){
                 leftLifterPos = 3;
             }
-            if (runtime.seconds() > 1.25 && runtime.seconds() < 1.75){
+            if (runtime.seconds() > 1.05 && runtime.seconds() < 1.35){
                 leftLifterPos = 2;
             }
 
-            if (runtime.seconds() > 1.75 && runtime.seconds() < 2.25){
+            if (runtime.seconds() > 1.35 && runtime.seconds() < 1.65){
                 rightLifterPos = 3;
             }
-            if (runtime.seconds() > 2.25 && runtime.seconds() < 2.75){
+            if (runtime.seconds() > 1.65 && runtime.seconds() < 1.95){
                 rightLifterPos = 2;
             }
-            if (runtime.seconds() > 3.75 && runtime.seconds() < 4.25){
+            if (runtime.seconds() > 2.7 && runtime.seconds() < 3){
                 rightLifterPos = 3;
             }
-            if (runtime.seconds() > 4.25 && runtime.seconds() < 4.75){
+            if (runtime.seconds() > 3 && runtime.seconds() < 3.3){
                 rightLifterPos = 1;
             }
-            if (runtime.seconds() > 4.75 && runtime.seconds()  < 5.25){
+            if (runtime.seconds() > 3.3 && runtime.seconds()  < 3.6){
                 leftLifterPos = 3;
             }
-            if (runtime.seconds() > 5.25 && runtime.seconds() < 5.75){
+            if (runtime.seconds() > 3.6 && runtime.seconds() < 3.9){
                 leftLifterPos = 1;
             }
 
@@ -331,29 +331,29 @@ public class Control_center {
 
 
 
-            if (runtime.seconds() > 12.5 && runtime.seconds() < 13){
+            if (runtime.seconds() > 12 && runtime.seconds() < 12.3){
                 leftLifterPos = 3;
             }
-            if (runtime.seconds() > 13 && runtime.seconds() < 13.5){
+            if (runtime.seconds() > 12.3 && runtime.seconds() < 12.6){
                 leftLifterPos = 2;
             }
 
-            if (runtime.seconds() > 13.5 && runtime.seconds() < 14){
+            if (runtime.seconds() > 12.6 && runtime.seconds() < 12.9){
                 rightLifterPos = 3;
             }
-            if (runtime.seconds() > 14 && runtime.seconds() < 14.5){
+            if (runtime.seconds() > 12.9 && runtime.seconds() < 13.2){
                 rightLifterPos = 2;
             }
-            if (runtime.seconds() > 15.5 && runtime.seconds() < 16){
+            if (runtime.seconds() > 13.95 && runtime.seconds() < 14.25){
                 rightLifterPos = 3;
             }
-            if (runtime.seconds() > 16 && runtime.seconds() < 16.5){
+            if (runtime.seconds() > 14.25 && runtime.seconds() < 14.55){
                 rightLifterPos = 1;
             }
-            if (runtime.seconds() > 16.5 && runtime.seconds()  < 17){
+            if (runtime.seconds() > 14.55 && runtime.seconds()  < 14.85){
                 leftLifterPos = 3;
             }
-            if (runtime.seconds() > 17 && runtime.seconds() < 17.5){
+            if (runtime.seconds() > 14.85 && runtime.seconds() < 15.15){
                 leftLifterPos = 1;
             }
             if (runtime.seconds() > 18 && runtime.seconds() < 18.5){
@@ -361,18 +361,135 @@ public class Control_center {
                 rightLifterPos = 3;
             }
 
-            if (runtime.seconds() > 14 && runtime.seconds() < 15){
+            if (runtime.seconds() > 13.2 && runtime.seconds() < 13.95){
                 robotBase.intake.intakeRoller.goToTarget(1);
             }
-            if (runtime.seconds() > 15 && runtime.seconds() < 15.5 ){
+            if (runtime.seconds() > 13.95 && runtime.seconds() < 14.1 ){
                 robotBase.intake.intakeRoller.goToTarget(0);
             }
 
-            if (runtime.seconds() > 11 && runtime.seconds() < 17.5){
+            if (runtime.seconds() > 10 && runtime.seconds() < 20){
                 robotBase.shooter.shooterMotor.goToTargetSpeed((3950 * 28) / 60);
             }
 
-            if (runtime .seconds() > 17.5 && runtime.seconds() < 18.5){
+            if (runtime .seconds() > 20 && runtime.seconds() < 21){
+                robotBase.shooter.shooterMotor.goToTargetSpeed(0);
+            }
+
+
+
+
+
+        }
+
+        public void Auto_op2(boolean alianceRedIsTrue) {
+
+            if (alianceRedIsTrue){
+                robotBase.drive.limelight3A.pipelineSwitch(0);
+            }
+
+            if (!alianceRedIsTrue){
+                robotBase.drive.limelight3A.pipelineSwitch(1);
+            }
+            if (runtime.seconds() > 1.95 && runtime.seconds() < 2.7){
+                robotBase.intake.intakeRoller.goToTarget(1);
+            }
+            if (runtime.seconds() > 2.7 && runtime.seconds() < 3 ){
+                robotBase.intake.intakeRoller.goToTarget(0);
+            }
+
+            if (runtime.seconds() > 5 && runtime.seconds() < 9){
+                robotBase.intake.intakeRoller.goToTarget(1);
+            }
+            if (runtime.seconds() > 9 && runtime.seconds() < 9.6 ){
+                robotBase.intake.intakeRoller.goToTarget(0);
+            }
+
+            if (runtime.seconds() > 9.6 && runtime.seconds() < 9.75){
+                robotBase.intake.intakeRoller.goToTarget(-1);
+            }
+            if (runtime.seconds() > 9.75 && runtime.seconds() < 10.1 ){
+                robotBase.intake.intakeRoller.goToTarget(0);
+            }
+
+            if (runtime.seconds() < 5.75){
+                robotBase.shooter.shooterMotor.goToTargetSpeed((3950 * 28) / 60);
+            }
+
+
+            if (runtime.seconds() > 0.75 && runtime.seconds() < 1.05){
+                leftLifterPos = 3;
+            }
+            if (runtime.seconds() > 1.05 && runtime.seconds() < 1.35){
+                leftLifterPos = 2;
+            }
+
+            if (runtime.seconds() > 1.35 && runtime.seconds() < 1.65){
+                rightLifterPos = 3;
+            }
+            if (runtime.seconds() > 1.65 && runtime.seconds() < 1.95){
+                rightLifterPos = 2;
+            }
+            if (runtime.seconds() > 2.7 && runtime.seconds() < 3){
+                rightLifterPos = 3;
+            }
+            if (runtime.seconds() > 3 && runtime.seconds() < 3.3){
+                rightLifterPos = 1;
+            }
+            if (runtime.seconds() > 3.3 && runtime.seconds()  < 3.6){
+                leftLifterPos = 3;
+            }
+            if (runtime.seconds() > 3.6 && runtime.seconds() < 3.9){
+                leftLifterPos = 1;
+            }
+
+
+
+
+
+
+            if (runtime.seconds() > 12 && runtime.seconds() < 12.3){
+                leftLifterPos = 3;
+            }
+            if (runtime.seconds() > 12.3 && runtime.seconds() < 12.6){
+                leftLifterPos = 2;
+            }
+
+            if (runtime.seconds() > 12.6 && runtime.seconds() < 12.9){
+                rightLifterPos = 3;
+            }
+            if (runtime.seconds() > 12.9 && runtime.seconds() < 13.2){
+                rightLifterPos = 2;
+            }
+            if (runtime.seconds() > 13.95 && runtime.seconds() < 14.25){
+                rightLifterPos = 3;
+            }
+            if (runtime.seconds() > 14.25 && runtime.seconds() < 14.55){
+                rightLifterPos = 1;
+            }
+            if (runtime.seconds() > 14.55 && runtime.seconds()  < 14.85){
+                leftLifterPos = 3;
+            }
+            if (runtime.seconds() > 14.85 && runtime.seconds() < 15.15){
+                leftLifterPos = 1;
+            }
+            if (runtime.seconds() > 18 && runtime.seconds() < 18.5){
+                leftLifterPos = 3;
+                rightLifterPos = 3;
+            }
+
+            if (runtime.seconds() > 13.2 && runtime.seconds() < 13.95){
+                robotBase.intake.intakeRoller.goToTarget(1);
+            }
+            if (runtime.seconds() > 13.95 && runtime.seconds() < 14.1 ){
+                robotBase.intake.intakeRoller.goToTarget(0);
+            }
+
+            if (runtime.seconds() > 10 && runtime.seconds() < 20){
+                robotBase.shooter.shooterMotor.goToTargetSpeed((3950 * 28) / 60);
+            }
+
+            if (runtime .seconds() > 20 && runtime.seconds() < 21){
                 robotBase.shooter.shooterMotor.goToTargetSpeed(0);
             }
 
