@@ -73,6 +73,8 @@ public class Control_center {
 
         public boolean triggerCheck;
 
+        public boolean lifterstall;
+
 
 
         public void teleop(Gamepad gamepad1, Gamepad gamepad2, boolean allianceRedIsTrue) {
@@ -196,27 +198,38 @@ public class Control_center {
 
             }
 
+            if (runtime.seconds() < 1.5){
+                lifterstall = true;
+            }
+            if (runtime.seconds() > 1.5){
+                lifterstall = false;
+            }
+            if (runtime.seconds() > 1.5 && runtime.seconds() < 3){
+                robotBase.indexer.indexerSystem.leftLifterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robotBase.indexer.indexerSystem.rightLifterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            }
+
             if (gamepad2.a || gamepad1.a){
                 leftLifterPos = 3;
                 rightLifterPos = 3;
             }
 
-            if (!triggerCheck && (!gamepad1.a && !gamepad2.a) && (!gamepad1.right_bumper && !gamepad2.right_bumper)){
+            if (!triggerCheck && (!gamepad1.a && !gamepad2.a) && (!gamepad1.right_bumper && !gamepad2.right_bumper) && !lifterstall){
                 leftLifterPos = 1;
                 rightLifterPos = 1;
             }
 
-            if (gamepad1.right_bumper || gamepad2.right_bumper) {
-                if ((robotBase.intake.intakeRoller.leftDistance.getDistance(DistanceUnit.MM) < 75 && robotBase.intake.intakeRoller.rightDistance.getDistance(DistanceUnit.MM) < 75)) {
-                    leftLifterPos = 1.5;
-                    rightLifterPos = 1.5;
-                }
-
-                if ((robotBase.intake.intakeRoller.leftDistance.getDistance(DistanceUnit.MM) > 75 && robotBase.intake.intakeRoller.rightDistance.getDistance(DistanceUnit.MM) < 75)){
-                    leftLifterPos = 1;
-                    rightLifterPos = 1;
-                }
-            }
+//            if (gamepad1.right_bumper || gamepad2.right_bumper) {
+//                if ((robotBase.intake.intakeRoller.leftDistance.getDistance(DistanceUnit.MM) < 75 && robotBase.intake.intakeRoller.rightDistance.getDistance(DistanceUnit.MM) < 75)) {
+//                    leftLifterPos = 1.5;
+//                    rightLifterPos = 1.5;
+//                }
+//
+//                if ((robotBase.intake.intakeRoller.leftDistance.getDistance(DistanceUnit.MM) > 75 && robotBase.intake.intakeRoller.rightDistance.getDistance(DistanceUnit.MM) < 75)){
+//                    leftLifterPos = 1;
+//                    rightLifterPos = 1;
+//                }
+//            }
 
 
 
@@ -524,6 +537,10 @@ public class Control_center {
                 if (rightLifterPos == 3) {
             robotBase.indexer.indexerSystem.rightLifterMotor.setTargetPosition(0);
             }
+                if (lifterstall){
+                    robotBase.indexer.indexerSystem.rightLifterMotor.setTargetPosition(650);
+                    robotBase.indexer.indexerSystem.leftLifterMotor.setTargetPosition(650);
+                }
         }
     }
 }

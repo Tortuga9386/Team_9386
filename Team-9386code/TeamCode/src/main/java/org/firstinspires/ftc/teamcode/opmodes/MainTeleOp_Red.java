@@ -51,6 +51,7 @@ public class MainTeleOp_Red extends RobotBase
     @Override
     public void start() {
         runtime.reset();
+        control_center.control_center1.runtime.reset();
     }
 
     /*
